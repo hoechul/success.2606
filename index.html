@@ -110,6 +110,7 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
 .hbar{display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:10px}
 .hbar .nm{font-size:12.5px;font-weight:600;text-align:right;color:var(--ink2);overflow:hidden;
   text-overflow:ellipsis;white-space:nowrap}
+.ch-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .hbar .track{background:var(--paper2);border-radius:6px;height:22px;position:relative;overflow:hidden}
 .hbar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),#13897f);
   transition:width .6s cubic-bezier(.2,.8,.2,1)}
@@ -272,6 +273,11 @@ COLS.forEach(c=>{ if(!(c.store in CHMAP)) CHMAP[c.store]=c.channel; });
 const ALL_CHANNELS=[...new Set(Object.values(CHMAP))];
 // 매핑 변경 시 선택 가능한 채널 옵션(파일 채널 + 요청 채널 합집합)
 const CH_OPTIONS=[...new Set([...ALL_CHANNELS, ...REQ_CHANNELS])];
+// 유통채널별 고유 색상 (그래프 구분용)
+const CH_PALETTE=['#0e6b63','#c0392b','#2c6fb0','#bd7a16','#7d4f9e','#2c8a63','#cf6a3a','#4a7a8c','#a8557f','#5a6b2c'];
+const CH_COLOR={'이랜드리테일':'#0e6b63','롯데백화점':'#c0392b','신세계아울렛':'#2c6fb0','마리오아울렛':'#bd7a16',
+  '인천스퀘어원':'#7d4f9e','LF':'#2c8a63','행복한백화점':'#cf6a3a','세이브존':'#4a7a8c','와이스퀘어':'#a8557f'};
+ALL_CHANNELS.forEach((ch,i)=>{ if(!CH_COLOR[ch]) CH_COLOR[ch]=CH_PALETTE[i%CH_PALETTE.length]; });
 
 function chOf(store){ return CHMAP[store]; }
 const sumDaily = c => c.daily.reduce((a,b)=>a+b,0);
@@ -313,10 +319,11 @@ function renderT1bars(){
   const sumv = arr.reduce((a,x)=>a+x[1],0);
   const cap = `<div style="font-size:13px;font-weight:700;color:${t1scope==='위라이크패션'?'var(--teal-d)':'var(--amber)'};margin-bottom:8px">
     ${t1scope} · ${t1mode==='day'?fmtDate(DATES[dayIdx])+' 일매출':'월누계'} 합계 <span class="num">${won(sumv)}</span></div>`;
-  document.getElementById('t1bars').innerHTML = cap + (arr.map(([k,v])=>`
-    <div class="hbar"><div class="nm">${k}</div>
-    <div class="track"><div class="fill ${cls}" style="width:${(v/max*100).toFixed(1)}%"></div></div>
-    <div class="vl num">${won(v)}</div></div>`).join('')
+  document.getElementById('t1bars').innerHTML = cap + (arr.map(([k,v])=>{
+    const col=CH_COLOR[k]||'var(--teal)';
+    return `<div class="hbar"><div class="nm"><span class="ch-dot" style="background:${col}"></span>${k}</div>
+    <div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%;background:${col}"></div></div>
+    <div class="vl num">${won(v)}</div></div>`;}).join('')
     || '<div class="ok-card">해당 조건 매출 데이터 없음</div>');
 }
 function renderT1kpi(){
