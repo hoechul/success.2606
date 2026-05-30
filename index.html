@@ -186,7 +186,7 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
 
   <div class="sec">
     <div class="sec-h"><span class="tag">2-1</span><h2>이랜드리테일 일간 실적 — 위라이크 입점 점포</h2></div>
-    <div class="sec-sub">위라이크패션만 집계(전 브랜드 아님) · 당일 점포별 실적</div>
+    <div class="sec-sub">위라이크패션만 집계(전 브랜드 아님) · 당일매출 + 누적매출(5/1~선택일) 병기</div>
     <div class="ctl">
       <label>당일</label><select id="t2date"></select>
     </div>
@@ -202,17 +202,17 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
     <div id="t2alerts"></div>
   </div>
 
-  <div class="flex2">
-    <div class="sec">
-      <div class="sec-h"><span class="tag">2-3</span><h2>점포별 누적매출 순위</h2></div>
-      <div class="sec-sub">위라이크패션 매장 한정 · 월누계 높은 순</div>
-      <div class="scroll"><table id="t2storerank"></table></div>
-    </div>
-    <div class="sec">
-      <div class="sec-h"><span class="tag">2</span><h2>브랜드별 월누계 (이랜드리테일)</h2></div>
-      <div class="sec-sub">요청 브랜드 기준 · 매출 높은 순</div>
-      <div class="scroll"><table id="t2brandrank"></table></div>
-    </div>
+  <div class="sec">
+    <div class="sec-h"><span class="tag">2-3</span><h2>이랜드리테일 타브랜드 점포·브랜드별 실적</h2></div>
+    <div class="sec-sub">위라이크패션 제외 · 점포×브랜드 단위 · 월누계 높은 순 / 선택일 일매출 병기</div>
+    <div class="ctl"><label>일매출 기준일</label><select id="t2obdate"></select></div>
+    <div class="scroll"><table id="t2otherbrand"></table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="tag">2</span><h2>브랜드별 월누계 (이랜드리테일)</h2></div>
+    <div class="sec-sub">전 브랜드 기준 · 매출 높은 순</div>
+    <div class="scroll"><table id="t2brandrank"></table></div>
   </div>
 </section>
 
@@ -353,33 +353,40 @@ document.getElementById('t1date').onchange=e=>{t1dateIdx=+e.target.value; render
 /* ============ TAB 2 (이랜드리테일) ============ */
 fillDates(document.getElementById('t2date'),true);
 fillDates(document.getElementById('t2alertdate'),true);
+fillDates(document.getElementById('t2obdate'),true);
 const elandCols = ()=>COLS.filter(c=>chOf(c.store)==='이랜드리테일');
 
 function renderT2kpi(){
   const ec=elandCols();
   const allM=ec.reduce((a,c)=>a+c.monthly,0);
   const weM=ec.filter(c=>c.isWelike).reduce((a,c)=>a+c.monthly,0);
-  const allLast=ec.reduce((a,c)=>a+c.daily[LASTI],0);
+  const otherM=allM-weM;
+  const weLast=ec.filter(c=>c.isWelike).reduce((a,c)=>a+c.daily[LASTI],0);
   const stores=new Set(ec.filter(c=>c.isWelike).map(c=>c.store)).size;
   document.getElementById('t2kpi').innerHTML=`
-   <div class="kpi ink"><div class="k-lab">이랜드리테일 총매출(전브랜드,월누계)</div><div class="k-val num">${wonM(allM)}</div><div class="k-sub num">${won(allM)}</div></div>
-   <div class="kpi gold"><div class="k-lab">└ 위라이크패션 월누계</div><div class="k-val num">${wonM(weM)}</div><div class="k-sub num">비중 ${(weM/allM*100).toFixed(1)}%</div></div>
-   <div class="kpi amber"><div class="k-lab">최근일(${fmtDate(DATES[LASTI])}) 총매출</div><div class="k-val num">${wonM(allLast)}</div><div class="k-sub num">${won(allLast)}</div></div>
+   <div class="kpi gold"><div class="k-lab">위라이크패션 월누계 (이랜드리테일)</div><div class="k-val num">${wonM(weM)}</div><div class="k-sub num">전브랜드 중 ${(weM/allM*100).toFixed(1)}%</div></div>
+   <div class="kpi ink"><div class="k-lab">타브랜드 월누계 (위라이크 제외)</div><div class="k-val num">${wonM(otherM)}</div><div class="k-sub num">${won(otherM)}</div></div>
+   <div class="kpi amber"><div class="k-lab">최근일(${fmtDate(DATES[LASTI])}) 위라이크 매출</div><div class="k-val num">${wonM(weLast)}</div><div class="k-sub num">${won(weLast)}</div></div>
    <div class="kpi"><div class="k-lab">위라이크 입점 점포</div><div class="k-val num">${stores}<span style="font-size:14px"> 점포</span></div><div class="k-sub">이랜드리테일 내</div></div>`;
 }
 function renderT2daily(){
   const idx=+document.getElementById('t2date').value;
-  // 위라이크 입점 점포만, 위라이크 매출만
-  const sm={};
-  elandCols().forEach(c=>{ if(c.isWelike) sm[c.store]=(sm[c.store]||0)+c.daily[idx]; });
-  const arr=Object.entries(sm).map(([k,v])=>({store:k,val:v})).sort((a,b)=>b.val-a.val);
-  const tot=arr.reduce((a,x)=>a+x.val,0);
+  // 위라이크 입점 점포만, 위라이크 매출만 — 당일 + 누적(5/1~당일)
+  const sm={}, cm={};
+  elandCols().forEach(c=>{ if(c.isWelike){
+    sm[c.store]=(sm[c.store]||0)+c.daily[idx];
+    let cum=0; for(let k=0;k<=idx;k++) cum+=c.daily[k];
+    cm[c.store]=(cm[c.store]||0)+cum;
+  }});
+  const arr=Object.entries(sm).map(([k,v])=>({store:k,val:v,cum:cm[k]})).sort((a,b)=>b.val-a.val);
+  const tot=arr.reduce((a,x)=>a+x.val,0), totc=arr.reduce((a,x)=>a+x.cum,0);
   document.getElementById('t2daily').innerHTML=
-    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th>${fmtDate(DATES[idx])} 위라이크 매출</th><th>구성비</th></tr></thead><tbody>`+
+    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th>${fmtDate(DATES[idx])} 당일매출</th><th>누적매출(5/1~${fmtDate(DATES[idx])})</th><th>당일 구성비</th></tr></thead><tbody>`+
     arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
       <td class="l">${r.store}</td><td class="num">${won(r.val)}</td>
+      <td class="num">${won(r.cum)}</td>
       <td class="num" style="color:var(--muted)">${tot?(r.val/tot*100).toFixed(1):0}%</td></tr>`).join('')+
-    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="2">합계 (위라이크 입점 점포)</td><td class="num">${won(tot)}</td><td class="num">100%</td></tr></tbody>`;
+    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="2">합계 (위라이크 입점 점포)</td><td class="num">${won(tot)}</td><td class="num">${won(totc)}</td><td class="num">100%</td></tr></tbody>`;
 }
 function renderT2alerts(){
   const idx=+document.getElementById('t2alertdate').value;
@@ -402,13 +409,23 @@ function renderT2alerts(){
       <div style="font-size:12px;color:var(--ink2);margin-top:2px" class="num">전주 ${won(x.prev)} → 금주 ${won(x.cur)}</div></div>
       <div class="pct num">▼${(x.drop*100).toFixed(0)}%</div></div>`).join('');
 }
-function renderT2storerank(){
-  const sm={};
-  elandCols().forEach(c=>{ if(c.isWelike) sm[c.store]=(sm[c.store]||0)+c.monthly; });
-  const arr=Object.entries(sm).map(([k,v])=>({name:k,val:v})).sort((a,b)=>b.val-a.val);
-  const tot=arr.reduce((a,x)=>a+x.val,0)||1; arr.forEach(x=>x.share=(x.val/tot*100).toFixed(1));
-  document.getElementById('t2storerank').innerHTML=
-    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th>월누계(위라이크)</th><th>비중</th></tr></thead><tbody>${rankRows(arr)}</tbody>`;
+function renderT2otherbrand(){
+  const idx=+document.getElementById('t2obdate').value;
+  // 이랜드리테일 내 위라이크 제외 — 점포×브랜드 단위, 월누계 + 선택일 일매출
+  const arr=elandCols().filter(c=>!c.isWelike).map(c=>({
+    store:c.store, brand:c.brandRaw, monthly:c.monthly, day:c.daily[idx],
+    req:REQ_BRANDS.includes(c.brand)
+  })).sort((a,b)=>b.monthly-a.monthly);
+  const totM=arr.reduce((a,x)=>a+x.monthly,0)||1, totD=arr.reduce((a,x)=>a+x.day,0);
+  document.getElementById('t2otherbrand').innerHTML=
+    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th class="l">브랜드</th><th>월누계</th><th>${fmtDate(DATES[idx])} 일매출</th><th>월누계 비중</th></tr></thead><tbody>`+
+    arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
+      <td class="l">${r.store}</td>
+      <td class="l">${r.brand}${r.req?' <span class="chip req">요청</span>':''}</td>
+      <td class="num">${won(r.monthly)}</td>
+      <td class="num">${won(r.day)}</td>
+      <td class="num" style="color:var(--muted)">${(r.monthly/totM*100).toFixed(1)}%</td></tr>`).join('')+
+    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="3">타브랜드 합계 (위라이크 제외)</td><td class="num">${won(totM)}</td><td class="num">${won(totD)}</td><td class="num">100%</td></tr></tbody>`;
 }
 function renderT2brandrank(){
   const bm={};
@@ -425,6 +442,7 @@ function renderT2brandrank(){
 }
 document.getElementById('t2date').onchange=renderT2daily;
 document.getElementById('t2alertdate').onchange=renderT2alerts;
+document.getElementById('t2obdate').onchange=renderT2otherbrand;
 
 /* ============ TAB 3 (DB) ============ */
 function buildT3filters(){
@@ -473,7 +491,7 @@ function buildT4(){
 /* ---------- master render ---------- */
 function renderAll(){
   renderT1kpi(); renderT1bars(); renderT1ranks();
-  renderT2kpi(); renderT2daily(); renderT2alerts(); renderT2storerank(); renderT2brandrank();
+  renderT2kpi(); renderT2daily(); renderT2alerts(); renderT2otherbrand(); renderT2brandrank();
   buildT3filters(); renderT3();
 }
 buildT4(); renderAll();
