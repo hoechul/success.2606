@@ -72,6 +72,18 @@ select:focus,input:focus{outline:none;border-color:var(--teal)}
 .seg button{border:none;background:#fff;font-family:inherit;font-size:12.5px;font-weight:600;
   padding:8px 14px;cursor:pointer;color:var(--muted)}
 .seg button.on{background:var(--teal);color:#fff}
+/* brand selector pills */
+.brandsel-wrap{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+.brandsel-lab{font-size:12.5px;font-weight:700;color:var(--ink2);padding-top:7px;flex-shrink:0}
+.brandsel{display:flex;flex-wrap:wrap;gap:7px}
+.brandsel button{font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;
+  border:1px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.brandsel button:hover{border-color:var(--amber);color:var(--ink)}
+.brandsel button .dot{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.brandsel button.we .dot{background:var(--teal)}
+.brandsel button.on{background:var(--amber);color:#fff;border-color:var(--amber)}
+.brandsel button.on .dot{background:#fff}
+.brandsel button.we.on{background:var(--teal);border-color:var(--teal)}
 /* ---- table ---- */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--line)}
@@ -148,7 +160,7 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
 
   <div class="sec">
     <div class="sec-h"><span class="tag">1</span><h2>오프라인 유통 채널별 매출 대시보드</h2></div>
-    <div class="sec-sub">위라이크패션 기준 · 채널별 일매출 / 월매출</div>
+    <div class="sec-sub">브랜드 선택 · 채널별 일매출 / 월매출</div>
     <div class="ctl">
       <div class="seg" id="t1mode">
         <button class="on" data-m="month">월매출(월누계)</button>
@@ -158,11 +170,8 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
         <label>기준일</label>
         <select id="t1date"></select>
       </span>
-      <div class="seg" id="t1scope">
-        <button class="on" data-s="we">위라이크패션</button>
-        <button data-s="all">전 브랜드</button>
-      </div>
     </div>
+    <div class="brandsel-wrap"><span class="brandsel-lab">브랜드</span><div class="brandsel" id="t1scope"></div></div>
     <div class="hbars" id="t1bars"></div>
   </div>
 
@@ -284,27 +293,41 @@ function fillDates(sel,defLast){ sel.innerHTML=''; DATES.forEach((d,i)=>{
   sel.appendChild(o); }); sel.value = defLast? LASTI : 0; }
 
 /* ============ TAB 1 ============ */
-let t1mode='month', t1scope='we', t1dateIdx=LASTI;
+let t1mode='month', t1scope='위라이크패션', t1dateIdx=LASTI;
+// 브랜드 선택 버튼 생성 (위라이크패션 + 요청 브랜드)
+(function buildBrandSel(){
+  const wrap=document.getElementById('t1scope');
+  wrap.innerHTML=REQ_BRANDS.map((b,i)=>
+    `<button class="${b==='위라이크패션'?'we ':''}${i===0?'on':''}" data-b="${b}"><span class="dot"></span>${b}</button>`).join('');
+  wrap.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{
+    wrap.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    btn.classList.add('on'); t1scope=btn.dataset.b; renderT1bars();
+  });
+})();
 fillDates(document.getElementById('t1date'),true);
 
-function chTotals(scopeWe, dayIdx){ // dayIdx=null => 월누계
+function brandMatch(c, brand){ return brand==='위라이크패션' ? c.isWelike : c.brand===brand; }
+function chTotals(brand, dayIdx){ // dayIdx=null => 월누계
   const m={}; ALL_CHANNELS.forEach(c=>m[c]=0);
-  COLS.forEach(c=>{ if(scopeWe && !c.isWelike) return;
+  COLS.forEach(c=>{ if(!brandMatch(c, brand)) return;
     const ch=chOf(c.store); if(!(ch in m)) m[ch]=0;
     m[ch]+= dayIdx===null? c.monthly : c.daily[dayIdx]; });
   return m;
 }
 function renderT1bars(){
   const dayIdx = t1mode==='day'? t1dateIdx : null;
-  const m = chTotals(t1scope==='we', dayIdx);
+  const m = chTotals(t1scope, dayIdx);
   const arr = Object.entries(m).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   const max = Math.max(...arr.map(x=>x[1]),1);
-  const cls = t1scope==='we'?'':'req';
-  document.getElementById('t1bars').innerHTML = arr.map(([k,v])=>`
+  const cls = t1scope==='위라이크패션'?'':'req';
+  const sumv = arr.reduce((a,x)=>a+x[1],0);
+  const cap = `<div style="font-size:13px;font-weight:700;color:${t1scope==='위라이크패션'?'var(--teal-d)':'var(--amber)'};margin-bottom:8px">
+    ${t1scope} · ${t1mode==='day'?fmtDate(DATES[dayIdx])+' 일매출':'월누계'} 합계 <span class="num">${won(sumv)}</span></div>`;
+  document.getElementById('t1bars').innerHTML = cap + (arr.map(([k,v])=>`
     <div class="hbar"><div class="nm">${k}</div>
     <div class="track"><div class="fill ${cls}" style="width:${(v/max*100).toFixed(1)}%"></div></div>
     <div class="vl num">${won(v)}</div></div>`).join('')
-    || '<div class="ok-card">해당 조건 매출 데이터 없음</div>';
+    || '<div class="ok-card">해당 조건 매출 데이터 없음</div>');
 }
 function renderT1kpi(){
   const we = COLS.filter(c=>c.isWelike);
@@ -327,7 +350,7 @@ function rankRows(arr,fmt){ return arr.map((r,i)=>`<tr>
 
 function renderT1ranks(){
   // 1-2 채널 순위 (위라이크 월누계)
-  const m=chTotals(true,null);
+  const m=chTotals('위라이크패션',null);
   const arr=Object.entries(m).filter(([k,v])=>v>0).map(([k,v])=>({name:k,val:v}))
             .sort((a,b)=>b.val-a.val);
   const tot=arr.reduce((a,x)=>a+x.val,0)||1;
@@ -345,9 +368,6 @@ function renderT1ranks(){
 document.querySelectorAll('#t1mode button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#t1mode button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
   t1mode=b.dataset.m; document.getElementById('t1daywrap').style.display=t1mode==='day'?'':'none'; renderT1bars();});
-document.querySelectorAll('#t1scope button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#t1scope button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
-  t1scope=b.dataset.s; renderT1bars();});
 document.getElementById('t1date').onchange=e=>{t1dateIdx=+e.target.value; renderT1bars();};
 
 /* ============ TAB 2 (이랜드리테일) ============ */
