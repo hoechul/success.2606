@@ -160,7 +160,7 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
 
   <div class="sec">
     <div class="sec-h"><span class="tag">1</span><h2>오프라인 유통 채널별 매출 대시보드</h2></div>
-    <div class="sec-sub">브랜드 선택 · 채널별 일매출 / 월매출</div>
+    <div class="sec-sub">위라이크패션 기준 · 채널별 일매출 / 월매출</div>
     <div class="ctl">
       <div class="seg" id="t1mode">
         <button class="on" data-m="month">월매출(월누계)</button>
@@ -171,7 +171,6 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
         <select id="t1date"></select>
       </span>
     </div>
-    <div class="brandsel-wrap"><span class="brandsel-lab">브랜드</span><div class="brandsel" id="t1scope"></div></div>
     <div class="hbars" id="t1bars"></div>
   </div>
 
@@ -213,7 +212,8 @@ tbody tr:hover{background:rgba(14,107,99,.045)}
 
   <div class="sec">
     <div class="sec-h"><span class="tag">2-3</span><h2>이랜드리테일 타브랜드 점포·브랜드별 실적</h2></div>
-    <div class="sec-sub">위라이크패션 제외 · 점포×브랜드 단위 · 월누계 높은 순 / 선택일 일매출 병기</div>
+    <div class="sec-sub">위라이크패션 제외 · 브랜드 버튼 선택 시 해당 브랜드의 점포별 실적 · 월누계 + 선택일 일매출</div>
+    <div class="brandsel-wrap"><span class="brandsel-lab">브랜드</span><div class="brandsel" id="t2obsel"></div></div>
     <div class="ctl"><label>일매출 기준일</label><select id="t2obdate"></select></div>
     <div class="scroll"><table id="t2otherbrand"></table></div>
   </div>
@@ -294,16 +294,6 @@ function fillDates(sel,defLast){ sel.innerHTML=''; DATES.forEach((d,i)=>{
 
 /* ============ TAB 1 ============ */
 let t1mode='month', t1scope='위라이크패션', t1dateIdx=LASTI;
-// 브랜드 선택 버튼 생성 (위라이크패션 + 요청 브랜드)
-(function buildBrandSel(){
-  const wrap=document.getElementById('t1scope');
-  wrap.innerHTML=REQ_BRANDS.map((b,i)=>
-    `<button class="${b==='위라이크패션'?'we ':''}${i===0?'on':''}" data-b="${b}"><span class="dot"></span>${b}</button>`).join('');
-  wrap.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{
-    wrap.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
-    btn.classList.add('on'); t1scope=btn.dataset.b; renderT1bars();
-  });
-})();
 fillDates(document.getElementById('t1date'),true);
 
 function brandMatch(c, brand){ return brand==='위라이크패션' ? c.isWelike : c.brand===brand; }
@@ -374,6 +364,16 @@ document.getElementById('t1date').onchange=e=>{t1dateIdx=+e.target.value; render
 fillDates(document.getElementById('t2date'),true);
 fillDates(document.getElementById('t2alertdate'),true);
 fillDates(document.getElementById('t2obdate'),true);
+let t2obBrand='전체';
+(function buildT2obSel(){
+  const wrap=document.getElementById('t2obsel');
+  const opts=['전체', ...REQ_BRANDS.filter(b=>b!=='위라이크패션'), 'UCLA'];
+  wrap.innerHTML=opts.map((b,i)=>`<button class="${i===0?'on':''}" data-b="${b}"><span class="dot"></span>${b}</button>`).join('');
+  wrap.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{
+    wrap.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    btn.classList.add('on'); t2obBrand=btn.dataset.b; renderT2otherbrand();
+  });
+})();
 const elandCols = ()=>COLS.filter(c=>chOf(c.store)==='이랜드리테일');
 
 function renderT2kpi(){
@@ -385,7 +385,6 @@ function renderT2kpi(){
   const stores=new Set(ec.filter(c=>c.isWelike).map(c=>c.store)).size;
   document.getElementById('t2kpi').innerHTML=`
    <div class="kpi gold"><div class="k-lab">위라이크패션 월누계 (이랜드리테일)</div><div class="k-val num">${wonM(weM)}</div><div class="k-sub num">전브랜드 중 ${(weM/allM*100).toFixed(1)}%</div></div>
-   <div class="kpi ink"><div class="k-lab">타브랜드 월누계 (위라이크 제외)</div><div class="k-val num">${wonM(otherM)}</div><div class="k-sub num">${won(otherM)}</div></div>
    <div class="kpi amber"><div class="k-lab">최근일(${fmtDate(DATES[LASTI])}) 위라이크 매출</div><div class="k-val num">${wonM(weLast)}</div><div class="k-sub num">${won(weLast)}</div></div>
    <div class="kpi"><div class="k-lab">위라이크 입점 점포</div><div class="k-val num">${stores}<span style="font-size:14px"> 점포</span></div><div class="k-sub">이랜드리테일 내</div></div>`;
 }
@@ -431,12 +430,16 @@ function renderT2alerts(){
 }
 function renderT2otherbrand(){
   const idx=+document.getElementById('t2obdate').value;
-  // 이랜드리테일 내 위라이크 제외 — 점포×브랜드 단위, 월누계 + 선택일 일매출
-  const arr=elandCols().filter(c=>!c.isWelike).map(c=>({
+  // 이랜드리테일 내 위라이크 제외 — 브랜드 버튼으로 필터, 점포별 월누계 + 선택일 일매출
+  let cols=elandCols().filter(c=>!c.isWelike);
+  if(t2obBrand!=='전체') cols=cols.filter(c=>c.brand===t2obBrand);
+  const arr=cols.map(c=>({
     store:c.store, brand:c.brandRaw, monthly:c.monthly, day:c.daily[idx],
     req:REQ_BRANDS.includes(c.brand)
   })).sort((a,b)=>b.monthly-a.monthly);
   const totM=arr.reduce((a,x)=>a+x.monthly,0)||1, totD=arr.reduce((a,x)=>a+x.day,0);
+  const sumlbl = t2obBrand==='전체'?'타브랜드 합계 (위라이크 제외)':`${t2obBrand} 합계 (점포 ${arr.length}곳)`;
+  if(!arr.length){ document.getElementById('t2otherbrand').innerHTML='<thead></thead><tbody><tr><td class="l">해당 브랜드 매출 데이터 없음</td></tr></tbody>'; return; }
   document.getElementById('t2otherbrand').innerHTML=
     `<thead><tr><th class="l">순위</th><th class="l">점포</th><th class="l">브랜드</th><th>월누계</th><th>${fmtDate(DATES[idx])} 일매출</th><th>월누계 비중</th></tr></thead><tbody>`+
     arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
@@ -445,7 +448,7 @@ function renderT2otherbrand(){
       <td class="num">${won(r.monthly)}</td>
       <td class="num">${won(r.day)}</td>
       <td class="num" style="color:var(--muted)">${(r.monthly/totM*100).toFixed(1)}%</td></tr>`).join('')+
-    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="3">타브랜드 합계 (위라이크 제외)</td><td class="num">${won(totM)}</td><td class="num">${won(totD)}</td><td class="num">100%</td></tr></tbody>`;
+    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="3">${sumlbl}</td><td class="num">${won(totM)}</td><td class="num">${won(totD)}</td><td class="num">100%</td></tr></tbody>`;
 }
 function renderT2brandrank(){
   const bm={};
