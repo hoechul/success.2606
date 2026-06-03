@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>KT 공식 인증 대리점 · 최신폰, 가장 유리하게</title>
-<meta name="description" content="KT 공식 인증 대리점. 갤럭시 S26·Z폴드7 등 최신 단말의 신규가입·번호이동 혜택을 1:1로 가장 유리하게 설계해 드립니다. 무료 상담 신청.">
+<title>KT 테라스타 통신 (주)Terrastar · 최신폰, 가장 유리하게</title>
+<meta name="description" content="KT 테라스타 통신 (주)Terrastar. 갤럭시 S26·Z폴드7·아이폰17 등 최신 단말의 신규가입 혜택을 1:1로 가장 유리하게 설계해 드립니다. 무료 상담 신청.">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
-<meta property="og:title" content="KT 공식 인증 대리점 · 최신폰, 가장 유리하게">
-<meta property="og:description" content="신규가입·번호이동 혜택을 1:1로 설계해 드립니다. 상담은 무료입니다.">
+<meta property="og:title" content="KT 테라스타 통신 (주)Terrastar · 최신폰, 가장 유리하게">
+<meta property="og:description" content="신규가입 혜택을 1:1로 설계해 드립니다. 상담은 무료입니다.">
 <meta property="og:locale" content="ko_KR">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 /* =======================================================
-   화이트 프리미엄형 — 넓은 여백 · 절제된 타이포 · 얇은 라인
-   palette: 화이트 + 잉크블랙 + 미세한 그레이, KT 레드는 포인트로만
+   화이트 프리미엄형 — KT 테라스타 통신
 ======================================================= */
 :root{
   --ink:#0f1115; --ink2:#3b3f46; --muted:#8b9099;
   --bg:#ffffff; --bg2:#fafafa; --bg3:#f4f5f6;
   --line:#ececee; --line2:#e2e3e6;
-  --kt:#e2231a; --kt-d:#b81812;
+  --kt:#e2231a; --kt-d:#b81812; --kt-soft:#fdecea;
   --r:18px; --r-sm:12px;
   --shadow:0 1px 2px rgba(15,17,21,.04), 0 18px 44px rgba(15,17,21,.06);
   --maxw:1080px;
@@ -71,7 +70,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .hero .lead{margin-top:22px;font-size:18.5px;color:var(--ink2);max-width:460px}
 .hero .cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
 .hero .fine{margin-top:18px;font-size:13.5px;color:var(--muted)}
-/* hero side card */
 .spec{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
 .spec .k{font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .spec .big{font-size:40px;font-weight:800;letter-spacing:-.03em;margin:6px 0 2px}
@@ -91,15 +89,14 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .band .it{display:flex;align-items:center;gap:9px}
 .band .it .d{width:5px;height:5px;border-radius:50%;background:var(--kt)}
 
-/* benefits */
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+/* benefits (3 cells) */
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:40px}
 .cell{background:#fff;padding:30px 26px}
 .cell .n{font-size:13px;font-weight:800;color:var(--kt);letter-spacing:.04em}
 .cell h3{font-size:18px;font-weight:800;margin:12px 0 7px;letter-spacing:-.02em}
 .cell p{font-size:14.5px;color:var(--muted)}
-@media(max-width:860px){.grid4{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.grid4{grid-template-columns:1fr}}
+@media(max-width:860px){.bgrid{grid-template-columns:1fr}}
 
 /* devices */
 .devices{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -113,17 +110,19 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
   border:1px solid var(--line2);padding:2px 9px;border-radius:999px}
 @media(max-width:860px){.dev-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* compare */
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
-.cmp .c{border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;background:#fff}
-.cmp .c .hd{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
-.cmp .c .hd .ko{font-size:20px;font-weight:800;letter-spacing:-.02em}
-.cmp .c .hd .en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em}
-.cmp ul{list-style:none;display:grid;gap:13px}
-.cmp li{display:flex;gap:11px;font-size:15px;color:var(--ink2)}
-.cmp li .ck{color:var(--kt);font-weight:800}
-.cmp li b{color:var(--ink);font-weight:700}
-@media(max-width:680px){.cmp{grid-template-columns:1fr}}
+/* notice box */
+.notice{margin-top:26px;display:grid;gap:12px}
+.ni{background:#fff;border:1px solid var(--line);border-left:3px solid var(--kt);border-radius:10px;
+  padding:16px 20px;font-size:14.5px;color:var(--ink2)}
+.ni b{color:var(--ink);font-weight:700}
+.ni.warn{background:var(--kt-soft);border-color:var(--kt-soft);border-left-color:var(--kt);color:var(--kt-d);font-weight:600}
+
+/* cannot activate */
+.cant-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px}
+.cant{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px}
+.cant .x{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--kt-soft);color:var(--kt);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.cant b{font-size:15.5px}
+.cant span{display:block;font-size:13.5px;color:var(--muted)}
 
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;border-top:1px solid var(--line)}
@@ -201,18 +200,18 @@ footer b{color:var(--ink2)}
 </head>
 <body>
 <!-- =======================================================
-  CONFIG — 본인 매장 값으로 교체 (자세한 건 README.md)
+  CONFIG — 본인 매장 값으로 교체
   ① 전화번호: tel:0000000000 (숫자만) / 표시용 0000-0000
   ② 카카오채널: data-kakao 의 href
   ③ 구글폼: #apply 의 iframe src
-  ④ 매장명/사업자정보: data-store, 푸터
+  ④ 사업자정보: 푸터
 ======================================================= -->
 
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <span class="kt-mark">KT</span> 공식 인증 대리점 <span class="sep">·</span>
-      <span class="store" data-store>〇〇점</span>
+      <span class="kt-mark">KT</span> 테라스타 통신 <span class="sep">·</span>
+      <span class="store">(주)Terrastar</span>
     </div>
     <nav class="nav-mid">
       <a href="#benefit">혜택</a>
@@ -231,9 +230,9 @@ footer b{color:var(--ink2)}
 <section class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">KT OFFICIAL AUTHORIZED PARTNER</p>
+      <p class="eyebrow">KT 테라스타 통신 · (주)TERRASTAR</p>
       <h1>최신폰,<br><em>가장 유리하게</em>.</h1>
-      <p class="lead">갤럭시 S26·Z폴드7부터 점프4까지. 신규가입·번호이동 혜택을
+      <p class="lead">갤럭시 S26·Z폴드7부터 아이폰17까지. 신규가입 혜택을
         1:1로 비교해 가장 합리적인 조합을 설계해 드립니다.</p>
       <div class="cta">
         <a class="btn btn-dark btn-lg" href="#apply">무료 상담 신청</a>
@@ -245,12 +244,12 @@ footer b{color:var(--ink2)}
     <aside class="spec">
       <div class="k">오늘의 가입 혜택</div>
       <div class="big">최대 <span>50만원</span><span style="font-size:20px;color:var(--ink2)"> 상당</span></div>
-      <div class="note">공시지원금 + 사은품 + 요금제 할인 합산 기준 · 단말·요금제별 상이</div>
+      <div class="note">공시지원금 + 요금제 할인 합산 기준 · 단말·요금제별 상이</div>
       <hr>
       <ul>
         <li><span class="dash">—</span><span><b>공시지원금</b> 최대 적용 + 추가지원금(15% 이내)</span></li>
-        <li><span class="dash">—</span><span><b>신규·번호이동</b> 동일 혜택 상담</span></li>
-        <li><span class="dash">—</span><span><b>사은품</b> 액세서리·상품권 등 매장 제공</span></li>
+        <li><span class="dash">—</span><span><b>요금제 할인</b>까지 함께 설계</span></li>
+        <li><span class="dash">—</span><span><b>갤럭시 점프4</b> 지원금 적용 시 출고가 0원</span></li>
         <li><span class="dash">—</span><span><b>데이터 이전</b> 무료 지원</span></li>
       </ul>
     </aside>
@@ -260,7 +259,7 @@ footer b{color:var(--ink2)}
 <!-- trust band -->
 <div class="band">
   <div class="wrap">
-    <span class="it"><span class="d"></span> KT 공식 인증 대리점</span>
+    <span class="it"><span class="d"></span> KT 테라스타 통신</span>
     <span class="it"><span class="d"></span> 당일 개통 가능</span>
     <span class="it"><span class="d"></span> 데이터 이전 무료</span>
     <span class="it"><span class="d"></span> 상담료 0원</span>
@@ -274,11 +273,10 @@ footer b{color:var(--ink2)}
     <p class="eyebrow">Benefits</p>
     <h2 class="t">가입 한 번에, 이만큼 챙겨드립니다</h2>
     <p class="sub">복잡한 통신 가입, 가장 유리한 조합만 골라 한눈에 비교해 드립니다.</p>
-    <div class="grid4">
+    <div class="bgrid">
       <div class="cell"><div class="n">01</div><h3>공시지원금 최대</h3><p>단말·요금제별 공시지원금에 대리점 추가지원금(15% 이내)을 더해 실구매가를 낮춥니다.</p></div>
       <div class="cell"><div class="n">02</div><h3>요금제 할인 설계</h3><p>선택약정·결합할인 등 가장 저렴한 요금 구조를 함께 설계합니다.</p></div>
-      <div class="cell"><div class="n">03</div><h3>사은품 제공</h3><p>가입 시 액세서리·상품권 등 매장 사은품을 함께 드립니다.</p></div>
-      <div class="cell"><div class="n">04</div><h3>데이터 이전 지원</h3><p>스마트스위치·구글 백업으로 연락처·사진·앱을 안전하게 옮겨드립니다.</p></div>
+      <div class="cell"><div class="n">03</div><h3>데이터 이전 지원</h3><p>스마트스위치·구글 백업으로 연락처·사진·앱을 안전하게 옮겨드립니다.</p></div>
     </div>
   </div>
 </section>
@@ -290,58 +288,53 @@ footer b{color:var(--ink2)}
     <h2 class="t">최신 인기 단말, 바로 개통</h2>
     <p class="sub">재고·색상·용량은 실시간으로 다릅니다. 원하시는 모델을 상담 시 알려주세요.</p>
     <div class="dev-grid">
+      <div class="dev"><div class="ph">📱</div><div class="nm">아이폰 17 프로맥스</div><div class="tg">프리미엄</div></div>
+      <div class="dev"><div class="ph">📱</div><div class="nm">아이폰 17 프로</div><div class="tg">프리미엄</div></div>
+      <div class="dev"><div class="ph">📱</div><div class="nm">아이폰 17</div><div class="tg">인기</div></div>
+      <div class="dev"><div class="ph">📱</div><div class="nm">아이폰 17 에어</div><div class="tg">신상</div></div>
       <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 S26 울트라</div><div class="tg">프리미엄</div></div>
       <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 S26+</div><div class="tg">인기</div></div>
       <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 S26</div><div class="tg">인기</div></div>
       <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 S26 엣지</div><div class="tg">신상</div></div>
       <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 S25 엣지</div><div class="tg">실속</div></div>
       <div class="dev"><div class="ph">📲</div><div class="nm">갤럭시 Z 폴드7</div><div class="tg">폴더블</div></div>
-      <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 점프4</div><div class="tg">가성비</div></div>
+      <div class="dev"><div class="ph">📱</div><div class="nm">갤럭시 점프4</div><div class="tg">출고가 0원</div></div>
       <div class="dev"><div class="ph">➕</div><div class="nm">그 외 모델</div><div class="tg">문의</div></div>
     </div>
-  </div>
-</section>
 
-<!-- compare -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Options</p>
-    <h2 class="t">신규가입 · 번호이동, 무엇이든</h2>
-    <p class="sub">상황에 맞춰 가장 유리한 방식으로 안내해 드립니다.</p>
-    <div class="cmp">
-      <div class="c">
-        <div class="hd"><span class="ko">신규가입</span><span class="en">NEW</span></div>
-        <ul>
-          <li><span class="ck">✓</span><span>MNP 예약번호 <b>불필요</b> — 절차가 더 간단합니다</span></li>
-          <li><span class="ck">✓</span><span>새 번호 발급 → 유심/단말 연결 → 서비스 확인</span></li>
-          <li><span class="ck">✓</span><span>PASS 앱 본인인증만 준비하면 완료</span></li>
-          <li><span class="ck">✓</span><span>세컨폰·자녀폰·업무용 회선에 추천</span></li>
-        </ul>
-      </div>
-      <div class="c">
-        <div class="hd"><span class="ko">번호이동</span><span class="en">MNP</span></div>
-        <ul>
-          <li><span class="ck">✓</span><span><b>기존 번호 그대로</b> KT로 이동</span></li>
-          <li><span class="ck">✓</span><span>위약금·약정 잔여기간까지 함께 점검</span></li>
-          <li><span class="ck">✓</span><span>MNP 예약번호(유효 약 7일) 확보 안내</span></li>
-          <li><span class="ck">✓</span><span>신규가입과 <b>동일한 혜택</b> 적용</span></li>
-        </ul>
-      </div>
+    <div class="notice">
+      <div class="ni"><b>요금제 안내</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
+      <div class="ni"><b>갤럭시 점프4</b> — 지원금 적용 시 <b>출고가 0원</b>. 단, <b>128GB 모델</b>이므로 현재 사용 중인 단말기의 저장공간을 꼭 확인해 주세요.</div>
+      <div class="ni warn">※ 약정기간 내 개통을 취소하면 자격이 영구 박탈됩니다.</div>
     </div>
   </div>
 </section>
 
 <!-- steps -->
-<section id="step" style="background:var(--bg2);border-top:1px solid var(--line)">
+<section id="step">
   <div class="wrap">
     <p class="eyebrow">Process</p>
     <h2 class="t">상담 신청부터 개통까지, 4단계</h2>
     <p class="sub">복잡한 절차는 저희가 처리합니다. 고객님은 신청만 하시면 됩니다.</p>
     <div class="steps">
-      <div class="stp"><div class="no">STEP 01</div><h3>상담 신청</h3><p>원하는 단말·요금제·가입유형을 남겨주세요.</p></div>
+      <div class="stp"><div class="no">STEP 01</div><h3>상담 신청</h3><p>원하는 단말기·요금제를 남겨주세요.</p></div>
       <div class="stp"><div class="no">STEP 02</div><h3>맞춤 견적</h3><p>가장 유리한 지원금·요금제 조합을 제안합니다.</p></div>
       <div class="stp"><div class="no">STEP 03</div><h3>서류·인증</h3><p>신청서 작성과 PASS 본인인증을 진행합니다.</p></div>
       <div class="stp"><div class="no">STEP 04</div><h3>개통·이전</h3><p>당일 개통 후 데이터 이전까지 완료합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- cannot activate -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Notice</p>
+    <h2 class="t">이런 경우 개통이 어려워요</h2>
+    <p class="sub">아래 사항에 해당되면 개통이 제한될 수 있습니다. 상담 시 미리 확인해 드립니다.</p>
+    <div class="cant-grid">
+      <div class="cant"><span class="x">✕</span><div><b>최근 6개월 내 개통 이력이 있는 경우</b><span>전체 회선 기준 · KT 기기변경 고객은 540일 내 개통 불가</span></div></div>
+      <div class="cant"><span class="x">✕</span><div><b>통신 요금 미납이 있는 경우</b></div></div>
+      <div class="cant"><span class="x">✕</span><div><b>위약금이 과다한 경우</b><span>위약금 35만원 초과 시 개통 불가</span></div></div>
     </div>
   </div>
 </section>
@@ -353,9 +346,7 @@ footer b{color:var(--ink2)}
     <h2 class="t">상담 전, 이것만 준비하세요</h2>
     <div class="prep-grid">
       <div class="pi"><span class="ck">✓</span><div><b>신분증</b><span>주민등록증 또는 운전면허증</span></div></div>
-      <div class="pi"><span class="ck">✓</span><div><b>결제수단</b><span>본인 명의 신용카드 또는 계좌(자동이체)</span></div></div>
-      <div class="pi"><span class="ck">✓</span><div><b>PASS 앱 본인인증</b><span>신규·번호이동 공통 — 설치 후 인증서 발급</span></div></div>
-      <div class="pi"><span class="ck">✓</span><div><b>MNP 예약번호</b><span>번호이동 시에만 — 114로 발급(유효 약 7일)</span></div></div>
+      <div class="pi"><span class="ck">✓</span><div><b>PASS 앱 본인인증</b><span>설치 후 본인인증·인증서 발급</span></div></div>
     </div>
   </div>
 </section>
@@ -373,11 +364,11 @@ footer b{color:var(--ink2)}
     <div class="formcard">
       <div class="top">
         <h3>상담 신청서</h3>
-        <p>이름 · 연락처 · 관심 단말 · 가입유형만 남겨주세요.</p>
+        <p>이름 · 연락처 · 관심 단말기만 남겨주세요.</p>
       </div>
       <div class="formwrap">
         <!-- ▼▼ 본인 구글폼 임베드(src)만 넣으면 폼이 표시됩니다. 비어있으면 아래 대체 박스 노출 ▼▼ -->
-        <iframe id="leadForm" src="" title="KT 상담 신청서" loading="lazy"
+        <iframe id="leadForm" src="" title="KT 테라스타 통신 상담 신청서" loading="lazy"
           onload="if(this.getAttribute('src')){document.getElementById('fb').style.display='none';this.style.display='block'}">
         </iframe>
         <div class="fb" id="fb">
@@ -400,7 +391,7 @@ footer b{color:var(--ink2)}
     <h2 class="t" id="faq">자주 묻는 질문</h2>
     <div class="faq">
       <details open><summary>상담만 받아도 비용이 드나요?</summary><div class="a">아니요. 상담은 100% 무료이며, 신청한다고 바로 가입되는 것도 아닙니다. 견적을 보고 결정하시면 됩니다.</div></details>
-      <details><summary>지금 쓰는 번호 그대로 옮길 수 있나요?</summary><div class="a">번호이동(MNP)으로 기존 번호를 유지할 수 있습니다. 위약금·약정 잔여기간을 함께 확인해 손해 없이 갈아타도록 도와드립니다.</div></details>
+      <details><summary>개통 후 요금제는 어떻게 되나요?</summary><div class="a">개통 후 6개월간 9만원 요금제를 유지하고, 이후 5만원 이상 요금제로 변경할 수 있습니다. (모든 단말기 동일)</div></details>
       <details><summary>당일 개통이 가능한가요?</summary><div class="a">본인인증(PASS)·서류·재고가 준비되면 대부분 당일 개통이 가능합니다. 모델·색상·용량 재고는 상담 시 확인해 드립니다.</div></details>
       <details><summary>기존 휴대폰 데이터는 어떻게 옮기나요?</summary><div class="a">삼성 간에는 스마트스위치, 공통으로는 구글 백업으로 연락처·사진·앱을 옮겨드립니다. 매장에서 무료로 지원합니다.</div></details>
     </div>
@@ -423,16 +414,16 @@ footer b{color:var(--ink2)}
 <footer>
   <div class="wrap foot">
     <div class="biz">
-      <b>〇〇〇 (KT 공식 인증 대리점)</b><br>
-      상호/대표자: 〇〇〇 · 사업자등록번호: 000-00-00000<br>
+      <b>(주)테라스타 · KT 테라스타 통신</b><br>
+      대표자: 〇〇〇 · 사업자등록번호: 000-00-00000<br>
       주소: 서울특별시 〇〇구 〇〇로 00, 0층<br>
       대표전화: <a href="tel:0000000000" data-tel><b>0000-0000</b></a> · 영업시간 10:00~20:00
     </div>
     <a class="btn btn-dark" href="#apply" style="align-self:flex-start">상담 신청</a>
   </div>
   <div class="wrap"><div class="disc">
-    ※ 본 페이지의 혜택(공시지원금·추가지원금·사은품·요금제 할인 등)은 단말기·요금제·가입유형 및 KT 정책에 따라
-    달라질 수 있으며, 실제 적용 금액은 상담 시 안내됩니다. 추가지원금은 공시지원금의 15% 이내에서 제공됩니다.
+    ※ 본 페이지의 혜택(공시지원금·추가지원금·요금제 할인 등)은 단말기·요금제 및 KT 정책에 따라 달라질 수 있으며, 실제 적용 금액은 상담 시 안내됩니다.
+    추가지원금은 공시지원금의 15% 이내에서 제공됩니다. 개통 후 6개월간 9만원 요금제 유지 등 조건이 적용되며, 약정기간 내 개통 취소 시 자격이 영구 박탈됩니다.
     가입 신청 시 수집되는 개인정보(이름·연락처 등)는 상담·개통 목적에 한해 이용되며 관련 법령에 따라 보호·관리됩니다. · 단통법 준수.
   </div></div>
 </footer>
