@@ -248,11 +248,11 @@ footer b{color:var(--ink2)}
   CONFIG — 본인 매장 값으로 교체
   ① 카카오채널: data-kakao 의 href
   ② 구글폼: #apply 의 iframe src
-  ③ 개통 조회 서류(3개 동시 다운로드): 저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 업로드.
+  ③ 개통 조회 서류 다운로드(합본 PDF 1개): 저장소 루트에 kt-application-forms.pdf 업로드.
   ④ 작성 샘플 이미지: 저장소 루트에 kt-sample-1.jpg / kt-sample-2.jpg / kt-sample-3.jpg 업로드.
   ⑤ STEP2 인증 동영상: 저장소 루트에 pass.mp4(1차) / sign.mp4(2차) 업로드.
-  ⑥ PASS 인증서 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_12.jpg (12장) 업로드 시 표시.
-     ※ 확장자가 png 면 하단 <script> 의 EXT 값을 'png'로 변경. 장수가 다르면 TOTAL 값 변경.
+  ⑥ PASS 인증서 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_11.jpg (현재 11장) 업로드 시 표시.
+     ※ 확장자가 png 면 하단 <script> 의 EXT 값을 'png'로, 장수가 다르면 TOTAL 값 변경.
 ======================================================= -->
 
 <header>
@@ -328,8 +328,8 @@ footer b{color:var(--ink2)}
     <div class="s1-grid">
       <div>
         <div class="s1-label">⬇ 서류 다운로드</div>
-        <button type="button" class="dl-btn" onclick="downloadForms()">📄 개통 조회 서류 3종 한번에 다운로드</button>
-        <p class="dl-note">클릭하면 신청서·동의서(1)·동의서(2) 3개 파일이 함께 다운로드됩니다.</p>
+        <a class="dl-btn" href="kt-application-forms.pdf" download="KT_개통조회_서류.pdf">📄 개통 조회 서류 다운로드 (PDF)</a>
+        <p class="dl-note">신청서 · 동의서(1) · 동의서(2)가 한 PDF로 제공됩니다.</p>
         <div class="req-box">
           <span class="rh">✓ 조회 전 필수사항</span>
           <p>KT가 아닌 타 통신사를 이용 중인 경우, <b>114로 전화</b>하여 위약금/단말기 할부금을 꼭 확인 후 기재해 주시기 바랍니다.</p>
@@ -396,12 +396,12 @@ footer b{color:var(--ink2)}
       <div class="ph">🔐 PASS 인증서 필수</div>
       <p>원활한 개통을 위해 <b>PASS 앱 설치 및 인증서 발급</b>이 필요합니다.</p>
       <div class="s1-label" style="margin-top:20px;margin-bottom:10px">PASS 인증서 발급방법 <span style="font-weight:600;color:var(--muted);font-size:13px">· 옆으로 넘겨보세요</span></div>
-      <!-- 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_12.jpg 업로드 시 표시 -->
+      <!-- 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_11.jpg 업로드 시 표시 -->
       <div class="pass-slider">
         <div class="slides" id="passSlides"></div>
         <button class="sl-nav prev" type="button" onclick="passSlide(-1)" aria-label="이전 슬라이드">&#8249;</button>
         <button class="sl-nav next" type="button" onclick="passSlide(1)" aria-label="다음 슬라이드">&#8250;</button>
-        <div class="sl-count"><span id="passIdx">1</span> / <span id="passTot">12</span></div>
+        <div class="sl-count"><span id="passIdx">1</span> / <span id="passTot">11</span></div>
       </div>
     </div>
   </div>
@@ -552,29 +552,12 @@ footer b{color:var(--ink2)}
 </div>
 
 <script>
-/* STEP1 개통 조회 서류 3종 동시 다운로드.
-   저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 를 올리면 동작합니다. */
-function downloadForms(){
-  var files=[
-    {url:'kt-form-1.pdf', name:'KT_개통조회_신청서.pdf'},
-    {url:'kt-form-2.pdf', name:'개인정보_활용동의서_1.pdf'},
-    {url:'kt-form-3.pdf', name:'개인정보_활용동의서_2.pdf'}
-  ];
-  files.forEach(function(f,i){
-    setTimeout(function(){
-      var a=document.createElement('a');
-      a.href=f.url; a.download=f.name;
-      document.body.appendChild(a); a.click(); a.remove();
-    }, i*500);
-  });
-}
-
-/* PASS 인증서 발급방법 슬라이드 (pass_1 ~ pass_12).
+/* PASS 인증서 발급방법 슬라이드 (pass_1 ~ pass_11).
    저장소 루트에 이미지 업로드 시 표시. 모바일은 손가락 스와이프, PC는 좌우 화살표. */
 (function(){
   var box=document.getElementById('passSlides');
   if(!box) return;
-  var TOTAL=12, PREFIX='pass_', EXT='jpg';   /* 확장자가 png면 'png'로, 장수 다르면 TOTAL 변경 */
+  var TOTAL=11, PREFIX='pass_', EXT='jpg';   /* 확장자가 png면 'png'로, 장수 다르면 TOTAL 변경 */
   document.getElementById('passTot').textContent=TOTAL;
   for(var i=1;i<=TOTAL;i++){
     var slide=document.createElement('div'); slide.className='slide';
