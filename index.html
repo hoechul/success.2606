@@ -150,7 +150,21 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .done .dk{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
 .done b{font-size:15.5px;display:block;letter-spacing:-.01em}
 .done span{font-size:13.5px;color:var(--muted)}
+.done .done-sub{margin-top:13px;padding-top:13px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2);line-height:1.65}
+.done .done-sub .sh{display:block;color:var(--ink);font-weight:700;font-size:13.5px;margin-bottom:5px}
+.done .done-sub.warn{border-top-color:var(--kt-soft);color:var(--kt-d)}
+.done .done-sub.warn .sh{color:var(--kt-d)}
 @media(max-width:680px){.done-grid{grid-template-columns:1fr}}
+
+/* STEP3 무선서비스 계약 표준안내서 (클릭 다운로드) */
+.sign-doc{display:flex;align-items:center;gap:16px;margin-top:24px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--kt);border-radius:12px;padding:16px 20px;transition:.16s}
+.sign-doc:hover{border-color:var(--kt);box-shadow:var(--shadow);transform:translateY(-1px)}
+.sign-doc .sign-thumb{flex:0 0 auto;width:54px;height:70px;border-radius:6px;overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid var(--line)}
+.sign-doc .sign-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.sign-doc .sign-txt{flex:1}
+.sign-doc .sign-txt b{display:block;font-size:15.5px;letter-spacing:-.01em}
+.sign-doc .sign-txt span{font-size:13px;color:var(--muted)}
+.sign-doc .sign-dl{flex:0 0 auto;font-size:22px;color:var(--kt);font-weight:800}
 
 /* cannot activate */
 .cant-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px}
@@ -237,6 +251,7 @@ footer b{color:var(--ink2)}
             p8 아이폰17프로 / p9 프로맥스(요금할인)·p10 프로맥스(단말할인)
             p11 에어(단말할인)·p12 에어(요금할인) / p13 아이폰17
      ※ 다른 이미지로 바꾸려면 해당 <a class="dev" href="..."> 의 파일명을 수정.
+  ⑨ STEP3 무선서비스 계약 표준안내서: 저장소 루트에 result1.jpg 업로드 시 클릭 다운로드.
 ======================================================= -->
 
 <header>
@@ -321,7 +336,6 @@ footer b{color:var(--ink2)}
     <div class="notice">
       <div class="ni"><b>요금제 안내</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
       <div class="ni"><b>갤럭시 점프4</b> — 지원금 적용 시 <b>출고가 0원</b>. 단, <b>128GB 모델</b>이므로 현재 사용 중인 단말기의 저장공간을 꼭 확인해 주세요.</div>
-      <div class="ni warn">※ 약정기간 내 개통을 취소하면 자격이 영구 박탈됩니다.</div>
     </div>
   </div>
 </section>
@@ -424,15 +438,21 @@ footer b{color:var(--ink2)}
     <p class="sub">인증이 끝나면 개통이 완료됩니다. 아래 순서로 마무리해 주세요.</p>
 
     <div class="done-grid">
-      <div class="done"><span class="dk">✓</span><div><b>단말기 수령 · 유심 장착</b><span>택배 수령 후 유심(또는 eSIM)을 장착합니다.</span></div></div>
+      <div class="done"><span class="dk">✓</span><div><b>단말기 수령 · 유심 장착</b><span>택배 수령 후 유심(또는 eSIM)을 장착합니다.</span>
+        <div class="done-sub"><span class="sh">📦 택배 수령 안내</span>오후 1시 이전 개통 완료 시 당일 발송됩니다.<br><b>번호이동</b> — 택배 수령 후 개통 진행<br><b>신규 · 기기변경</b> — 개통 후 택배 발송 (택배비는 추천인이 지급)<br>외국인 · 미성년자 온라인 개통 불가</div>
+      </div></div>
       <div class="done"><span class="dk">✓</span><div><b>셀프 개통 · 정상 확인</b><span>개통 진행 후 통화·문자·데이터 정상 동작을 확인합니다.</span></div></div>
-      <div class="done"><span class="dk">✓</span><div><b>요금제 · 청구 안내</b><span>요금제, 청구일, 고객센터 연락처를 안내해 드립니다.</span></div></div>
+      <div class="done"><span class="dk">✓</span><div><b>요금제 · 청구 안내</b><span>요금제, 청구일, 고객센터 연락처를 안내해 드립니다.</span>
+        <div class="done-sub warn"><span class="sh">⚠ 주의사항 (요금제)</span>개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
+      </div></div>
     </div>
 
-    <div class="notice">
-      <div class="ni"><b>📦 택배 수령 안내</b><br>오후 1시 이전 개통 완료 시 당일 발송됩니다.<br><b>번호이동</b> — 택배 수령 후 개통 진행 / <b>신규 · 기기변경</b> — 개통 후 택배 발송 (택배비는 추천인이 지급)<br>외국인 · 미성년자 온라인 개통 불가</div>
-      <div class="ni warn"><b>⚠ 주의사항 (요금제)</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
-    </div>
+    <!-- 무선서비스 계약 표준안내서 (클릭 → result1.jpg 다운로드) -->
+    <a class="sign-doc" href="result1.jpg" download="무선서비스_계약_표준안내서.jpg" target="_blank" rel="noopener">
+      <span class="sign-thumb"><img src="result1.jpg" alt="무선서비스 계약 표준안내서" loading="lazy" onerror="this.replaceWith(document.createTextNode('📄'))"></span>
+      <span class="sign-txt"><b>무선서비스 계약 표준안내서 · 서명 필수</b><span>클릭하면 안내서를 다운로드할 수 있습니다.</span></span>
+      <span class="sign-dl">⬇</span>
+    </a>
 
     <!-- 데이터 이전 방법 슬라이드 (transfer-1 ~ transfer-6) -->
     <div class="s1-label" style="margin-top:30px;margin-bottom:10px">📲 데이터 이전 방법 (삼성 스마트스위치) <span style="font-weight:600;color:var(--muted);font-size:13px">· 옆으로 넘겨보세요</span></div>
