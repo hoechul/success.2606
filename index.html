@@ -105,13 +105,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .req-box p b{color:#5f4e1d}
 .samples{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .doc{margin:0}
-.doc .paper{aspect-ratio:3/4;background:#fff;border:1px solid var(--line);border-radius:7px;
-  box-shadow:var(--shadow-sm);padding:9px;position:relative;overflow:hidden}
-.doc .dbadge{position:absolute;top:5px;right:5px;background:var(--kt);color:#fff;font-size:8px;font-weight:800;padding:1px 5px;border-radius:4px}
-.doc .dh{font-size:7.5px;font-weight:800;text-align:center;color:var(--ink);border-bottom:1px solid var(--line);padding:2px 0 6px;margin-bottom:7px}
-.doc i{display:block;height:3px;background:#edeff2;border-radius:2px;margin:4px 3px}
-.doc i:nth-of-type(2n){width:78%}
-.doc i:nth-of-type(3n){width:90%}
+.doc .paper-box{position:relative;display:block;aspect-ratio:3/4;border:1px solid var(--line);border-radius:7px;
+  box-shadow:var(--shadow-sm);overflow:hidden;background:#fff;cursor:zoom-in}
+.doc .paper-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.doc .paper-box .ph-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:12px;font-weight:600;text-align:center;line-height:1.4;padding:10px}
 .doc figcaption{margin-top:9px;font-size:11.5px;color:var(--ink2);text-align:center;font-weight:600;line-height:1.35}
 @media(max-width:680px){.s1-grid{grid-template-columns:1fr;gap:30px}}
 
@@ -236,8 +234,11 @@ footer b{color:var(--ink2)}
       kt-form-1.pdf  (KT 개통/조회 신청서)
       kt-form-2.pdf  (개인정보 및 개인위치정보 활용 동의서 1)
       kt-form-3.pdf  (개인정보 및 개인위치정보 활용 동의서 2)
-     ※ 파일명을 바꾸려면 하단 <script> 의 downloadForms() 목록을 수정하세요.
-  ④ 작성 샘플 이미지: STEP1의 가짜 미리보기(.doc) 대신 실제 스캔 이미지를 쓰려면 <img src="...">로 교체하세요.
+  ④ 작성 샘플 이미지: 저장소 루트에 아래 3개 이미지를 올리면 STEP1 작성샘플에 표시됩니다.
+      kt-sample-1.jpg  (KT 개통/조회 신청서 작성샘플)
+      kt-sample-2.jpg  (개인정보 활용 동의서 1 작성샘플)
+      kt-sample-3.jpg  (개인정보 활용 동의서 2 작성샘플)
+     ※ 파일이 없으면 "작성 샘플 준비 중"으로 표시됩니다. 다른 이름/확장자는 STEP1의 <img src> 와 <a href> 를 수정하세요.
   ⑤ PASS 인증서 발급방법: STEP2의 .guide-media 를 유튜브 <iframe> 또는 <img> 로 교체하세요.
 ======================================================= -->
 
@@ -323,27 +324,28 @@ footer b{color:var(--ink2)}
       </div>
 
       <div>
-        <div class="s1-label">작성 샘플 (예시)</div>
+        <div class="s1-label">작성 샘플 (예시) · 클릭하면 크게 보기</div>
         <div class="samples">
+          <!-- 실제 작성샘플 이미지: 저장소 루트에 kt-sample-1/2/3.jpg 업로드 시 표시 -->
           <figure class="doc">
-            <div class="paper"><span class="dbadge">예시</span>
-              <div class="dh">KT 개통/조회 신청서</div>
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
+            <a class="paper-box" href="kt-sample-1.jpg" target="_blank" rel="noopener" title="크게 보기">
+              <span class="ph-fallback">작성 샘플<br>준비 중</span>
+              <img src="kt-sample-1.jpg" alt="KT 개통/조회 신청서 작성 샘플" loading="lazy" onerror="this.remove()">
+            </a>
             <figcaption>KT 개통/조회 신청서</figcaption>
           </figure>
           <figure class="doc">
-            <div class="paper"><span class="dbadge">예시</span>
-              <div class="dh">개인정보 활용 동의서 (1)</div>
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
+            <a class="paper-box" href="kt-sample-2.jpg" target="_blank" rel="noopener" title="크게 보기">
+              <span class="ph-fallback">작성 샘플<br>준비 중</span>
+              <img src="kt-sample-2.jpg" alt="개인정보 활용 동의서 (1) 작성 샘플" loading="lazy" onerror="this.remove()">
+            </a>
             <figcaption>개인정보 및 개인위치정보<br>활용 동의서 (1)</figcaption>
           </figure>
           <figure class="doc">
-            <div class="paper"><span class="dbadge">예시</span>
-              <div class="dh">개인정보 활용 동의서 (2)</div>
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
+            <a class="paper-box" href="kt-sample-3.jpg" target="_blank" rel="noopener" title="크게 보기">
+              <span class="ph-fallback">작성 샘플<br>준비 중</span>
+              <img src="kt-sample-3.jpg" alt="개인정보 활용 동의서 (2) 작성 샘플" loading="lazy" onerror="this.remove()">
+            </a>
             <figcaption>개인정보 및 개인위치정보<br>활용 동의서 (2)</figcaption>
           </figure>
         </div>
