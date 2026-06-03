@@ -127,8 +127,22 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .pass-box{margin-top:20px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-sm);padding:24px}
 .pass-box .ph{display:flex;align-items:center;gap:8px;font-size:16.5px;font-weight:800;margin-bottom:6px}
 .pass-box>p{font-size:14.5px;color:var(--ink2)}
-.guide-media{aspect-ratio:16/9;background:#fff;border:1px dashed var(--line2);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;font-weight:600;text-align:center;padding:20px;max-width:560px}
+
+/* PASS 발급방법 슬라이드 */
+.pass-slider{position:relative;margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pass-slider .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pass-slider .slides::-webkit-scrollbar{display:none}
+.pass-slider .slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:16px;min-height:240px;background:#fff}
+.pass-slider .slide img{max-width:100%;max-height:70vh;object-fit:contain;border-radius:6px;display:block}
+.pass-slider .slide .sl-ph{color:var(--muted);font-size:13px;font-weight:600;padding:60px 10px;text-align:center}
+.sl-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;
+  background:rgba(15,17,21,.55);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;padding-bottom:3px}
+.sl-nav:hover{background:rgba(15,17,21,.8)}
+.sl-nav.prev{left:10px}
+.sl-nav.next{right:10px}
+.sl-count{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(15,17,21,.62);color:#fff;
+  font-size:12px;font-weight:700;padding:3px 11px;border-radius:999px;z-index:2}
+@media(max-width:600px){.sl-nav{width:34px;height:34px;font-size:20px}}
 
 /* STEP 3 — 개통 완료 */
 .done-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
@@ -234,16 +248,11 @@ footer b{color:var(--ink2)}
   CONFIG — 본인 매장 값으로 교체
   ① 카카오채널: data-kakao 의 href
   ② 구글폼: #apply 의 iframe src
-  ③ 개통 조회 서류(3개 동시 다운로드): 저장소 루트에 아래 3개 PDF를 올리면 버튼이 동작합니다.
-      kt-form-1.pdf  (KT 개통/조회 신청서)
-      kt-form-2.pdf  (개인정보 및 개인위치정보 활용 동의서 1)
-      kt-form-3.pdf  (개인정보 및 개인위치정보 활용 동의서 2)
-  ④ 작성 샘플 이미지: 저장소 루트에 kt-sample-1.jpg / kt-sample-2.jpg / kt-sample-3.jpg 업로드 시 STEP1 작성샘플 표시.
-  ⑤ STEP2 인증 동영상: 저장소 루트에 아래 2개 mp4 업로드 시 표시됩니다.
-      pass.mp4  (1차 인증 — PASS 본인인증)
-      sign.mp4  (2차 인증 — 계약서 서명)
-     ※ 파일이 없으면 "동영상 준비 중"으로 표시됩니다. 이름이 다르면 STEP2의 <video src> 를 수정하세요.
-  ⑥ PASS 인증서 발급방법: STEP2의 .guide-media 를 유튜브 <iframe> 또는 <img> 로 교체하세요.
+  ③ 개통 조회 서류(3개 동시 다운로드): 저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 업로드.
+  ④ 작성 샘플 이미지: 저장소 루트에 kt-sample-1.jpg / kt-sample-2.jpg / kt-sample-3.jpg 업로드.
+  ⑤ STEP2 인증 동영상: 저장소 루트에 pass.mp4(1차) / sign.mp4(2차) 업로드.
+  ⑥ PASS 인증서 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_12.jpg (12장) 업로드 시 표시.
+     ※ 확장자가 png 면 하단 <script> 의 EXT 값을 'png'로 변경. 장수가 다르면 TOTAL 값 변경.
 ======================================================= -->
 
 <header>
@@ -386,8 +395,14 @@ footer b{color:var(--ink2)}
     <div class="pass-box">
       <div class="ph">🔐 PASS 인증서 필수</div>
       <p>원활한 개통을 위해 <b>PASS 앱 설치 및 인증서 발급</b>이 필요합니다.</p>
-      <div class="s1-label" style="margin-top:20px;margin-bottom:10px">PASS 인증서 발급방법</div>
-      <div class="guide-media">▶ PASS 인증서 발급방법 안내 (영상·이미지 준비 중)</div>
+      <div class="s1-label" style="margin-top:20px;margin-bottom:10px">PASS 인증서 발급방법 <span style="font-weight:600;color:var(--muted);font-size:13px">· 옆으로 넘겨보세요</span></div>
+      <!-- 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_12.jpg 업로드 시 표시 -->
+      <div class="pass-slider">
+        <div class="slides" id="passSlides"></div>
+        <button class="sl-nav prev" type="button" onclick="passSlide(-1)" aria-label="이전 슬라이드">&#8249;</button>
+        <button class="sl-nav next" type="button" onclick="passSlide(1)" aria-label="다음 슬라이드">&#8250;</button>
+        <div class="sl-count"><span id="passIdx">1</span> / <span id="passTot">12</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -538,8 +553,7 @@ footer b{color:var(--ink2)}
 
 <script>
 /* STEP1 개통 조회 서류 3종 동시 다운로드.
-   저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 를 올리면 동작합니다.
-   다운로드 시 저장되는 파일명(name)은 한글로 지정됩니다. */
+   저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 를 올리면 동작합니다. */
 function downloadForms(){
   var files=[
     {url:'kt-form-1.pdf', name:'KT_개통조회_신청서.pdf'},
@@ -554,6 +568,32 @@ function downloadForms(){
     }, i*500);
   });
 }
+
+/* PASS 인증서 발급방법 슬라이드 (pass_1 ~ pass_12).
+   저장소 루트에 이미지 업로드 시 표시. 모바일은 손가락 스와이프, PC는 좌우 화살표. */
+(function(){
+  var box=document.getElementById('passSlides');
+  if(!box) return;
+  var TOTAL=12, PREFIX='pass_', EXT='jpg';   /* 확장자가 png면 'png'로, 장수 다르면 TOTAL 변경 */
+  document.getElementById('passTot').textContent=TOTAL;
+  for(var i=1;i<=TOTAL;i++){
+    var slide=document.createElement('div'); slide.className='slide';
+    var img=document.createElement('img');
+    img.src=PREFIX+i+'.'+EXT; img.alt='PASS 인증서 발급방법 '+i+'단계'; img.loading='lazy';
+    img.onerror=function(){
+      var ph=document.createElement('div'); ph.className='sl-ph'; ph.textContent='이미지 준비 중';
+      this.replaceWith(ph);
+    };
+    slide.appendChild(img); box.appendChild(slide);
+  }
+  var idxEl=document.getElementById('passIdx');
+  function cur(){ return box.clientWidth ? Math.round(box.scrollLeft/box.clientWidth) : 0; }
+  box.addEventListener('scroll',function(){ if(idxEl) idxEl.textContent=cur()+1; });
+  window.passSlide=function(dir){
+    var n=Math.min(TOTAL-1, Math.max(0, cur()+dir));
+    box.scrollTo({left:n*box.clientWidth, behavior:'smooth'});
+  };
+})();
 </script>
 </body>
 </html>
