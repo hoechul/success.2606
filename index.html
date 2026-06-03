@@ -221,7 +221,6 @@ footer b{color:var(--ink2)}
   .dock a{flex:1;text-align:center;border-radius:11px;padding:14px 0;font-weight:700;font-size:15px;margin:0 4px}
   .dock .d-tel{background:#fff;color:var(--ink);border:1px solid var(--line2)}
   .dock .d-apply{background:var(--ink);color:#fff}
-  body{padding-bottom:64px}
 }
 </style>
 </head>
@@ -253,10 +252,6 @@ footer b{color:var(--ink2)}
       <a href="#step3">개통 완료</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="nav-right">
-      <a class="nav-tel" href="tel:01023409147">010-2340-9147</a>
-      <a class="btn btn-dark" href="tel:01023409147" style="padding:11px 20px">상담 신청</a>
-    </div>
   </div>
 </header>
 
@@ -270,7 +265,6 @@ footer b{color:var(--ink2)}
         혜택을 1:1로 비교해 가장 합리적인 조합을 설계해 드립니다.</p>
       <div class="cta">
         <a class="btn btn-dark btn-lg" href="#device">단말기 보기</a>
-        <a class="btn btn-line btn-lg" href="tel:01023409147">전화 상담 010-2340-9147</a>
       </div>
       <p class="fine">상담은 무료이며, 신청만으로 가입되지 않습니다. 견적을 보고 결정하세요.</p>
     </div>
@@ -337,7 +331,7 @@ footer b{color:var(--ink2)}
   <div class="wrap">
     <h2 class="step-h"><span class="step-no">STEP 1.</span> 개통 조회</h2>
     <p class="sub">아래 조회 서류 3장을 모두 작성하시어 <b>추천인에게 조회 요청</b>해 주세요.</p>
-    <p class="sub" style="margin-top:10px">서류 3장을 <b>다운로드 → 출력 → 작성</b> 하신 뒤, <b>서명을 꼭</b> 하시고 <b>사진을 찍어 <a href="tel:01023409147" style="color:var(--kt);font-weight:700">010-2340-9147</a></b> 로 전달해 주세요.</p>
+    <p class="sub" style="margin-top:10px">서류 3장을 <b>다운로드 → 출력 → 작성</b> 하신 뒤, <b>서명을 꼭</b> 하시고 <b>사진을 찍어 추천인에게 전달</b>해 주세요.</p>
 
     <div class="s1-grid">
       <div>
@@ -435,6 +429,11 @@ footer b{color:var(--ink2)}
       <div class="done"><span class="dk">✓</span><div><b>요금제 · 청구 안내</b><span>요금제, 청구일, 고객센터 연락처를 안내해 드립니다.</span></div></div>
     </div>
 
+    <div class="notice">
+      <div class="ni"><b>📦 택배 수령 안내</b><br>오후 1시 이전 개통 완료 시 당일 발송됩니다.<br><b>번호이동</b> — 택배 수령 후 개통 진행 / <b>신규 · 기기변경</b> — 개통 후 택배 발송 (택배비는 추천인이 지급)<br>외국인 · 미성년자 온라인 개통 불가</div>
+      <div class="ni warn"><b>⚠ 주의사항 (요금제)</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
+    </div>
+
     <!-- 데이터 이전 방법 슬라이드 (transfer-1 ~ transfer-6) -->
     <div class="s1-label" style="margin-top:30px;margin-bottom:10px">📲 데이터 이전 방법 (삼성 스마트스위치) <span style="font-weight:600;color:var(--muted);font-size:13px">· 옆으로 넘겨보세요</span></div>
     <!-- 저장소 루트에 transfer-1.jpg ~ transfer-6.jpg 업로드 시 표시 -->
@@ -483,7 +482,6 @@ footer b{color:var(--ink2)}
       주소: 서울특별시 구로구 디지털로26길 43 (구로동, 대륭포스트타워8차) L동 1404-1405호<br>
       고객센터: <a href="tel:024670300" data-tel><b>02-467-0300</b></a> · 팩스 02-497-0400 · 영업시간 10:00~20:00
     </div>
-    <a class="btn btn-dark" href="tel:01023409147" style="align-self:flex-start">상담 신청</a>
   </div>
   <div class="wrap"><div class="disc">
     ※ 본 페이지의 혜택(공시지원금·추가지원금·요금제 할인 등)은 단말기·요금제 및 KT 정책에 따라 달라질 수 있으며, 실제 적용 금액은 상담 시 안내됩니다.
@@ -491,16 +489,6 @@ footer b{color:var(--ink2)}
     가입 신청 시 수집되는 개인정보(이름·연락처 등)는 상담·개통 목적에 한해 이용되며 관련 법령에 따라 보호·관리됩니다. · 단통법 준수.
   </div></div>
 </footer>
-
-<!-- floating (desktop) -->
-<div class="float">
-  <a class="f-red" href="tel:01023409147">📞 전화 상담</a>
-</div>
-<!-- mobile dock -->
-<div class="dock">
-  <a class="d-tel" href="tel:01023409147">📞 전화</a>
-  <a class="d-apply" href="tel:01023409147">상담 신청</a>
-</div>
 
 <script>
 /* 슬라이더(.pass-slider): data-prefix / data-total / data-ext 로 이미지 자동 생성.
