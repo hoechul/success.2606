@@ -87,13 +87,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .spec .dash{color:var(--kt);font-weight:800}
 @media(max-width:860px){.hero{padding:56px 0 50px}.hero .wrap{grid-template-columns:1fr;gap:38px}.hero h1{font-size:38px}}
 
-/* trust band */
-.band{border-bottom:1px solid var(--line);background:var(--bg)}
-.band .wrap{display:flex;gap:38px;flex-wrap:wrap;padding-top:22px;padding-bottom:22px;
-  font-size:14.5px;color:var(--ink2);font-weight:600}
-.band .it{display:flex;align-items:center;gap:9px}
-.band .it .d{width:5px;height:5px;border-radius:50%;background:var(--kt)}
-
 /* STEP 공통 */
 .step-h{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
 .step-h .step-no{color:var(--blue)}
@@ -141,6 +134,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .done span{font-size:13.5px;color:var(--muted)}
 @media(max-width:680px){.done-grid{grid-template-columns:1fr}}
 
+/* cannot activate */
+.cant-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px}
+.cant{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px}
+.cant .x{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--kt-soft);color:var(--kt);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.cant b{font-size:15.5px}
+.cant span{display:block;font-size:13.5px;color:var(--muted)}
+
 /* devices */
 .devices{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .dev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
@@ -159,13 +159,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
   padding:16px 20px;font-size:14.5px;color:var(--ink2)}
 .ni b{color:var(--ink);font-weight:700}
 .ni.warn{background:var(--kt-soft);border-color:var(--kt-soft);border-left-color:var(--kt);color:var(--kt-d);font-weight:600}
-
-/* cannot activate */
-.cant-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px}
-.cant{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px}
-.cant .x{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--kt-soft);color:var(--kt);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
-.cant b{font-size:15.5px}
-.cant span{display:block;font-size:13.5px;color:var(--muted)}
 
 /* prep */
 .prep{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -292,16 +285,19 @@ footer b{color:var(--ink2)}
   </div>
 </section>
 
-<!-- trust band -->
-<div class="band">
+<!-- cannot activate (히어로 바로 아래 · 기존 신뢰 띠 자리) -->
+<section style="background:var(--bg2);border-bottom:1px solid var(--line)">
   <div class="wrap">
-    <span class="it"><span class="d"></span> KT 테라스타 통신</span>
-    <span class="it"><span class="d"></span> 당일 개통 가능</span>
-    <span class="it"><span class="d"></span> 데이터 이전 무료</span>
-    <span class="it"><span class="d"></span> 상담료 0원</span>
-    <span class="it"><span class="d"></span> 단통법 준수</span>
+    <p class="eyebrow">Notice</p>
+    <h2 class="t">이런 경우 개통이 어려워요</h2>
+    <p class="sub">아래 사항에 해당되면 개통이 제한될 수 있습니다. 상담 시 미리 확인해 드립니다.</p>
+    <div class="cant-grid">
+      <div class="cant"><span class="x">✕</span><div><b>최근 6개월 내 개통 이력이 있는 경우</b><span>전체 회선 기준 · KT 기기변경 고객은 540일 내 개통 불가</span></div></div>
+      <div class="cant"><span class="x">✕</span><div><b>통신 요금 미납이 있는 경우</b></div></div>
+      <div class="cant"><span class="x">✕</span><div><b>위약금이 과다한 경우</b><span>위약금 35만원 초과 시 개통 불가</span></div></div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- STEP 1. 개통 조회 -->
 <section id="step1">
@@ -409,20 +405,6 @@ footer b{color:var(--ink2)}
       <div class="ni"><b>요금제 안내</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
       <div class="ni"><b>갤럭시 점프4</b> — 지원금 적용 시 <b>출고가 0원</b>. 단, <b>128GB 모델</b>이므로 현재 사용 중인 단말기의 저장공간을 꼭 확인해 주세요.</div>
       <div class="ni warn">※ 약정기간 내 개통을 취소하면 자격이 영구 박탈됩니다.</div>
-    </div>
-  </div>
-</section>
-
-<!-- cannot activate -->
-<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-  <div class="wrap">
-    <p class="eyebrow">Notice</p>
-    <h2 class="t">이런 경우 개통이 어려워요</h2>
-    <p class="sub">아래 사항에 해당되면 개통이 제한될 수 있습니다. 상담 시 미리 확인해 드립니다.</p>
-    <div class="cant-grid">
-      <div class="cant"><span class="x">✕</span><div><b>최근 6개월 내 개통 이력이 있는 경우</b><span>전체 회선 기준 · KT 기기변경 고객은 540일 내 개통 불가</span></div></div>
-      <div class="cant"><span class="x">✕</span><div><b>통신 요금 미납이 있는 경우</b></div></div>
-      <div class="cant"><span class="x">✕</span><div><b>위약금이 과다한 경우</b><span>위약금 35만원 초과 시 개통 불가</span></div></div>
     </div>
   </div>
 </section>
