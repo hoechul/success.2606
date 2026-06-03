@@ -95,8 +95,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .s1-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:36px;align-items:start}
 .s1-label{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:16px;display:flex;align-items:center;gap:7px}
 .dl-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-  background:var(--navy);color:#fff;font-weight:800;font-size:16.5px;padding:22px;border-radius:12px;transition:.16s}
+  background:var(--navy);color:#fff;font-weight:800;font-size:16.5px;padding:22px;border-radius:12px;transition:.16s;
+  border:0;cursor:pointer;font-family:inherit}
 .dl-btn:hover{background:#16203a}
+.dl-note{margin-top:10px;font-size:12.5px;color:var(--muted);text-align:center}
 .req-box{margin-top:18px;background:#fffaf0;border:1px solid #f0e4c2;border-left:3px solid #e6b32a;border-radius:10px;padding:17px 19px}
 .req-box .rh{display:block;color:#8a6d1a;font-size:14.5px;font-weight:800;margin-bottom:6px}
 .req-box p{font-size:13.5px;color:#7c6a3a;line-height:1.65}
@@ -230,7 +232,11 @@ footer b{color:var(--ink2)}
   CONFIG — 본인 매장 값으로 교체
   ① 카카오채널: data-kakao 의 href
   ② 구글폼: #apply 의 iframe src
-  ③ 개통 조회 서류 PDF: 저장소에 'kt-application-forms.pdf' 파일을 올리면 STEP1의 다운로드 버튼이 동작합니다.
+  ③ 개통 조회 서류(3개 동시 다운로드): 저장소 루트에 아래 3개 PDF를 올리면 버튼이 동작합니다.
+      kt-form-1.pdf  (KT 개통/조회 신청서)
+      kt-form-2.pdf  (개인정보 및 개인위치정보 활용 동의서 1)
+      kt-form-3.pdf  (개인정보 및 개인위치정보 활용 동의서 2)
+     ※ 파일명을 바꾸려면 하단 <script> 의 downloadForms() 목록을 수정하세요.
   ④ 작성 샘플 이미지: STEP1의 가짜 미리보기(.doc) 대신 실제 스캔 이미지를 쓰려면 <img src="...">로 교체하세요.
   ⑤ PASS 인증서 발급방법: STEP2의 .guide-media 를 유튜브 <iframe> 또는 <img> 로 교체하세요.
 ======================================================= -->
@@ -308,7 +314,8 @@ footer b{color:var(--ink2)}
     <div class="s1-grid">
       <div>
         <div class="s1-label">⬇ 서류 다운로드</div>
-        <a class="dl-btn" href="kt-application-forms.pdf" download>📄 개통 조회 서류 다운로드</a>
+        <button type="button" class="dl-btn" onclick="downloadForms()">📄 개통 조회 서류 3종 한번에 다운로드</button>
+        <p class="dl-note">클릭하면 신청서·동의서(1)·동의서(2) 3개 파일이 함께 다운로드됩니다.</p>
         <div class="req-box">
           <span class="rh">✓ 조회 전 필수사항</span>
           <p>KT가 아닌 타 통신사를 이용 중인 경우, <b>114로 전화</b>하여 위약금/단말기 할부금을 꼭 확인 후 기재해 주시기 바랍니다.</p>
@@ -508,5 +515,25 @@ footer b{color:var(--ink2)}
   <a class="d-tel" href="tel:024670300" data-tel>📞 전화</a>
   <a class="d-apply" href="#apply">무료 상담 신청</a>
 </div>
+
+<script>
+/* STEP1 개통 조회 서류 3종 동시 다운로드.
+   저장소 루트에 kt-form-1.pdf / kt-form-2.pdf / kt-form-3.pdf 를 올리면 동작합니다.
+   다운로드 시 저장되는 파일명(name)은 한글로 지정됩니다. */
+function downloadForms(){
+  var files=[
+    {url:'kt-form-1.pdf', name:'KT_개통조회_신청서.pdf'},
+    {url:'kt-form-2.pdf', name:'개인정보_활용동의서_1.pdf'},
+    {url:'kt-form-3.pdf', name:'개인정보_활용동의서_2.pdf'}
+  ];
+  files.forEach(function(f,i){
+    setTimeout(function(){
+      var a=document.createElement('a');
+      a.href=f.url; a.download=f.name;
+      document.body.appendChild(a); a.click(); a.remove();
+    }, i*500);
+  });
+}
+</script>
 </body>
 </html>
