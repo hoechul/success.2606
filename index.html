@@ -114,11 +114,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 @media(max-width:680px){.s1-grid{grid-template-columns:1fr;gap:30px}}
 
 /* STEP 2 — 본인인증 */
-.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
 .auth{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:22px 20px}
 .auth .anum{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
 .auth b{font-size:16px;display:block;letter-spacing:-.01em}
 .auth span{font-size:13px;color:var(--muted)}
+.video-box{position:relative;margin-top:12px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.video-box video{position:absolute;inset:0;width:100%;height:100%;background:#000;display:block}
+.video-box .ph-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:var(--bg2);color:var(--muted);font-size:13px;font-weight:600;text-align:center;padding:12px}
 @media(max-width:680px){.auth-grid{grid-template-columns:1fr}}
 .pass-box{margin-top:20px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-sm);padding:24px}
 .pass-box .ph{display:flex;align-items:center;gap:8px;font-size:16.5px;font-weight:800;margin-bottom:6px}
@@ -234,12 +238,12 @@ footer b{color:var(--ink2)}
       kt-form-1.pdf  (KT 개통/조회 신청서)
       kt-form-2.pdf  (개인정보 및 개인위치정보 활용 동의서 1)
       kt-form-3.pdf  (개인정보 및 개인위치정보 활용 동의서 2)
-  ④ 작성 샘플 이미지: 저장소 루트에 아래 3개 이미지를 올리면 STEP1 작성샘플에 표시됩니다.
-      kt-sample-1.jpg  (KT 개통/조회 신청서 작성샘플)
-      kt-sample-2.jpg  (개인정보 활용 동의서 1 작성샘플)
-      kt-sample-3.jpg  (개인정보 활용 동의서 2 작성샘플)
-     ※ 파일이 없으면 "작성 샘플 준비 중"으로 표시됩니다. 다른 이름/확장자는 STEP1의 <img src> 와 <a href> 를 수정하세요.
-  ⑤ PASS 인증서 발급방법: STEP2의 .guide-media 를 유튜브 <iframe> 또는 <img> 로 교체하세요.
+  ④ 작성 샘플 이미지: 저장소 루트에 kt-sample-1.jpg / kt-sample-2.jpg / kt-sample-3.jpg 업로드 시 STEP1 작성샘플 표시.
+  ⑤ STEP2 인증 동영상: 저장소 루트에 아래 2개 mp4 업로드 시 표시됩니다.
+      pass.mp4  (1차 인증 — PASS 본인인증)
+      sign.mp4  (2차 인증 — 계약서 서명)
+     ※ 파일이 없으면 "동영상 준비 중"으로 표시됩니다. 이름이 다르면 STEP2의 <video src> 를 수정하세요.
+  ⑥ PASS 인증서 발급방법: STEP2의 .guide-media 를 유튜브 <iframe> 또는 <img> 로 교체하세요.
 ======================================================= -->
 
 <header>
@@ -358,11 +362,25 @@ footer b{color:var(--ink2)}
 <section id="step2" style="border-top:1px solid var(--line)">
   <div class="wrap">
     <h2 class="step-h"><span class="step-no">STEP 2.</span> 개통 진행 (본인인증)</h2>
-    <p class="sub">개통 진행 시 <b>본인인증 후 개통이 완료</b>됩니다. 조회 후 인증 요청은 필수이며, 아래 인증 방법(영상·이미지)을 참고해 주세요.</p>
+    <p class="sub">개통 진행 시 <b>본인인증 후 개통이 완료</b>됩니다. 조회 후 인증 요청은 필수이며, 아래 인증 방법(영상)을 참고해 주세요.</p>
 
     <div class="auth-grid">
-      <div class="auth"><span class="anum">1</span><div><b>1차 인증</b><span>PASS 본인인증</span></div></div>
-      <div class="auth"><span class="anum">2</span><div><b>2차 인증</b><span>계약서 서명</span></div></div>
+      <!-- 1차 인증 + 동영상 (pass.mp4) -->
+      <div>
+        <div class="auth"><span class="anum">1</span><div><b>1차 인증</b><span>PASS 본인인증</span></div></div>
+        <div class="video-box">
+          <span class="ph-fallback">PASS 본인인증 영상 준비 중</span>
+          <video src="pass.mp4" controls preload="metadata" playsinline onerror="this.style.display='none'"></video>
+        </div>
+      </div>
+      <!-- 2차 인증 + 동영상 (sign.mp4) -->
+      <div>
+        <div class="auth"><span class="anum">2</span><div><b>2차 인증</b><span>계약서 서명</span></div></div>
+        <div class="video-box">
+          <span class="ph-fallback">계약서 서명 영상 준비 중</span>
+          <video src="sign.mp4" controls preload="metadata" playsinline onerror="this.style.display='none'"></video>
+        </div>
+      </div>
     </div>
 
     <div class="pass-box">
