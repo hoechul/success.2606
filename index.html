@@ -2,529 +2,353 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>위라이크패션 · 매출 인텔리전스 대시보드</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>폰 바꿀 때 됐나요? · KT 공식 인증 대리점 상담</title>
+<meta name="description" content="폰 바꿀 때 됐나요? 카카오로 1분만 물어보세요. KT 공식 인증 대리점이 신규가입·번호이동 혜택을 가장 유리하게 알려드려요. 상담은 무료, 부담 0.">
+<meta name="theme-color" content="#fffaf0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="폰 바꿀 때 됐나요? 1분이면 끝나요 📱">
+<meta property="og:description" content="카카오로 편하게 물어보세요. KT 공식 인증 대리점이 가장 유리한 혜택만 골라 알려드려요.">
+<meta property="og:locale" content="ko_KR">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
+/* ===========================================================
+   모바일 첫화면형 · 친근 컨셉 — 카카오 대화 느낌 (말풍선 모티프)
+   palette: 따뜻한 크림 배경 + 카카오 옐로 + 부드러운 잉크
+=========================================================== */
 :root{
-  --paper:#f4f1ea; --paper2:#ece7dc; --ink:#15202b; --ink2:#3a4a5a; --muted:#7d8794;
-  --line:#ddd6c8; --card:#fbf9f4; --teal:#0e6b63; --teal-d:#0a4f49; --amber:#bd7a16;
-  --red:#c23a3a; --red-bg:#fbe9e7; --green:#2c8a63; --gold:#caa24a;
-  --shadow:0 1px 2px rgba(21,32,43,.06),0 8px 24px rgba(21,32,43,.06);
+  --bg:#fff7ea; --bg2:#fff;
+  --ink:#2b2620; --ink2:#5b554c; --muted:#9a948a;
+  --line:#efe6d4; --card:#ffffff;
+  --kakao:#FEE500; --kakao-d:#f5d800; --kakao-ink:#3c1e1e;
+  --kt:#e2231a; --mint:#1fb27a; --blue:#3b7cff;
+  --r:22px; --r-sm:16px;
+  --shadow:0 2px 6px rgba(43,38,32,.05), 0 14px 32px rgba(43,38,32,.07);
+  --shadow-sm:0 1px 3px rgba(43,38,32,.06);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Pretendard,-apple-system,system-ui,sans-serif;background:var(--paper);
-  color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(circle at 1px 1px,rgba(21,32,43,.035) 1px,transparent 0);
-  background-size:22px 22px;}
-.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
-/* ---- header ---- */
-header{background:linear-gradient(135deg,#15202b 0%,#1d3140 60%,#0e6b63 160%);color:#f4f1ea;
-  padding:26px 32px 22px;position:relative;overflow:hidden}
-header::after{content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;
-  border:1px solid rgba(244,241,234,.12);border-radius:50%}
-header::before{content:"";position:absolute;right:30px;top:30px;width:160px;height:160px;
-  border:1px solid rgba(244,241,234,.10);border-radius:50%}
-.brandline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
-.logo{font-size:25px;font-weight:800;letter-spacing:-.02em}
-.logo b{color:var(--gold)}
-.tagline{font-size:12.5px;color:rgba(244,241,234,.7);font-weight:500}
-.period{margin-top:7px;font-size:13px;color:rgba(244,241,234,.82);position:relative;z-index:1}
-.period span{color:var(--gold);font-weight:700}
-/* ---- tabs ---- */
-nav{position:sticky;top:0;z-index:50;background:rgba(244,241,234,.92);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);padding:0 18px;display:flex;gap:4px;overflow-x:auto}
-nav button{background:none;border:none;font-family:inherit;font-size:14px;font-weight:600;
-  color:var(--muted);padding:15px 16px 13px;cursor:pointer;border-bottom:2.5px solid transparent;
-  white-space:nowrap;transition:.18s}
-nav button:hover{color:var(--ink)}
-nav button.on{color:var(--teal-d);border-bottom-color:var(--teal)}
-main{max-width:1240px;margin:0 auto;padding:24px 22px 80px}
-.tab{display:none;animation:fade .4s ease}
-.tab.on{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-/* ---- section ---- */
-.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;
-  margin-bottom:20px;box-shadow:var(--shadow)}
-.sec-h{display:flex;align-items:center;gap:10px;margin-bottom:4px}
-.sec-h .tag{background:var(--ink);color:var(--paper);font-size:11px;font-weight:700;
-  padding:3px 9px;border-radius:6px;letter-spacing:.02em}
-.sec-h h2{font-size:18px;font-weight:800;letter-spacing:-.01em}
-.sec-sub{font-size:12.5px;color:var(--muted);margin:2px 0 16px}
-/* ---- kpi ---- */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 17px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden}
-.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
-.kpi.amber::before{background:var(--amber)} .kpi.gold::before{background:var(--gold)}
-.kpi.ink::before{background:var(--ink2)}
-.kpi .k-lab{font-size:12px;color:var(--muted);font-weight:600}
-.kpi .k-val{font-size:25px;font-weight:800;margin-top:6px;letter-spacing:-.02em}
-.kpi .k-sub{font-size:11.5px;color:var(--ink2);margin-top:3px}
-/* ---- controls ---- */
-.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.ctl label{font-size:12.5px;font-weight:600;color:var(--ink2)}
-select,input[type=text]{font-family:inherit;font-size:13px;padding:8px 11px;border:1px solid var(--line);
-  border-radius:9px;background:#fff;color:var(--ink);font-weight:600}
-select:focus,input:focus{outline:none;border-color:var(--teal)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
-.seg button{border:none;background:#fff;font-family:inherit;font-size:12.5px;font-weight:600;
-  padding:8px 14px;cursor:pointer;color:var(--muted)}
-.seg button.on{background:var(--teal);color:#fff}
-/* brand selector pills */
-.brandsel-wrap{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
-.brandsel-lab{font-size:12.5px;font-weight:700;color:var(--ink2);padding-top:7px;flex-shrink:0}
-.brandsel{display:flex;flex-wrap:wrap;gap:7px}
-.brandsel button{font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;
-  border:1px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
-.brandsel button:hover{border-color:var(--amber);color:var(--ink)}
-.brandsel button .dot{width:7px;height:7px;border-radius:50%;background:var(--amber)}
-.brandsel button.we .dot{background:var(--teal)}
-.brandsel button.on{background:var(--amber);color:#fff;border-color:var(--amber)}
-.brandsel button.on .dot{background:#fff}
-.brandsel button.we.on{background:var(--teal);border-color:var(--teal)}
-/* ---- table ---- */
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--line)}
-th{font-size:11.5px;color:var(--muted);font-weight:700;text-align:right;text-transform:none;
-  position:sticky;top:0;background:var(--card)}
-th:first-child,td:first-child{text-align:left}
-th.l,td.l{text-align:left}
-tbody tr:hover{background:rgba(14,107,99,.045)}
-.rk{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
-  border-radius:7px;background:var(--paper2);font-weight:800;font-size:12px;color:var(--ink2)}
-.rk.t1{background:var(--gold);color:#fff} .rk.t2{background:#c8b88a;color:#fff}
-.rk.t3{background:#d8cba8;color:#5a4d28}
-.bar-cell{position:relative;min-width:120px}
-.bar{height:7px;border-radius:4px;background:var(--teal);opacity:.85}
-.chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;
-  background:var(--paper2);color:var(--ink2)}
-.chip.we{background:#e1efe9;color:var(--teal-d)}
-.chip.req{background:#fdf3df;color:var(--amber)}
-.scroll{max-height:520px;overflow:auto;border-radius:10px;border:1px solid var(--line)}
-.scroll::-webkit-scrollbar{width:9px;height:9px}
-.scroll::-webkit-scrollbar-thumb{background:#cdc6b6;border-radius:6px}
-/* ---- bars chart ---- */
-.hbars{display:flex;flex-direction:column;gap:9px}
-.hbar{display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:10px}
-.hbar .nm{font-size:12.5px;font-weight:600;text-align:right;color:var(--ink2);overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
-.ch-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
-.hbar .track{background:var(--paper2);border-radius:6px;height:22px;position:relative;overflow:hidden}
-.hbar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),#13897f);
-  transition:width .6s cubic-bezier(.2,.8,.2,1)}
-.hbar .fill.req{background:linear-gradient(90deg,var(--amber),#d99227)}
-.hbar .vl{font-size:12px;font-weight:700;min-width:104px;text-align:right}
-/* ---- alert ---- */
-.alert-card{border:1px solid var(--red);background:var(--red-bg);border-radius:11px;padding:14px 16px;
-  display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.alert-card .ic{font-size:22px}
-.alert-card .body{flex:1}
-.alert-card .body b{font-size:14px}
-.alert-card .pct{font-size:20px;font-weight:800;color:var(--red)}
-.ok-card{border:1px dashed var(--line);border-radius:11px;padding:24px;text-align:center;color:var(--muted)}
-.note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7}
-.note b{color:var(--ink2)}
-.flex2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:860px){.flex2{grid-template-columns:1fr}.hbar{grid-template-columns:96px 1fr auto}}
-.map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.map-row{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
-  border-radius:9px;padding:8px 10px}
-.map-row .st{font-size:13px;font-weight:700;flex:1}
-.foot{text-align:center;font-size:11.5px;color:var(--muted);padding:20px}
-.legend{font-size:11.5px;color:var(--muted);margin-bottom:12px}
-.legend .chip{margin-right:6px}
-.pos{color:var(--green);font-weight:700} .neg{color:var(--red);font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Pretendard,-apple-system,system-ui,"Apple SD Gothic Neo",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.num{font-variant-numeric:tabular-nums}
+
+/* 모바일 첫화면형: 폰 화면 폭의 단일 컬럼. 데스크톱에선 가운데 정렬 */
+.app{max-width:480px;margin:0 auto;background:var(--bg);min-height:100vh;
+  position:relative;padding-bottom:84px;
+  box-shadow:0 0 0 1px rgba(43,38,32,.04), 0 30px 80px rgba(43,38,32,.10)}
+@media(min-width:481px){body{padding:24px 0}.app{border-radius:28px;overflow:hidden;min-height:auto}}
+
+.pad{padding:0 20px}
+.sec{padding:34px 20px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;
+  color:var(--mint);background:#e7f7f0;padding:6px 12px;border-radius:999px;letter-spacing:.01em}
+h2.t{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin:12px 0 6px}
+.sub{color:var(--ink2);font-size:15px}
+
+/* ===== 상단 바 ===== */
+.bar{position:sticky;top:0;z-index:40;background:rgba(255,247,234,.9);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15.5px}
+.kt-chip{background:var(--kt);color:#fff;font-size:11.5px;font-weight:800;padding:3px 7px;border-radius:6px}
+.bar .mini{font-size:12.5px;color:var(--muted);font-weight:600}
+
+/* ===== 히어로 (채팅 느낌) ===== */
+.hero{padding:26px 20px 30px;text-align:center;
+  background:radial-gradient(420px 220px at 50% -30%, #fff4cf, transparent 70%)}
+.emoji-badge{font-size:42px;line-height:1;filter:drop-shadow(0 6px 10px rgba(43,38,32,.12))}
+.hero h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.25;margin:14px 0 10px}
+.hero h1 .hl{background:linear-gradient(transparent 60%, #ffe88a 60%);padding:0 2px}
+.hero p{color:var(--ink2);font-size:15.5px;max-width:340px;margin:0 auto}
+
+/* 채팅 말풍선 */
+.chat{margin:24px auto 0;max-width:330px;display:flex;flex-direction:column;gap:10px}
+.bubble{padding:12px 16px;border-radius:18px;font-size:14.5px;font-weight:600;max-width:84%;box-shadow:var(--shadow-sm)}
+.bubble.them{background:#fff;color:var(--ink2);align-self:flex-start;border-bottom-left-radius:5px}
+.bubble.me{background:var(--kakao);color:var(--kakao-ink);align-self:flex-end;border-bottom-right-radius:5px}
+.bubble .tip{display:block;font-size:11.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.typing{align-self:flex-start;background:#fff;border-bottom-left-radius:5px;display:flex;gap:4px;padding:14px 16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#cfc7b8;animation:bl 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.cta-stack{margin:26px auto 0;max-width:340px;display:grid;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;
+  border-radius:15px;padding:16px 20px;font-size:16.5px;cursor:pointer;border:0;transition:.14s;width:100%}
+.btn:active{transform:scale(.985)}
+.btn-kakao{background:var(--kakao);color:var(--kakao-ink);box-shadow:0 8px 20px rgba(254,229,0,.45)}
+.btn-kakao:hover{background:var(--kakao-d)}
+.btn-line{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-line:hover{border-color:var(--ink)}
+.btn-tel{background:var(--ink);color:#fff}
+.reassure{margin-top:14px;font-size:13px;color:var(--muted);font-weight:600}
+.reassure b{color:var(--mint)}
+
+/* ===== 신뢰 strip ===== */
+.trust{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;scrollbar-width:none}
+.trust::-webkit-scrollbar{display:none}
+.trust .pill{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 14px;font-size:13px;font-weight:700;color:var(--ink2);display:flex;align-items:center;gap:6px;box-shadow:var(--shadow-sm)}
+.trust .pill b{color:var(--ink)}
+
+/* ===== 이런 분께 (공감 카드) ===== */
+.relate{display:grid;gap:10px;margin-top:18px}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:15px 16px;display:flex;gap:13px;align-items:center;box-shadow:var(--shadow-sm)}
+.rcard .e{font-size:24px;flex:0 0 auto}
+.rcard .tx{font-size:14.5px;font-weight:600;color:var(--ink2)}
+.rcard .tx b{color:var(--ink);font-weight:800}
+
+/* ===== 혜택 (간단 리스트) ===== */
+.benefits{background:var(--bg2)}
+.blist{display:grid;gap:12px;margin-top:18px}
+.bitem{display:flex;gap:13px;align-items:flex-start}
+.bitem .ic{flex:0 0 auto;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;
+  justify-content:center;font-size:20px;background:#fff6d6}
+.bitem h3{font-size:16px;font-weight:800}
+.bitem p{font-size:14px;color:var(--muted);margin-top:2px}
+
+/* ===== 단말 (가로 스크롤) ===== */
+.dev-scroll{display:flex;gap:11px;overflow-x:auto;padding:18px 20px 6px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.dev-scroll::-webkit-scrollbar{display:none}
+.dev{flex:0 0 auto;width:128px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:16px 14px;text-align:center;box-shadow:var(--shadow-sm)}
+.dev .e{font-size:30px}
+.dev .nm{font-weight:800;font-size:14px;margin-top:8px;line-height:1.3}
+.dev .tg{display:inline-block;margin-top:7px;font-size:11px;font-weight:800;color:var(--kt);
+  background:#fdecea;padding:2px 8px;border-radius:999px}
+.dev-note{padding:6px 20px 0;font-size:12.5px;color:var(--muted)}
+
+/* ===== 절차 (친근 3스텝) ===== */
+.steps{display:grid;gap:12px;margin-top:18px}
+.stp{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;
+  display:flex;gap:14px;align-items:center;box-shadow:var(--shadow-sm)}
+.stp .no{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--kakao);color:var(--kakao-ink);
+  font-weight:800;display:flex;align-items:center;justify-content:center;font-size:16px}
+.stp h3{font-size:15.5px;font-weight:800}
+.stp p{font-size:13.5px;color:var(--muted)}
+
+/* ===== 준비물 ===== */
+.prep{background:var(--bg2)}
+.checks{display:grid;gap:9px;margin-top:16px}
+.chk{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:13px 15px;box-shadow:var(--shadow-sm)}
+.chk .c{color:var(--mint);font-weight:900;font-size:17px;line-height:1.4}
+.chk b{font-size:14.5px}.chk span{font-size:13px;color:var(--muted);display:block}
+
+/* ===== 상담신청 (구글폼) ===== */
+.apply{background:linear-gradient(180deg,#fff,var(--bg))}
+.formcard{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;box-shadow:var(--shadow)}
+.formcard .h{background:var(--kakao);color:var(--kakao-ink);padding:18px 20px}
+.formcard .h h3{font-size:18px;font-weight:800}
+.formcard .h p{font-size:13.5px;font-weight:600;opacity:.85;margin-top:2px}
+.formwrap{padding:6px}
+.formwrap iframe{width:100%;border:0;min-height:980px;border-radius:14px}
+.fallback{padding:30px 22px;text-align:center}
+.fallback .e{font-size:34px}
+.fallback p{color:var(--muted);font-size:14px;margin:8px 0 16px}
+
+/* ===== FAQ ===== */
+details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:10px;box-shadow:var(--shadow-sm)}
+summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:700;font-size:15px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;color:var(--mint);font-weight:800;transition:.2s;flex:0 0 auto}
+details[open] summary::after{transform:rotate(45deg)}
+details .a{padding:0 18px 16px;color:var(--ink2);font-size:14px}
+
+/* ===== 마지막 CTA ===== */
+.final{background:var(--ink);color:#fff;text-align:center;border-radius:var(--r) var(--r) 0 0;margin-top:8px}
+.final .e{font-size:36px}
+.final h2{font-size:23px;font-weight:800;margin:8px 0 8px;letter-spacing:-.02em}
+.final p{color:#c9c2b6;font-size:14.5px;max-width:300px;margin:0 auto 20px}
+.final .btn-kakao{max-width:320px;margin:0 auto}
+
+/* ===== 푸터 ===== */
+footer{padding:24px 20px 30px;font-size:12px;color:var(--muted);line-height:1.8}
+footer b{color:var(--ink2)}
+.disc{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.7}
+
+/* ===== 하단 고정 CTA 바 (항상 노출) ===== */
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:50;width:100%;max-width:480px;
+  display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,247,234,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+.dock a{flex:1;border-radius:14px;padding:14px 0;text-align:center;font-weight:800;font-size:15.5px}
+.dock .d-kakao{flex:1.4;background:var(--kakao);color:var(--kakao-ink)}
+.dock .d-tel{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
 </style>
 </head>
 <body>
-<header>
-  <div class="brandline">
-    <div class="logo">WE<b>LIKE</b> · 위라이크패션</div>
-    <div class="tagline">오프라인 유통 매출 인텔리전스 대시보드</div>
+<!-- ===========================================================
+  CONFIG — 본인 매장 값으로 3곳만 교체하세요 (자세한 건 README.md)
+  ① 전화번호: tel:0000000000  (숫자만)  → 화면표시 0000-0000
+  ② 카카오채널: data-kakao 의 href (https://pf.kakao.com/_xxxx)
+  ③ 구글폼: #apply 의 iframe src 에 구글폼 임베드 주소
+=========================================================== -->
+<div class="app">
+
+  <!-- 상단 바 -->
+  <div class="bar">
+    <div class="brand"><span class="kt-chip">KT</span> 공식 인증 대리점</div>
+    <div class="mini">상담 무료 · 부담 0</div>
   </div>
-  <div class="period">분석기간 <span id="period"></span> · 데이터 출처: 첨부 매출자료(test.xlsx)</div>
-</header>
 
-<nav id="nav">
-  <button class="on" data-t="t1">① 위라이크패션 종합</button>
-  <button data-t="t2">② 이랜드리테일 점포·브랜드</button>
-  <button data-t="t3">③ 매출 DB</button>
-  <button data-t="t4">⚙ 채널 매핑 설정</button>
-</nav>
+  <!-- 히어로 -->
+  <header class="hero">
+    <div class="emoji-badge">📱</div>
+    <h1>폰 바꿀 때<br><span class="hl">됐나요?</span></h1>
+    <p>고민되면 카카오로 1분만 물어보세요.<br>가장 유리한 혜택만 골라 알려드려요.</p>
 
-<main>
-<!-- ===== TAB 1 ===== -->
-<section class="tab on" id="t1">
-  <div class="kpis" id="t1kpi"></div>
+    <div class="chat" aria-hidden="true">
+      <div class="bubble them">지금 폰 약정 거의 끝났는데… 바꾸는 게 이득일까요? 🤔</div>
+      <div class="bubble me">번호 그대로 KT로 오시면 더 유리해요!<br>지원금이랑 요금제 같이 계산해 드릴게요 😊
+        <span class="tip">평균 응답 5분 이내</span></div>
+      <div class="typing"><i></i><i></i><i></i></div>
+    </div>
 
-  <div class="sec">
-    <div class="sec-h"><span class="tag">1</span><h2>오프라인 유통 채널별 매출 대시보드</h2></div>
-    <div class="sec-sub">위라이크패션 기준 · 채널별 일매출 / 월매출</div>
-    <div class="ctl">
-      <div class="seg" id="t1mode">
-        <button class="on" data-m="month">월매출(월누계)</button>
-        <button data-m="day">일매출</button>
+    <div class="cta-stack">
+      <a class="btn btn-kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" data-kakao>💛 카카오로 물어보기</a>
+      <a class="btn btn-line" href="#apply">📝 상담 신청서 작성하기</a>
+    </div>
+    <div class="reassure">상담만 받아도 <b>전혀 부담 없어요.</b> 가입은 직접 결정하시면 됩니다.</div>
+  </header>
+
+  <!-- 신뢰 strip -->
+  <div class="trust">
+    <div class="pill">✅ <b>KT 공식 인증</b></div>
+    <div class="pill">⚡ <b>당일 개통</b> 가능</div>
+    <div class="pill">🎁 사은품 제공</div>
+    <div class="pill">🔁 번호이동 OK</div>
+    <div class="pill">📲 데이터 이전 무료</div>
+  </div>
+
+  <!-- 이런 분께 (공감) -->
+  <section class="sec">
+    <span class="eyebrow">🙋 이런 분이라면</span>
+    <h2 class="t">혹시 이런 고민, 있으세요?</h2>
+    <div class="relate">
+      <div class="rcard"><span class="e">😮‍💨</span><div class="tx"><b>약정이 끝났는데</b> 그냥 계속 쓰고 있어요</div></div>
+      <div class="rcard"><span class="e">💸</span><div class="tx">요금이 <b>생각보다 비싼 것</b> 같아요</div></div>
+      <div class="rcard"><span class="e">🆕</span><div class="tx"><b>최신폰</b>으로 바꾸고 싶은데 뭐가 이득인지 모르겠어요</div></div>
+      <div class="rcard"><span class="e">😵</span><div class="tx">매장 가서 <b>설명 듣는 게 부담</b>스러워요</div></div>
+    </div>
+    <p class="sub" style="margin-top:14px">→ 카톡으로 편하게 물어보세요. 숫자로 딱 정리해 드릴게요.</p>
+  </section>
+
+  <!-- 혜택 -->
+  <section class="sec benefits">
+    <span class="eyebrow">🎁 가입 혜택</span>
+    <h2 class="t">한 번 바꿀 때, 이만큼 챙겨요</h2>
+    <div class="blist">
+      <div class="bitem"><div class="ic">💰</div><div><h3>공시지원금 + 추가지원금</h3><p>단말·요금제별 공시지원금에 대리점 추가지원금(15% 이내)까지.</p></div></div>
+      <div class="bitem"><div class="ic">📉</div><div><h3>요금제 할인 설계</h3><p>선택약정·결합할인으로 매달 나가는 요금을 가장 낮게.</p></div></div>
+      <div class="bitem"><div class="ic">🎁</div><div><h3>매장 사은품</h3><p>액세서리·상품권 등 가입 시 사은품 제공.</p></div></div>
+      <div class="bitem"><div class="ic">📲</div><div><h3>데이터 이전 무료</h3><p>연락처·사진·앱까지 새 폰으로 안전하게 옮겨드려요.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 단말 -->
+  <section style="padding:34px 0">
+    <div class="pad"><span class="eyebrow">📱 개통 가능 단말</span>
+      <h2 class="t">최신 인기폰, 바로 개통돼요</h2></div>
+    <div class="dev-scroll">
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 S26 울트라</div><div class="tg">프리미엄</div></div>
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 S26+</div><div class="tg">인기</div></div>
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 S26</div><div class="tg">인기</div></div>
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 S26 엣지</div><div class="tg">신상</div></div>
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 S25 엣지</div><div class="tg">실속</div></div>
+      <div class="dev"><div class="e">📲</div><div class="nm">갤럭시 Z 폴드7</div><div class="tg">폴더블</div></div>
+      <div class="dev"><div class="e">📱</div><div class="nm">갤럭시 점프4</div><div class="tg">가성비</div></div>
+      <div class="dev"><div class="e">➕</div><div class="nm">그 외 모델</div><div class="tg">문의</div></div>
+    </div>
+    <p class="dev-note">← 옆으로 넘겨보세요. 재고·색상·용량은 상담 시 확인해 드려요.</p>
+  </section>
+
+  <!-- 절차 -->
+  <section class="sec">
+    <span class="eyebrow">🪄 진행 방법</span>
+    <h2 class="t">정말 간단해요, 3단계면 끝</h2>
+    <div class="steps">
+      <div class="stp"><div class="no">1</div><div><h3>카톡/폼으로 신청</h3><p>원하는 폰·가입유형(신규·번호이동)만 알려주세요.</p></div></div>
+      <div class="stp"><div class="no">2</div><div><h3>맞춤 견적 받기</h3><p>가장 유리한 지원금·요금제 조합을 정리해 드려요.</p></div></div>
+      <div class="stp"><div class="no">3</div><div><h3>당일 개통 + 이전</h3><p>PASS 인증·서류 후 개통, 데이터까지 옮기면 끝!</p></div></div>
+    </div>
+  </section>
+
+  <!-- 준비물 -->
+  <section class="sec prep">
+    <span class="eyebrow">🧾 준비물</span>
+    <h2 class="t">이것만 있으면 돼요</h2>
+    <div class="checks">
+      <div class="chk"><span class="c">✓</span><div><b>신분증</b><span>주민등록증 또는 운전면허증</span></div></div>
+      <div class="chk"><span class="c">✓</span><div><b>결제수단</b><span>본인 명의 카드 또는 계좌</span></div></div>
+      <div class="chk"><span class="c">✓</span><div><b>PASS 앱 본인인증</b><span>신규·번호이동 공통 (설치 후 인증서 발급)</span></div></div>
+      <div class="chk"><span class="c">✓</span><div><b>MNP 예약번호</b><span>번호이동만 — 114로 발급(유효 약 7일)</span></div></div>
+    </div>
+  </section>
+
+  <!-- 상담신청 (구글폼) -->
+  <section class="sec apply" id="apply">
+    <span class="eyebrow">✍️ 상담 신청</span>
+    <h2 class="t">1분이면 끝! 견적 받아보세요</h2>
+    <p class="sub">남겨주시면 영업시간 내 빠르게 연락드려요.</p>
+    <div class="formcard">
+      <div class="h"><h3>📝 무료 상담 신청서</h3><p>이름 · 연락처 · 관심 단말 · 가입유형만 남겨주세요</p></div>
+      <div class="formwrap">
+        <!-- ▼▼ 본인 구글폼 임베드(src)만 넣으면 폼이 표시됩니다. 비어있으면 아래 대체 박스 노출 ▼▼ -->
+        <iframe id="leadForm" src="" title="KT 상담 신청서" loading="lazy"
+          onload="if(this.getAttribute('src')){document.getElementById('fb').style.display='none';this.style.display='block'}">
+        </iframe>
+        <div class="fallback" id="fb">
+          <div class="e">💬</div>
+          <p>상담 신청서 준비 중이에요.<br>지금은 카카오·전화로 바로 상담하실 수 있어요!</p>
+          <div class="cta-stack" style="margin-top:0">
+            <a class="btn btn-kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" data-kakao>💛 카카오로 상담</a>
+            <a class="btn btn-tel" href="tel:0000000000" data-tel>📞 전화로 상담</a>
+          </div>
+        </div>
       </div>
-      <span id="t1daywrap" style="display:none">
-        <label>기준일</label>
-        <select id="t1date"></select>
-      </span>
     </div>
-    <div class="hbars" id="t1bars"></div>
-  </div>
+  </section>
 
-  <div class="flex2">
-    <div class="sec">
-      <div class="sec-h"><span class="tag">1-2</span><h2>채널별 월누계 매출 순위</h2></div>
-      <div class="sec-sub">매출 높은 순 · 위라이크패션 기준</div>
-      <div class="scroll"><table id="t1chrank"></table></div>
+  <!-- FAQ -->
+  <section class="sec">
+    <span class="eyebrow">❓ 자주 묻는 질문</span>
+    <h2 class="t">궁금한 점, 미리 풀어드려요</h2>
+    <details open><summary>상담만 받아도 괜찮나요?</summary><div class="a">네! 상담은 100% 무료고, 신청한다고 바로 가입되는 것도 아니에요. 견적 보고 천천히 결정하시면 됩니다.</div></details>
+    <details><summary>쓰던 번호 그대로 옮길 수 있나요?</summary><div class="a">번호이동(MNP)으로 기존 번호를 유지할 수 있어요. 위약금·약정 잔여까지 같이 확인해서 손해 없게 도와드려요.</div></details>
+    <details><summary>오늘 바로 개통되나요?</summary><div class="a">본인인증(PASS)·서류·재고가 준비되면 대부분 당일 개통 가능해요. 재고는 상담 시 확인해 드려요.</div></details>
+    <details><summary>예전 폰 데이터는 어떻게 옮겨요?</summary><div class="a">삼성 간에는 스마트스위치, 공통으로는 구글 백업으로 연락처·사진·앱을 옮겨드려요. 매장에서 무료로 도와드립니다.</div></details>
+  </section>
+
+  <!-- 마지막 CTA -->
+  <section class="sec final">
+    <div class="e">🙌</div>
+    <h2>고민될 땐, 일단 물어보세요</h2>
+    <p>대답은 무료, 결정은 천천히. 가장 유리한 방법만 알려드릴게요.</p>
+    <a class="btn btn-kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" data-kakao>💛 카카오로 1분 상담</a>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <b>〇〇〇 (KT 공식 인증 대리점)</b><br>
+    상호/대표자 · 사업자등록번호 000-00-00000<br>
+    주소: 서울특별시 〇〇구 〇〇로 00 · 영업시간 10:00~20:00<br>
+    대표전화 <a href="tel:0000000000" data-tel><b>0000-0000</b></a>
+    <div class="disc">
+      ※ 혜택(공시지원금·추가지원금·사은품·요금제 할인)은 단말기·요금제·가입유형 및 KT 정책에 따라 달라지며, 실제 금액은 상담 시 안내됩니다.
+      추가지원금은 공시지원금의 15% 이내. 가입 시 수집되는 개인정보는 상담·개통 목적에 한해 이용·보호됩니다. 단통법 준수.
     </div>
-    <div class="sec">
-      <div class="sec-h"><span class="tag">1-1</span><h2>이랜드리테일 내 위라이크 점포 순위</h2></div>
-      <div class="sec-sub">이랜드리테일 점포별 위라이크패션 매출 높은 순</div>
-      <div class="scroll"><table id="t1elandrank"></table></div>
-    </div>
-  </div>
-</section>
+  </footer>
+</div>
 
-<!-- ===== TAB 2 ===== -->
-<section class="tab" id="t2">
-  <div class="kpis" id="t2kpi"></div>
-
-  <div class="sec">
-    <div class="sec-h"><span class="tag">2-1</span><h2>이랜드리테일 일간 실적 — 위라이크 입점 점포</h2></div>
-    <div class="sec-sub">위라이크패션만 집계(전 브랜드 아님) · 당일매출 + 누적매출(5/1~선택일) 병기</div>
-    <div class="ctl">
-      <label>당일</label><select id="t2date"></select>
-    </div>
-    <div class="scroll"><table id="t2daily"></table></div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-h"><span class="tag">2-2</span><h2>이상 매장 경보 — 전주대비 30% 이상 급감</h2></div>
-    <div class="sec-sub">위라이크패션 매장 한정 · 최근 7일 vs 직전 7일 비교</div>
-    <div class="ctl">
-      <label>기준일(주차 마지막일)</label><select id="t2alertdate"></select>
-    </div>
-    <div id="t2alerts"></div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-h"><span class="tag">2-3</span><h2>이랜드리테일 타브랜드 점포·브랜드별 실적</h2></div>
-    <div class="sec-sub">위라이크패션 제외 · 브랜드 버튼 선택 시 해당 브랜드의 점포별 실적 · 월누계 + 선택일 일매출</div>
-    <div class="brandsel-wrap"><span class="brandsel-lab">브랜드</span><div class="brandsel" id="t2obsel"></div></div>
-    <div class="ctl"><label>일매출 기준일</label><select id="t2obdate"></select></div>
-    <div class="scroll"><table id="t2otherbrand"></table></div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-h"><span class="tag">2</span><h2>브랜드별 월누계 (이랜드리테일)</h2></div>
-    <div class="sec-sub">전 브랜드 기준 · 매출 높은 순</div>
-    <div class="scroll"><table id="t2brandrank"></table></div>
-  </div>
-</section>
-
-<!-- ===== TAB 3 ===== -->
-<section class="tab" id="t3">
-  <div class="sec">
-    <div class="sec-h"><span class="tag">3</span><h2>매출 DB (원본 기준)</h2></div>
-    <div class="sec-sub">첨부파일 기준 · 점포 × 브랜드 단위 일별/월누계 매출</div>
-    <div class="ctl">
-      <input type="text" id="t3search" placeholder="점포·브랜드 검색…" style="min-width:200px">
-      <label>채널</label><select id="t3ch"><option value="">전체</option></select>
-      <label>브랜드</label><select id="t3br"><option value="">전체</option></select>
-      <label><input type="checkbox" id="t3we"> 위라이크패션만</label>
-      <span class="chip" id="t3count"></span>
-    </div>
-    <div class="scroll" style="max-height:640px"><table id="t3tbl"></table></div>
-    <div class="note">※ 월누계는 첨부파일 「월누계」행 값이며 일자(5/1~5/31) 합계와 일치합니다. 유통채널은 첨부파일 1행 값을 그대로 사용했습니다.</div>
-  </div>
-</section>
-
-<!-- ===== TAB 4 ===== -->
-<section class="tab" id="t4">
-  <div class="sec">
-    <div class="sec-h"><span class="tag">⚙</span><h2>점포 → 유통채널 매핑</h2></div>
-    <div class="sec-sub">유통채널은 첨부파일 1행 값을 그대로 반영했습니다(확정). 필요 시 아래에서 재분류할 수 있습니다(즉시 반영).</div>
-    <div class="map-grid" id="t4map"></div>
-    <div class="note">
-      <b>첨부파일 채널(확정)</b> — 와이스퀘어 · 이랜드리테일 · 롯데백화점 · 행복한백화점 · 마리오아울렛 · 세이브존 · LF · 인천스퀘어원 · 신세계아울렛<br>
-      <b>브랜드 정규화</b> — 위라이크/위라이크패션(여성)/위라이크잇/위라이크(정341104) → 「위라이크패션」, 더블제이디→더블JD, 더블에이트→더블88, 멤버헐리데이→멤버할리데이.
-    </div>
-  </div>
-</section>
-</main>
-<div class="foot">위라이크패션 매출 인텔리전스 · 첨부파일(test.xlsx) 기반 자동 생성 대시보드</div>
-
-<script>
-const RAW = {"dates": ["2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09", "2026-05-10", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-16", "2026-05-17", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-23", "2026-05-24", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-05-30", "2026-05-31"], "cols": [{"col": 2, "channel": "와이스퀘어", "store": "와이스퀘어", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [668900, 1030500, 26200, 151500, 267400, 104600, 348300, 172600, 104500, 209200, 89600, 149300, 150700, 211400, 357700, 262700, 826400, 0, 65700, 149000, 294800, 1276500, 794500, 826700, 438200, 550100, 49700, 84700, 0, 0, 0], "monthly": 9661400}, {"col": 3, "channel": "이랜드리테일", "store": "평촌", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2792900, 3532400, 1851000, 1722600, 5456400, 861600, 533800, 248600, 3839200, 3507000, 557200, 393400, 414200, 953400, 1031800, 1758900, 2045400, 1473400, 593400, 287600, 468800, 199600, 2522700, 1760600, 2037700, 128800, 150000, 495800, 627600, 0, 0], "monthly": 42245800}, {"col": 4, "channel": "이랜드리테일", "store": "평촌", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [2652000, 2090000, 1556000, 879000, 2365000, 941000, 1953000, 1312000, 2943000, 2794000, 713000, 590000, 683000, 819000, 876000, 1856000, 995000, 723000, 1011000, 174000, 484000, 805000, 712000, 1871000, 1296000, 154000, 189000, 178000, 629000, 0, 0], "monthly": 34243000}, {"col": 5, "channel": "이랜드리테일", "store": "평촌", "brandRaw": "어나더어썸", "brand": "어나더어썸", "isWelike": false, "daily": [5792000, 2779000, 2235000, 1305000, 4227000, 993000, 777000, 1207000, 3997000, 4271000, 111000, 464000, 584000, 1693000, 1272000, 4370000, 3549000, 1209000, 65000, 356000, 937000, 244000, 4045000, 1396000, 1177000, 467000, 1370000, 601000, 1050000, 0, 0], "monthly": 52543000}, {"col": 6, "channel": "이랜드리테일", "store": "평촌", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [1048000, 90000, 150000, 964000, 828000, 32000, 0, 50000, 638000, 40000, 40000, 0, 0, 0, 60000, 210000, 349000, 180000, 40000, 215000, 0, 0, 300000, 60000, 439000, 228000, -48000, 80000, 0, 0, 0], "monthly": 5993000}, {"col": 7, "channel": "이랜드리테일", "store": "불광", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2431400, 2358600, 2342600, 2039400, 2571200, 269200, 528200, 458600, 1375000, 1545200, 368800, 1226200, 229200, 589000, 519200, 2326600, 1399800, 957000, 378600, 448600, 488600, 956400, 2211800, 1778400, 1599800, 388800, 139600, 558200, 468400, 0, 0], "monthly": 32952400}, {"col": 8, "channel": "이랜드리테일", "store": "불광", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [495000, 466000, 551000, 224000, 447000, 0, 82000, 259000, 209000, 463000, -50000, 250000, 152000, 174000, 180000, 676000, 883000, 170000, 67000, 100000, 45000, 91000, 387000, 559000, 397000, 180000, 897000, 613000, 738000, 0, 0], "monthly": 9705000}, {"col": 9, "channel": "이랜드리테일", "store": "불광", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [3498000, 2033000, 1389000, 638000, 2854000, 687000, 648000, 599000, 1379000, 1246000, 468000, 315000, 646000, 746000, 946000, 1561000, 2474000, 235000, 817000, 594000, 961000, 1223000, 1696000, 1785000, 876000, 545000, 333000, 511000, 1036000, 0, 0], "monthly": 32739000}, {"col": 10, "channel": "이랜드리테일", "store": "불광", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [2923000, 2192000, 1245000, 784000, 1418000, 225000, 216000, 312000, 630000, 1636000, 146000, 325000, 287000, 324000, 693000, 1442000, 1949000, 531000, 319000, 187000, 1235000, 368000, 1879000, 1273000, 1602000, 245000, 557000, 511000, 359000, 0, 0], "monthly": 25813000}, {"col": 11, "channel": "이랜드리테일", "store": "불광", "brandRaw": "아크로셀렉트", "brand": "아크로셀렉트", "isWelike": false, "daily": [991000, 841000, 1104000, 689000, 1625000, 362000, 195000, 107000, 1078000, 986000, 0, 19000, 696000, 342000, 58000, 1298000, 906000, 590000, 304000, 216000, 284000, 163000, 1124000, 1257000, 1025000, -30000, 9000, 59000, 475000, 0, 0], "monthly": 16773000}, {"col": 12, "channel": "이랜드리테일", "store": "부천", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [3513600, 3599200, 3921900, 2688100, 3718400, 632500, 1106200, 927600, 3508800, 2641300, 757800, 259200, 547900, 1580200, 1780600, 4385400, 3633100, 2168400, 1067200, 413600, 1638800, 802200, 2892000, 4355200, 2208200, 69800, 169400, 518000, 598000, 0, 0], "monthly": 56102600}, {"col": 13, "channel": "이랜드리테일", "store": "부천", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [1563000, 1390000, 1200000, 1180000, 1521000, 60000, 70000, 633000, 2194000, 2875000, 450000, 942000, 226000, 212000, 88000, 2357000, 2291000, 280000, 513000, 156000, 136000, 120000, 628000, 1132000, 990000, 316000, 70000, 426000, 308000, 0, 0], "monthly": 24327000}, {"col": 14, "channel": "이랜드리테일", "store": "부천", "brandRaw": "프라임에이트", "brand": "프라임에이트", "isWelike": false, "daily": [1279800, 2740400, 2152400, 846600, 2077800, 74800, 911800, 248400, 2232800, 1370500, 209200, 10900, 238300, 339800, 289000, 975700, 786800, 916000, 109700, 169300, 632600, 228400, 1300200, 1204600, 1350200, 129400, 119600, 229400, 458000, 0, 0], "monthly": 23632400}, {"col": 15, "channel": "이랜드리테일", "store": "부천", "brandRaw": "어노이드", "brand": "어노이드", "isWelike": false, "daily": [3597000, 2600000, 2511000, 2229000, 3628000, 626000, 750000, 270000, 3332000, 3481000, 304000, 578000, 998000, 1754000, 1299000, 3758000, 4215000, 1222000, 694000, 878000, 1160000, 496000, 3034000, 3082000, 2794000, 320000, 468000, 665000, 1421000, 0, 0], "monthly": 52164000}, {"col": 16, "channel": "이랜드리테일", "store": "부천", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [2809000, 3114000, 1991000, 1856000, 3096000, 492000, 228000, 428000, 2374000, 2871000, 276000, 456000, 1379000, 813000, 1288000, 2522000, 3136000, 291000, 341000, 730000, 933000, 470000, 2674000, 2688000, 1654000, 229000, 169000, 775000, 392000, 0, 0], "monthly": 40475000}, {"col": 17, "channel": "이랜드리테일", "store": "부천", "brandRaw": "아크로셀렉트", "brand": "아크로셀렉트", "isWelike": false, "daily": [2049000, 1691000, 1412000, 401000, 1609000, 294000, 276000, 602000, 1652000, 2150000, 40000, 157000, 857000, 544000, 532000, 1920000, 1451000, 88000, 226000, 436000, -16000, 461000, 1156000, 1565000, 1757000, 306000, 227000, 78000, 157000, 0, 0], "monthly": 24078000}, {"col": 18, "channel": "이랜드리테일", "store": "야탑", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [8085700, 4720500, 4137620, 3559400, 5359000, 980000, 650000, 1340400, 4385700, 3594100, 1635200, 1441000, 2065600, 1750820, 1500200, 4026180, 6475540, 1470200, 867400, 1600400, 1191200, 1790100, 3978200, 5600600, 5230260, 567240, 1769400, 1037800, 1830000, 0, 0], "monthly": 82639760}, {"col": 19, "channel": "이랜드리테일", "store": "야탑", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [2589000, 1775000, 2166000, 1605000, 2683000, 190000, 329000, 717000, 2110000, 2031000, 397000, 594000, 514000, 1307000, 782000, 3027000, 2015000, 515000, 112000, 739000, 818000, 559000, 1875000, 2335000, 1691000, 604000, 601000, 334000, 1003000, 0, 0], "monthly": 36017000}, {"col": 20, "channel": "이랜드리테일", "store": "야탑", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [2578000, 2422000, 1859000, 1177000, 1907000, 195000, 370000, 1298000, 2337000, 2996000, 679000, 688000, 879000, 1127000, 994000, 3572000, 2202000, 430000, 407000, 507000, 456000, 2569000, 2072000, 1659000, 2320000, 225000, 1110000, 588000, 471000, 0, 0], "monthly": 40094000}, {"col": 21, "channel": "이랜드리테일", "store": "야탑", "brandRaw": "풀포우스트", "brand": "풀포우스트", "isWelike": false, "daily": [2009000, 1936000, 1183000, 675000, 1148000, 327000, 108000, 111000, 1465000, 1541000, 178000, 739000, 764000, 1077000, 606000, 1927000, 3423000, 104000, 586000, 172000, 258000, 670000, 2180000, 1642000, 1387000, 135000, 929000, 687000, 1074000, 0, 0], "monthly": 29041000}, {"col": 22, "channel": "이랜드리테일", "store": "중계점", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [5383540, 5994500, 5907640, 3262800, 6227210, 1127200, 408800, 843610, 3573040, 4947120, 399000, 1496000, 1689110, 477800, 1148120, 4313160, 7400300, 1991280, 1191730, 920200, 1108400, 1173840, 5540370, 6863100, 6034420, 1435200, 1218940, 1913240, 636020, 0, 0], "monthly": 84625690}, {"col": 23, "channel": "이랜드리테일", "store": "중계점", "brandRaw": "어노이드", "brand": "어노이드", "isWelike": false, "daily": [2449000, 2088000, 2046000, 1446000, 2557000, 515000, 474000, 458000, 1787000, 2097000, 496000, 1002000, 271000, 338000, 288000, 3076000, 2122000, 716000, 240000, 343000, 254000, 380000, 1302000, 2019000, 1806000, 676000, 156000, 577000, 170000, 0, 0], "monthly": 32149000}, {"col": 24, "channel": "이랜드리테일", "store": "중계점", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [5072000, 6139000, 5200000, 1957000, 3011000, 678000, 658000, 508000, 2882000, 4033000, 538000, 1226000, 160000, 986000, 1075000, 6866000, 5417000, 1463000, 738000, 766000, 883000, 587000, 5245000, 4633000, 3249000, 1035000, 1006000, 1190000, 518000, 0, 0], "monthly": 67719000}, {"col": 25, "channel": "이랜드리테일", "store": "중계점", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [3620000, 2207000, 2095000, 2186000, 3025000, 974000, 468000, 256000, 3562000, 2558000, 425000, 745000, 414000, 1468000, 725000, 2664000, 2635000, 866000, 989000, 364000, 942000, 782000, 1407000, 3754000, 1442000, 379000, 1625000, 810000, 319000, 0, 0], "monthly": 43706000}, {"col": 26, "channel": "롯데백화점", "store": "롯데창원", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2094100, 1876400, 2235800, 1027600, 2179700, 94800, 113600, 747600, 1887900, 597300, 254000, 417100, 501800, 333800, 588200, 1782400, 2048100, 0, 1000600, 401200, 324000, 538700, 1299400, 1471000, 866800, 209400, 453500, 243900, 253800, 0, 0], "monthly": 25842500}, {"col": 27, "channel": "롯데백화점", "store": "롯데동탄", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [7085350, 4791390, 3793700, 1080780, 8336640, 1287140, 844310, 1283240, 2531940, 2422110, 15400, 690610, 1012520, 1184140, 455960, 3047480, 5556560, 0, 12350, 654580, 863070, 8352410, 15616720, 16281750, 15464130, 5175500, 3390580, 3735160, 1038870, 0, 0], "monthly": 116004390}, {"col": 28, "channel": "롯데백화점", "store": "롯데건대", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [413800, 535700, 393000, 84800, 168800, 99800, 322200, 0, 253400, 218400, 39600, 123800, 189300, 149600, 49700, 327900, 792000, 0, 119600, 159400, 499000, 129600, 218400, 567000, 318000, 39800, 0, 281400, 1112600, 0, 0], "monthly": 7606600}, {"col": 29, "channel": "롯데백화점", "store": "롯데대전", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [269200, 626600, 199600, 421700, 195600, 34800, 59800, 0, 503800, 271200, 127800, 133800, 69800, 0, 0, 432400, 229200, 0, 168000, 0, 0, 0, 892800, 674100, 311400, 0, 0, 0, 0, 0, 0], "monthly": 5621600}, {"col": 30, "channel": "롯데백화점", "store": "롯데서면", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [4502200, 5468400, 4703000, 3190400, 3471100, 692400, 2195700, 888400, 4710000, 2936600, 169600, 1760200, 957000, 318200, 480800, 4412800, 4383200, 0, 1206000, 1302200, 602800, 1930000, 4238800, 4261800, 3111200, 518600, 522400, 885200, 904200, 0, 0], "monthly": 64723200}, {"col": 31, "channel": "이랜드리테일", "store": "평택", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [1134800, 1548300, 1187500, 1096300, 2122000, 0, 39800, 149500, 1869200, 1290000, 333800, 578600, 403600, 209000, 627700, 2105400, 1592500, 298200, 288800, 39800, 188500, 249200, 1822100, 1532600, 1026600, 297200, 326700, 91400, 308800, 0, 0], "monthly": 22757900}, {"col": 32, "channel": "이랜드리테일", "store": "평택", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [106000, 169000, 30000, 24000, 331000, 148000, 80000, 174000, 277000, 427000, 40000, 0, 40000, 0, 180000, 128000, 294000, 0, 0, 0, 0, 119000, 77000, 230000, 49000, 211000, 0, 0, 112000, 0, 0], "monthly": 3246000}, {"col": 33, "channel": "이랜드리테일", "store": "평택", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [2266000, 1295000, 2460000, 1120000, 2351000, 446000, 650000, 857000, 1060000, 1232000, 773000, 284000, 372000, 634000, 952000, 2723000, 1840000, 573000, 298000, 559000, 546000, 403000, 1272000, 2378000, 344000, 324000, 514000, 1080000, 948000, 0, 0], "monthly": 30554000}, {"col": 34, "channel": "이랜드리테일", "store": "충장", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2453300, 2386400, 2117800, 884400, 5321100, 254000, 50800, 469000, 3000200, 3606900, 328000, 709100, 302100, 274000, 636600, 3463100, 3136100, 482400, 428500, 128600, 263400, 438400, 3941800, 3438700, 1764800, 20000, 39000, 342800, 508400, 0, 0], "monthly": 41189700}, {"col": 35, "channel": "이랜드리테일", "store": "충장", "brandRaw": "아크로셀렉트", "brand": "아크로셀렉트", "isWelike": false, "daily": [1064000, 919000, 602000, 541000, 1114000, 20000, 0, 328000, 905000, 523000, 0, 198000, 30000, 236000, 246000, 1339000, 1056000, 197000, 60000, 30000, 247000, 389000, 1104000, 2408000, 918000, 90000, 0, 226000, 323000, 0, 0], "monthly": 15113000}, {"col": 36, "channel": "이랜드리테일", "store": "충장", "brandRaw": "나인마이너스투", "brand": "나인마이너스투", "isWelike": false, "daily": [3414000, 1841000, 1766000, 1239000, 3462000, 192000, 615000, 313000, 1352000, 2929000, 244000, 70000, 537000, 361000, 543000, 2309000, 2428000, 511000, 127000, 268000, 60000, 80000, 2098000, 1946000, 2104000, 4000, 2056000, 1373000, 1839000, 0, 0], "monthly": 36081000}, {"col": 37, "channel": "이랜드리테일", "store": "충장", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [1990000, 3258000, 2353000, 740000, 3595000, 611000, 818000, 207000, 1918000, 2758000, 475000, 296000, 88000, 266000, 175000, 1490000, 1742000, 521000, 301000, 85000, 219000, 431000, 2052000, 1918000, 656000, 570000, 340000, 117000, 227000, 0, 0], "monthly": 30217000}, {"col": 38, "channel": "이랜드리테일", "store": "충장", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [1077000, 2098000, 2072000, 857000, 1599000, 437000, 702000, 505000, 2227000, 1696000, 195000, 718000, 369000, 59000, 1410000, 1665000, 1145000, 565000, 964000, 861000, 147000, 540000, 1685000, 2540000, 1475000, 177000, 674000, 288000, 348000, 0, 0], "monthly": 29095000}, {"col": 39, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [4257300, 4215800, 2707800, 2003800, 4590500, 493200, 0, 1186000, 2472000, 3920300, 770800, 1082000, 688000, 388800, 1117800, 2530700, 5312900, 199200, 1081900, 378600, 1031700, 358600, 3186100, 4342300, 2230400, 573000, 349000, 755900, 348900, 0, 0], "monthly": 52573300}, {"col": 40, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [7319000, 6353000, 2519000, 1677000, 3974000, 717000, 1079000, 541000, 2697000, 4005000, 570000, 974000, 511000, 941000, 654000, 3242000, 4480000, 951000, 1442000, 264000, 965000, 1948000, 4870000, 4784000, 4560000, 324000, 903000, 2134000, 767000, 0, 0], "monthly": 66165000}, {"col": 41, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "에드호크", "brand": "에드호크", "isWelike": false, "daily": [3624000, 2266000, 2565000, 1500000, 3154000, 199000, 139000, 716000, 2024000, 2566000, 275000, 367000, 479000, 850000, 757000, 2863000, 2750000, 283000, 826000, 499000, 747000, 917000, 2454000, 1615000, 3039000, 320000, 239000, 723000, 260000, 0, 0], "monthly": 39016000}, {"col": 42, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "프로젝트M", "brand": "프로젝트M", "isWelike": false, "daily": [3653000, 2482000, 2505000, 798000, 2066000, 210000, 335000, 1078000, 2100000, 1664000, 419000, 350000, 148000, 939000, 1003000, 3082000, 2342000, 313000, 1377000, 185000, 445000, 699000, 1512000, 2026000, 1880000, 460000, 429000, 534000, 305000, 0, 0], "monthly": 35339000}, {"col": 43, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "인터크루", "brand": "인터크루", "isWelike": false, "daily": [3462000, 3377000, 943000, 1587000, 1627000, 500000, 414000, 888000, 2121000, 2236000, 649000, 360000, 499000, 300000, 300000, 2403000, 3229000, 444000, 798000, 60000, 449000, 679000, 2021000, 2485000, 997000, 220000, 80000, 763000, 1377000, 0, 0], "monthly": 35268000}, {"col": 44, "channel": "이랜드리테일", "store": "부산대", "brandRaw": "행텐", "brand": "행텐", "isWelike": false, "daily": [3356000, 3272000, 2118000, 3692000, 9482000, 334000, 100000, 663000, 2264000, 3041000, 205000, 908000, 2895000, 1998000, 3143000, 8377000, 8417000, 95000, 648000, 444000, 564000, 529000, 1553000, 3405000, 1954000, 120000, 295000, 267000, 190000, 0, 0], "monthly": 64329000}, {"col": 45, "channel": "행복한백화점", "store": "목동", "brandRaw": "위라이크패션(여성)", "brand": "위라이크패션", "isWelike": true, "daily": [911300, 448200, 787000, 194200, 1767700, 229200, 1105000, 224300, 1644300, 597700, -109600, 374300, 259100, 478200, 687400, 816200, 670300, 292200, 782000, 151800, 687600, 777400, 901600, 1179400, 805400, 118800, 408400, 224200, 568400, 0, 0], "monthly": 17982000}, {"col": 46, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [4496320, 3634330, 3198300, 1327600, 5108900, 678900, 648000, 422020, 3197400, 3452900, 369000, 1414600, 1228310, 608300, 1146200, 3586680, 3676990, 860800, 631200, 518200, 453600, 875600, 4032630, 3708910, 3369000, 398000, 543400, 1016470, 743000, 0, 0], "monthly": 55345560}, {"col": 47, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [1696000, 1027000, 1068000, 1414000, 1021000, 93000, 100000, 75000, 283000, 1061000, 212000, 140000, 310000, 400000, 150000, 1489000, 1013000, 215000, 40000, 222000, 0, 120000, 892000, 1331000, 693000, 551000, 352000, 20000, 263000, 0, 0], "monthly": 16251000}, {"col": 48, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "프라임에이트", "brand": "프라임에이트", "isWelike": false, "daily": [2736100, 1920900, 1767100, 1074300, 2472700, 228400, 246500, 219100, 1845900, 1784200, 199200, 706600, 238400, 206600, 413600, 2195000, 1797800, 607300, 408600, 203400, 228200, 323000, 1630400, 1458600, 1604400, 289000, 168600, 352600, 318900, 0, 0], "monthly": 27645400}, {"col": 49, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "바인드", "brand": "바인드", "isWelike": false, "daily": [9981000, 10479000, 10755000, 4763000, 10381000, 1186000, 1173000, 1416000, 4840000, 7034000, 1753000, 1410000, 1690000, 1783000, 2031000, 10236000, 11926000, 2311000, 2930000, 1537000, 1710000, 2280000, 5503000, 8779000, 7594000, 1531000, 1132000, 563000, 2007000, 0, 0], "monthly": 130714000}, {"col": 50, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [3494000, 5226000, 3835000, 1131000, 2628000, 892000, 387000, 1089000, 2979000, 3270000, 622000, 720000, 337000, 1230000, 1603000, 3512000, 5199000, 635000, 1015000, 658000, 696000, 842000, 3124000, 4154000, 2975000, 204000, 491000, 437000, 687000, 0, 0], "monthly": 54072000}, {"col": 51, "channel": "이랜드리테일", "store": "송파점", "brandRaw": "마레드", "brand": "마레드", "isWelike": false, "daily": [387000, 251000, 977000, 517000, 210000, 0, 59000, 245000, 225000, 476000, 303000, 244000, 110000, 150000, 70000, 367000, 446000, 79000, 164000, 188000, 3000, 190000, 572000, 668000, 200000, 135000, 219000, 95000, -60000, 0, 0], "monthly": 7490000}, {"col": 52, "channel": "이랜드리테일", "store": "대전 유성", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [1879600, 2341700, 1484900, 1410500, 2409800, 203400, 54800, 508400, 1334400, 1513800, 716000, 353200, 289600, 323200, 630700, 2189400, 2710900, 89600, 316400, 783100, 312400, 568200, 1331000, 1606700, 2196200, 579400, 938900, 343700, 378600, 0, 0], "monthly": 29798500}, {"col": 53, "channel": "이랜드리테일", "store": "대전 유성", "brandRaw": "바인드", "brand": "바인드", "isWelike": false, "daily": [0, 0, 0, 0, 0, 0, 0, 1165000, 3156000, 3036000, 513000, 1642000, 1675000, 1051000, 1290000, 3243000, 3058000, 1831000, 454000, 622000, 1045000, 1743000, 3512000, 3821000, 3253000, 736000, 2376000, 1954000, 3335000, 0, 0], "monthly": 44511000}, {"col": 54, "channel": "이랜드리테일", "store": "일산", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [1131800, 407700, 676300, 303800, 316200, 0, 39800, 0, 592600, 566400, 344200, 259100, 518000, 478500, 304300, 901800, 900300, 89800, 94600, 392400, 184600, 54800, 442700, 520600, 1646900, 29800, 184200, 294000, 119600, 0, 0], "monthly": 11794800}, {"col": 55, "channel": "이랜드리테일", "store": "일산", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [832000, 604000, 778000, 128000, 630000, 0, 224000, 50000, 1097000, 1570000, 328000, 309000, 200000, 658000, 861000, 3845000, 2055000, 1635000, 911000, 618000, 484000, 693000, 1338000, 1332000, 2004000, 484000, 993000, 929000, 553000, 0, 0], "monthly": 26143000}, {"col": 56, "channel": "이랜드리테일", "store": "일산", "brandRaw": "UCLA", "brand": "UCLA", "isWelike": false, "daily": [2019000, 3522000, 2169000, 2220000, 2926000, 175000, 460000, 614000, 1509000, 1411000, 107000, 155000, 427000, 665000, 126000, 2109000, 2202000, 843000, 564000, 851000, 944000, 577000, 2397000, 1267000, 2111000, 271000, 547000, 541000, 476000, 0, 0], "monthly": 34205000}, {"col": 57, "channel": "이랜드리테일", "store": "일산", "brandRaw": "더블JD", "brand": "더블JD", "isWelike": false, "daily": [3301000, 2885000, 3750000, 2013000, 2449000, 1422000, 1118000, 226000, 1979000, 2252000, 1240000, 1546000, 1132000, 1849000, 1730000, 3183000, 3648000, 283000, 1184000, 957000, 885000, 1752000, 2806000, 3780000, 1671000, 693000, 1084000, 731000, 2109000, 0, 0], "monthly": 53658000}, {"col": 58, "channel": "마리오아울렛", "store": "마리오", "brandRaw": "위라이크(정341104)", "brand": "위라이크패션", "isWelike": true, "daily": [3064220, 4916000, 2596000, 1786200, 3585440, 668200, 304100, 628600, 1838600, 3549400, 558600, 1007000, 638800, 1705200, 629200, 3009660, 3758100, 862880, 827800, 548930, 558800, 528600, 2817200, 2667600, 1007400, 715230, 578200, 409200, 2231520, 0, 0], "monthly": 47996680}, {"col": 59, "channel": "이랜드리테일", "store": "동수원점", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [3230000, 1755400, 1229300, 810100, 2475700, 437600, 153000, 712400, 1912000, 1804100, 488000, 179300, 532700, 577200, 492200, 2932500, 2158100, 134600, 224000, 751500, 426900, 741500, 2004400, 1537600, 1240600, 791400, 174200, 208300, 184000, 0, 0], "monthly": 30298600}, {"col": 60, "channel": "이랜드리테일", "store": "동수원점", "brandRaw": "멤버할리데이", "brand": "멤버할리데이", "isWelike": false, "daily": [2005000, 2148000, 1016000, 1063000, 1672000, 853000, 450000, 571000, 739000, 1051000, 200000, 494000, 70000, 1532000, 683000, 2245000, 2748000, 858000, 473000, 156000, 272000, 557000, 735000, 1702000, 801000, 296000, 86000, 186000, 494000, 0, 0], "monthly": 26156000}, {"col": 61, "channel": "이랜드리테일", "store": "동수원점", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [0, 0, 0, 0, 0, 3172000, 201000, 454000, 538000, 779000, 30000, 64000, 58000, 64000, -3000, 500000, 86000, 336000, 152000, 210000, -20000, 0, 217000, 412000, 344000, 100000, 26000, 159000, 0, 0, 0], "monthly": 7879000}, {"col": 62, "channel": "이랜드리테일", "store": "동수원점", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [2308000, 1535000, 1725000, 911000, 2015000, 310000, 190000, 497000, 2520000, 2008000, 359000, 396000, 289000, 543000, 766000, 2190000, 2020000, 606000, 462000, 333000, 100000, 697000, 1531000, 1202000, 1250000, 348000, 699000, 492000, 549000, 0, 0], "monthly": 28851000}, {"col": 63, "channel": "이랜드리테일", "store": "창원", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [7966700, 4082500, 2798000, 2379800, 4983800, 139500, 223800, 904600, 4101300, 3594200, 651900, 408500, 747900, 413500, 1146300, 3788000, 3874300, 1306100, 1262900, 357800, 169200, 413500, 1673300, 3366600, 3030700, 338600, 378400, 565600, 1133100, 0, 0], "monthly": 56200400}, {"col": 64, "channel": "이랜드리테일", "store": "창원", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [7874000, 2655000, 4161000, 1591000, 3140000, 468000, 92000, 671000, 2066000, 2420000, 280000, 674000, 1187000, 494000, 988000, 2438000, 3668000, 599000, 1035000, 618000, 349000, 532000, 2550000, 2240000, 2365000, 289000, 466000, 292000, 488000, 0, 0], "monthly": 46690000}, {"col": 65, "channel": "이랜드리테일", "store": "창원", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [1687000, 2019000, 1568000, 376000, 1060000, 374000, -42000, 120000, 1499000, 1397000, 365000, 117000, 301000, 50000, 202000, 1383000, 1339000, 163000, 685000, 68000, 40000, 272000, 532000, 1313000, 292000, 27000, 99000, 140000, 478000, 0, 0], "monthly": 17924000}, {"col": 66, "channel": "이랜드리테일", "store": "인천점", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2742900, 2408600, 1272600, 1220400, 3069200, 603000, 202600, 438600, 3052300, 2241300, 613000, 559500, 879400, 877400, 348700, 2566400, 2546800, 129400, 1153000, 267600, 667800, 480200, 2215800, 1401000, 1415000, 697600, 1016400, 725000, 129200, 0, 0], "monthly": 35940700}, {"col": 67, "channel": "이랜드리테일", "store": "인천점", "brandRaw": "그루브라임", "brand": "그루브라임", "isWelike": false, "daily": [4461000, 2100000, 1114000, 1455000, 2140000, 552000, 870000, 573000, 1698000, 1781000, 420000, 365000, 1346000, 1807000, 985000, 3942000, 2499000, 991000, 837000, 779000, 112000, 575000, 1001000, 2190000, 812000, 579000, 1598000, 651000, 1165000, 0, 0], "monthly": 39398000}, {"col": 68, "channel": "이랜드리테일", "store": "인천점", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [4485000, 3784000, 2857000, 804000, 1655000, 387000, 30000, 1239000, 1117000, 3410000, 240000, 400000, 1450000, 427000, 665000, 1795000, 978000, 1518000, 411000, 508000, 569000, 590000, 1716000, 648000, 1472000, 150000, 230000, 200000, 661000, 0, 0], "monthly": 34396000}, {"col": 69, "channel": "세이브존", "store": "화정 세이브존", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [674000, 971200, 339300, 926700, 398500, 67900, 199200, 64700, 1008000, 469600, 318800, 713700, 49800, 288900, 137600, 570000, 1253000, 97900, 259100, 516200, 353600, 89900, 1135200, 81400, 518100, 328400, 493100, 526000, 364800, 0, 0], "monthly": 13214600}, {"col": 70, "channel": "이랜드리테일", "store": "엑스코", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [916900, 1161700, 1500000, 368600, 1586400, 19900, 104600, 254000, 772400, 1297300, 778800, 366000, 289600, 148900, 507900, 877000, 1404900, 408500, 552200, 652000, 408400, 627200, 746700, 1005800, 522800, 94600, 59800, 868800, 79800, 0, 0], "monthly": 18381500}, {"col": 71, "channel": "이랜드리테일", "store": "엑스코", "brandRaw": "나인마이너스투", "brand": "나인마이너스투", "isWelike": false, "daily": [712000, 485000, 728000, 532000, 802000, 120000, 306000, 32000, 538000, 790000, 45000, 49000, 0, 180000, 96000, 652000, 297000, 90000, 36000, 118000, 78000, 190000, 264000, 488000, 487000, 128000, 29000, 288000, 109000, 0, 0], "monthly": 8669000}, {"col": 72, "channel": "이랜드리테일", "store": "엑스코", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [934000, 912000, 1068000, 553000, 674000, 162000, 174000, 40000, 700000, 871000, 49000, 151000, 80000, 80000, 268000, 888000, 1078000, 109000, 370000, 29000, 80000, 50000, 245000, 1094000, 524000, 115000, 50000, 358000, 40000, 0, 0], "monthly": 11746000}, {"col": 73, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [4985200, 3459000, 3225400, 2960700, 7025000, 1047200, 836700, 1336300, 2931000, 3813200, 1026800, 1659800, 986800, 1295800, 1081800, 5827800, 5039300, 1490400, 767800, 1012000, 1036400, 1878800, 3852800, 5787000, 2831400, 1615400, 957200, 538200, 847000, 0, 0], "monthly": 71152200}, {"col": 74, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [3520000, 3369000, 2701000, 3239000, 5769000, 1269000, 775000, 363000, 3089000, 3825000, 1502000, 1072000, 837000, 386000, 1171000, 2207000, 3726000, 1288000, 1347000, 635000, 296000, 1446000, 2172000, 4554000, 4956000, 2305000, 821000, 776000, 907000, 0, 0], "monthly": 60323000}, {"col": 75, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "더블제이디", "brand": "더블JD", "isWelike": false, "daily": [3885000, 3663000, 1747000, 1700000, 2851000, 1606000, 766000, 1135000, 2644000, 2998000, 332000, 1147000, 481000, 1480000, 1614000, 3041000, 2927000, 329000, 574000, 1233000, 741000, 2235000, 2200000, 4012000, 2336000, 844000, 686000, 1028000, 1333000, 0, 0], "monthly": 51568000}, {"col": 76, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "리트머스", "brand": "리트머스", "isWelike": false, "daily": [3539000, 1612000, 2114000, 821000, 3089000, 1558000, 1273000, 1021000, 3154000, 3520000, 559000, 1590000, 539000, 764000, 1537000, 3096000, 4689000, 904000, 1087000, 337000, 483000, 1058000, 2091000, 3018000, 2430000, 811000, 656000, 616000, 657000, 0, 0], "monthly": 48623000}, {"col": 77, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "바인드", "brand": "바인드", "isWelike": false, "daily": [10021000, 8105000, 6715000, 5474000, 11397000, 1230000, 1356000, 2442000, 5607000, 7331000, 1352000, 1723000, 2400000, 3008000, 2924000, 8689000, 7450000, 1986000, 2188000, 2272000, 1786000, 2147000, 7545000, 8459000, 8344000, 1665000, 1606000, 1985000, 2603000, 0, 0], "monthly": 129810000}, {"col": 78, "channel": "이랜드리테일", "store": "고잔", "brandRaw": "UCLA", "brand": "UCLA", "isWelike": false, "daily": [5220000, 4453000, 2632000, 2749000, 4178000, 597000, 518000, 623000, 4658000, 2678000, 1431000, 903000, 1411000, 1385000, 636000, 2922000, 3101000, 634000, 1230000, 816000, 1026000, 1392000, 3737000, 4940000, 3728000, 1039000, 986000, 1015000, 1165000, 0, 0], "monthly": 61803000}, {"col": 79, "channel": "LF", "store": "광양", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2006900, 1153700, 1775900, 786900, 1246100, 198500, 104600, 294200, 1459600, 865700, 657400, 290400, 126500, 413000, 468400, 1843700, 711500, 19900, 244100, 39800, 401000, 159200, 1734400, 1576200, 1495300, 0, 0, 249400, 219100, 0, 0], "monthly": 20541400}, {"col": 80, "channel": "이랜드리테일", "store": "신구로점", "brandRaw": "더블에이트", "brand": "더블88", "isWelike": false, "daily": [2306000, 1398000, 1213000, 1027000, 2237000, 617000, 426000, 312000, 1087000, 1209000, -143000, 195000, 182000, 821000, 987000, 1419000, 1174000, 365000, 175000, 595000, 405000, 718000, 1146000, 1702000, 1462000, 190000, 120000, 1003000, 674000, 0, 0], "monthly": 25022000}, {"col": 81, "channel": "이랜드리테일", "store": "강서", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [6424500, 5488900, 5427800, 3714100, 7174400, 1275200, 976400, 1961400, 4336800, 6279800, 2044400, 1348200, 2309800, 1620000, 1195600, 4218900, 5800000, 1490100, 2282300, 967000, 1416000, 727400, 4819500, 5283600, 2678000, 1096400, 1018000, 1276200, 1796600, 0, 0], "monthly": 86447300}, {"col": 82, "channel": "이랜드리테일", "store": "강서", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [3165000, 4213000, 4224000, 1768000, 3944000, 1010000, 1046000, 818000, 3838000, 3119000, 399000, 981000, 1250000, 991000, 1386000, 3879000, 3595000, 620000, 1225000, 444000, 560000, 1136000, 3831000, 3253000, 2992000, 649000, 1178000, 2153000, 1235000, 0, 0], "monthly": 58902000}, {"col": 83, "channel": "이랜드리테일", "store": "강서", "brandRaw": "바인드", "brand": "바인드", "isWelike": false, "daily": [7644000, 3985000, 5416000, 2135000, 5014000, 1342000, 1040000, 1653000, 6841000, 4572000, 494000, 1217000, 1172000, 1149000, 1681000, 5119000, 5424000, 1149000, 1478000, 1540000, 991000, 1366000, 3392000, 4791000, 3682000, 516000, 782000, 1012000, 1533000, 0, 0], "monthly": 78130000}, {"col": 84, "channel": "이랜드리테일", "store": "수원터미널", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [1153200, 1108400, 537200, 1026400, 1079000, 94600, 129600, 261100, 818500, 328800, 418400, 273200, 0, 119600, 398600, 986600, 547200, 124400, 39000, 158600, 78000, 508200, 1587000, 654800, 732400, 74600, 174200, 15000, 382900, 0, 0], "monthly": 13809500}, {"col": 85, "channel": "이랜드리테일", "store": "수원터미널", "brandRaw": "더블88", "brand": "더블88", "isWelike": false, "daily": [2069000, 2463000, 2481000, 1765000, 2383000, 327000, 719000, 309000, 2008000, 2110000, 817000, 962000, 592000, 897000, 1105000, 3102000, 2791000, 497000, 657000, 749000, 1202000, 832000, 2172000, 2438000, 1936000, 343000, 542000, 870000, 873000, 0, 0], "monthly": 40011000}, {"col": 86, "channel": "이랜드리테일", "store": "수원터미널", "brandRaw": "멤버헐리데이", "brand": "멤버할리데이", "isWelike": false, "daily": [2365000, 1022000, 1423000, 528000, 716000, -132000, 170000, 0, 781000, 1639000, 336000, 487000, 174000, 194000, 430000, 580000, 601000, 244000, 120000, 260000, 104000, 294000, 632000, 1004000, 929000, 259000, 160000, 246000, 88000, 0, 0], "monthly": 15654000}, {"col": 87, "channel": "이랜드리테일", "store": "분당점", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2345100, 2511200, 0, 1087900, 1966300, 383600, 856700, 493200, 1408600, 0, 373600, 14800, 81200, 547500, 416600, 2923400, 0, 297800, 239200, 508000, 343700, 486200, 2481000, 0, 1140800, 547300, 139200, 162600, 436800, 0, 0], "monthly": 22192300}, {"col": 88, "channel": "이랜드리테일", "store": "분당점", "brandRaw": "라이프워크", "brand": "라이프워크", "isWelike": false, "daily": [2376000, 4807000, 0, 4296000, 3804000, 918000, 1472000, 1952000, 3070000, 359000, 814000, 1151000, 1534000, 1302000, 684000, 3803000, 323000, 1702000, 587000, 1225000, 258000, 1293000, 4447000, 0, 2138000, 1093000, 1948000, 1599000, 1093500, 0, 0], "monthly": 50048500}, {"col": 89, "channel": "인천스퀘어원", "store": "인천스퀘어원", "brandRaw": "위라이크", "brand": "위라이크패션", "isWelike": true, "daily": [2034000, 1178160, 1004610, 1088000, 1465800, 209600, 60000, 499400, 2349200, 507610, 0, 244400, 1233200, 498600, 648400, 1573000, 1086800, 1415350, 631800, 493600, 284100, 683800, 2599610, 1439360, 819800, 537890, 386600, 423200, 0, 0, 0], "monthly": 25395890}, {"col": 90, "channel": "신세계아울렛", "store": "파주 신세계", "brandRaw": "위라이크잇", "brand": "위라이크패션", "isWelike": true, "daily": [22702200, 18814400, 13889800, 7623300, 21948500, 1037800, 1116800, 2654900, 14372100, 18738100, 1352100, 1103000, 745800, 1110200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "monthly": 127209000}, {"col": 91, "channel": "롯데백화점", "store": "롯데동탄행사", "brandRaw": "위라이크잇", "brand": "위라이크패션", "isWelike": true, "daily": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6483200, 13882200, 13326200, 12294300, 4504300, 3275100, 3065000, 0, 0, 0], "monthly": 56830300}]};
-const REQ_BRANDS = ["위라이크패션", "어노이드", "더블88", "더블JD", "리트머스", "아크로셀렉트", "나인마이너스투", "에드호크", "프로젝트M", "인터크루", "행텐", "프라임에이트", "바인드", "마레드", "멤버할리데이", "그루브라임", "라이프워크"];
-const REQ_CHANNELS = ["현대아울렛", "이랜드리테일", "롯데백화점", "마리오아울렛", "lf몰", "세이브존", "한국중소기업벤처기업유통원", "와이스퀘어", "스퀘어원", "신세계아울렛"];
-const COLS = RAW.cols, DATES = RAW.dates, ND = DATES.length;
-const won = v => '₩' + Math.round(v).toLocaleString('ko-KR');
-const wonM = v => (v/1e8>=1? (v/1e8).toFixed(2)+'억' : Math.round(v/1e4).toLocaleString()+'만');
-const fmtDate = s => { const [,m,d]=s.split('-'); return `${+m}/${+d}`; };
-
-// 채널 매핑 상태(수정 가능)
-let CHMAP = {};
-COLS.forEach(c=>{ if(!(c.store in CHMAP)) CHMAP[c.store]=c.channel; });
-const ALL_CHANNELS=[...new Set(Object.values(CHMAP))];
-// 매핑 변경 시 선택 가능한 채널 옵션(파일 채널 + 요청 채널 합집합)
-const CH_OPTIONS=[...new Set([...ALL_CHANNELS, ...REQ_CHANNELS])];
-// 유통채널별 고유 색상 (그래프 구분용)
-const CH_PALETTE=['#0e6b63','#c0392b','#2c6fb0','#bd7a16','#7d4f9e','#2c8a63','#cf6a3a','#4a7a8c','#a8557f','#5a6b2c'];
-const CH_COLOR={'이랜드리테일':'#0e6b63','롯데백화점':'#c0392b','신세계아울렛':'#2c6fb0','마리오아울렛':'#bd7a16',
-  '인천스퀘어원':'#7d4f9e','LF':'#2c8a63','행복한백화점':'#cf6a3a','세이브존':'#4a7a8c','와이스퀘어':'#a8557f'};
-ALL_CHANNELS.forEach((ch,i)=>{ if(!CH_COLOR[ch]) CH_COLOR[ch]=CH_PALETTE[i%CH_PALETTE.length]; });
-
-function chOf(store){ return CHMAP[store]; }
-const sumDaily = c => c.daily.reduce((a,b)=>a+b,0);
-
-const dayTot=i=>COLS.reduce((a,c)=>a+c.daily[i],0);
-let LASTI=ND-1; while(LASTI>0 && dayTot(LASTI)===0) LASTI--;  // 마지막 실데이터 일자
-document.getElementById('period').textContent = `${fmtDate(DATES[0])} ~ ${fmtDate(DATES[LASTI])} (실데이터 입력 기준)`;
-
-/* ---------- tabs ---------- */
-document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
-});
-
-/* ---------- date selects ---------- */
-function fillDates(sel,defLast){ sel.innerHTML=''; DATES.forEach((d,i)=>{
-  const o=document.createElement('option'); o.value=i; o.textContent=fmtDate(d)+' ('+['일','월','화','수','목','금','토'][new Date(d).getDay()]+')';
-  sel.appendChild(o); }); sel.value = defLast? LASTI : 0; }
-
-/* ============ TAB 1 ============ */
-let t1mode='month', t1scope='위라이크패션', t1dateIdx=LASTI;
-fillDates(document.getElementById('t1date'),true);
-
-function brandMatch(c, brand){ return brand==='위라이크패션' ? c.isWelike : c.brand===brand; }
-function chTotals(brand, dayIdx){ // dayIdx=null => 월누계
-  const m={}; ALL_CHANNELS.forEach(c=>m[c]=0);
-  COLS.forEach(c=>{ if(!brandMatch(c, brand)) return;
-    const ch=chOf(c.store); if(!(ch in m)) m[ch]=0;
-    m[ch]+= dayIdx===null? c.monthly : c.daily[dayIdx]; });
-  return m;
-}
-function renderT1bars(){
-  const dayIdx = t1mode==='day'? t1dateIdx : null;
-  const m = chTotals(t1scope, dayIdx);
-  const arr = Object.entries(m).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
-  const max = Math.max(...arr.map(x=>x[1]),1);
-  const cls = t1scope==='위라이크패션'?'':'req';
-  const sumv = arr.reduce((a,x)=>a+x[1],0);
-  const cap = `<div style="font-size:13px;font-weight:700;color:${t1scope==='위라이크패션'?'var(--teal-d)':'var(--amber)'};margin-bottom:8px">
-    ${t1scope} · ${t1mode==='day'?fmtDate(DATES[dayIdx])+' 일매출':'월누계'} 합계 <span class="num">${won(sumv)}</span></div>`;
-  document.getElementById('t1bars').innerHTML = cap + (arr.map(([k,v])=>{
-    const col=CH_COLOR[k]||'var(--teal)';
-    return `<div class="hbar"><div class="nm"><span class="ch-dot" style="background:${col}"></span>${k}</div>
-    <div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%;background:${col}"></div></div>
-    <div class="vl num">${won(v)}</div></div>`;}).join('')
-    || '<div class="ok-card">해당 조건 매출 데이터 없음</div>');
-}
-function renderT1kpi(){
-  const we = COLS.filter(c=>c.isWelike);
-  const total = we.reduce((a,c)=>a+c.monthly,0);
-  const lastDay = we.reduce((a,c)=>a+c.daily[LASTI],0);
-  const avg = we.reduce((a,c)=>a+sumDaily(c),0)/ND;
-  const stores = new Set(we.map(c=>c.store)).size;
-  const chs = new Set(we.map(c=>chOf(c.store))).size;
-  document.getElementById('t1kpi').innerHTML = `
-   <div class="kpi gold"><div class="k-lab">위라이크패션 월누계</div><div class="k-val num">${wonM(total)}</div><div class="k-sub num">${won(total)}</div></div>
-   <div class="kpi"><div class="k-lab">일평균 매출</div><div class="k-val num">${wonM(avg)}</div><div class="k-sub">5/1~5/31 일평균</div></div>
-   <div class="kpi amber"><div class="k-lab">최근일(${fmtDate(DATES[LASTI])}) 매출</div><div class="k-val num">${wonM(lastDay)}</div><div class="k-sub num">${won(lastDay)}</div></div>
-   <div class="kpi ink"><div class="k-lab">입점 점포 / 채널</div><div class="k-val num">${stores}<span style="font-size:14px"> 점포</span></div><div class="k-sub">${chs}개 유통채널</div></div>`;
-}
-function rankRows(arr,fmt){ return arr.map((r,i)=>`<tr>
-  <td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
-  <td class="l">${r.name}</td>${r.extra?`<td class="l">${r.extra}</td>`:''}
-  <td class="num">${won(r.val)}</td>
-  <td class="num" style="color:var(--muted)">${r.share}%</td></tr>`).join(''); }
-
-function renderT1ranks(){
-  // 1-2 채널 순위 (위라이크 월누계)
-  const m=chTotals('위라이크패션',null);
-  const arr=Object.entries(m).filter(([k,v])=>v>0).map(([k,v])=>({name:k,val:v}))
-            .sort((a,b)=>b.val-a.val);
-  const tot=arr.reduce((a,x)=>a+x.val,0)||1;
-  arr.forEach(x=>x.share=(x.val/tot*100).toFixed(1));
-  document.getElementById('t1chrank').innerHTML =
-    `<thead><tr><th class="l">순위</th><th class="l">유통채널</th><th>월누계 매출</th><th>비중</th></tr></thead><tbody>${rankRows(arr)}</tbody>`;
-  // 1-1 이랜드리테일 내 위라이크 점포 순위
-  const sm={};
-  COLS.forEach(c=>{ if(c.isWelike && chOf(c.store)==='이랜드리테일'){ sm[c.store]=(sm[c.store]||0)+c.monthly; }});
-  const sarr=Object.entries(sm).map(([k,v])=>({name:k,val:v})).sort((a,b)=>b.val-a.val);
-  const stot=sarr.reduce((a,x)=>a+x.val,0)||1; sarr.forEach(x=>x.share=(x.val/stot*100).toFixed(1));
-  document.getElementById('t1elandrank').innerHTML =
-    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th>월누계 매출</th><th>비중</th></tr></thead><tbody>${rankRows(sarr)}</tbody>`;
-}
-document.querySelectorAll('#t1mode button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#t1mode button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
-  t1mode=b.dataset.m; document.getElementById('t1daywrap').style.display=t1mode==='day'?'':'none'; renderT1bars();});
-document.getElementById('t1date').onchange=e=>{t1dateIdx=+e.target.value; renderT1bars();};
-
-/* ============ TAB 2 (이랜드리테일) ============ */
-fillDates(document.getElementById('t2date'),true);
-fillDates(document.getElementById('t2alertdate'),true);
-fillDates(document.getElementById('t2obdate'),true);
-let t2obBrand='전체';
-(function buildT2obSel(){
-  const wrap=document.getElementById('t2obsel');
-  const opts=['전체', ...REQ_BRANDS.filter(b=>b!=='위라이크패션'), 'UCLA'];
-  wrap.innerHTML=opts.map((b,i)=>`<button class="${i===0?'on':''}" data-b="${b}"><span class="dot"></span>${b}</button>`).join('');
-  wrap.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{
-    wrap.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
-    btn.classList.add('on'); t2obBrand=btn.dataset.b; renderT2otherbrand();
-  });
-})();
-const elandCols = ()=>COLS.filter(c=>chOf(c.store)==='이랜드리테일');
-
-function renderT2kpi(){
-  const ec=elandCols();
-  const allM=ec.reduce((a,c)=>a+c.monthly,0);
-  const weM=ec.filter(c=>c.isWelike).reduce((a,c)=>a+c.monthly,0);
-  const otherM=allM-weM;
-  const weLast=ec.filter(c=>c.isWelike).reduce((a,c)=>a+c.daily[LASTI],0);
-  const stores=new Set(ec.filter(c=>c.isWelike).map(c=>c.store)).size;
-  document.getElementById('t2kpi').innerHTML=`
-   <div class="kpi gold"><div class="k-lab">위라이크패션 월누계 (이랜드리테일)</div><div class="k-val num">${wonM(weM)}</div><div class="k-sub num">전브랜드 중 ${(weM/allM*100).toFixed(1)}%</div></div>
-   <div class="kpi amber"><div class="k-lab">최근일(${fmtDate(DATES[LASTI])}) 위라이크 매출</div><div class="k-val num">${wonM(weLast)}</div><div class="k-sub num">${won(weLast)}</div></div>
-   <div class="kpi"><div class="k-lab">위라이크 입점 점포</div><div class="k-val num">${stores}<span style="font-size:14px"> 점포</span></div><div class="k-sub">이랜드리테일 내</div></div>`;
-}
-function renderT2daily(){
-  const idx=+document.getElementById('t2date').value;
-  // 위라이크 입점 점포만, 위라이크 매출만 — 당일 + 누적(5/1~당일)
-  const sm={}, cm={};
-  elandCols().forEach(c=>{ if(c.isWelike){
-    sm[c.store]=(sm[c.store]||0)+c.daily[idx];
-    let cum=0; for(let k=0;k<=idx;k++) cum+=c.daily[k];
-    cm[c.store]=(cm[c.store]||0)+cum;
-  }});
-  const arr=Object.entries(sm).map(([k,v])=>({store:k,val:v,cum:cm[k]})).sort((a,b)=>b.val-a.val);
-  const tot=arr.reduce((a,x)=>a+x.val,0), totc=arr.reduce((a,x)=>a+x.cum,0);
-  document.getElementById('t2daily').innerHTML=
-    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th>${fmtDate(DATES[idx])} 당일매출</th><th>누적매출(5/1~${fmtDate(DATES[idx])})</th><th>당일 구성비</th></tr></thead><tbody>`+
-    arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
-      <td class="l">${r.store}</td><td class="num">${won(r.val)}</td>
-      <td class="num">${won(r.cum)}</td>
-      <td class="num" style="color:var(--muted)">${tot?(r.val/tot*100).toFixed(1):0}%</td></tr>`).join('')+
-    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="2">합계 (위라이크 입점 점포)</td><td class="num">${won(tot)}</td><td class="num">${won(totc)}</td><td class="num">100%</td></tr></tbody>`;
-}
-function renderT2alerts(){
-  const idx=+document.getElementById('t2alertdate').value;
-  const box=document.getElementById('t2alerts');
-  if(idx<13){ box.innerHTML='<div class="ok-card">전주 비교를 위해 기준일은 최소 5/14 이후로 선택하세요 (직전 7일 데이터 필요).</div>'; return; }
-  const sm={};
-  elandCols().forEach(c=>{ if(!c.isWelike) return;
-    let cur=0,prev=0;
-    for(let k=idx-6;k<=idx;k++) cur+=c.daily[k];
-    for(let k=idx-13;k<=idx-7;k++) prev+=c.daily[k];
-    if(!sm[c.store]) sm[c.store]={cur:0,prev:0}; sm[c.store].cur+=cur; sm[c.store].prev+=prev; });
-  const al=Object.entries(sm).map(([k,v])=>({store:k,...v,
-      drop: v.prev>0? (v.prev-v.cur)/v.prev : (v.cur<v.prev?1:0)}))
-    .filter(x=>x.prev>0 && x.drop>=0.30).sort((a,b)=>b.drop-a.drop);
-  const wk=`(${fmtDate(DATES[idx-6])}~${fmtDate(DATES[idx])} vs ${fmtDate(DATES[idx-13])}~${fmtDate(DATES[idx-7])})`;
-  if(!al.length){ box.innerHTML=`<div class="ok-card">✓ 전주대비 30% 이상 급감한 위라이크 매장 없음 ${wk}</div>`; return; }
-  box.innerHTML=`<div class="legend">비교 ${wk} · 총 <b>${al.length}개</b> 매장 경보</div>`+
-    al.map(x=>`<div class="alert-card"><div class="ic">⚠️</div>
-      <div class="body"><b>${x.store}</b> · 위라이크패션
-      <div style="font-size:12px;color:var(--ink2);margin-top:2px" class="num">전주 ${won(x.prev)} → 금주 ${won(x.cur)}</div></div>
-      <div class="pct num">▼${(x.drop*100).toFixed(0)}%</div></div>`).join('');
-}
-function renderT2otherbrand(){
-  const idx=+document.getElementById('t2obdate').value;
-  // 이랜드리테일 내 위라이크 제외 — 브랜드 버튼으로 필터, 점포별 월누계 + 선택일 일매출
-  let cols=elandCols().filter(c=>!c.isWelike);
-  if(t2obBrand!=='전체') cols=cols.filter(c=>c.brand===t2obBrand);
-  const arr=cols.map(c=>({
-    store:c.store, brand:c.brandRaw, monthly:c.monthly, day:c.daily[idx],
-    req:REQ_BRANDS.includes(c.brand)
-  })).sort((a,b)=>b.monthly-a.monthly);
-  const totM=arr.reduce((a,x)=>a+x.monthly,0)||1, totD=arr.reduce((a,x)=>a+x.day,0);
-  const sumlbl = t2obBrand==='전체'?'타브랜드 합계 (위라이크 제외)':`${t2obBrand} 합계 (점포 ${arr.length}곳)`;
-  if(!arr.length){ document.getElementById('t2otherbrand').innerHTML='<thead></thead><tbody><tr><td class="l">해당 브랜드 매출 데이터 없음</td></tr></tbody>'; return; }
-  document.getElementById('t2otherbrand').innerHTML=
-    `<thead><tr><th class="l">순위</th><th class="l">점포</th><th class="l">브랜드</th><th>월누계</th><th>${fmtDate(DATES[idx])} 일매출</th><th>월누계 비중</th></tr></thead><tbody>`+
-    arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
-      <td class="l">${r.store}</td>
-      <td class="l">${r.brand}${r.req?' <span class="chip req">요청</span>':''}</td>
-      <td class="num">${won(r.monthly)}</td>
-      <td class="num">${won(r.day)}</td>
-      <td class="num" style="color:var(--muted)">${(r.monthly/totM*100).toFixed(1)}%</td></tr>`).join('')+
-    `<tr style="font-weight:800;background:var(--paper2)"><td class="l" colspan="3">${sumlbl}</td><td class="num">${won(totM)}</td><td class="num">${won(totD)}</td><td class="num">100%</td></tr></tbody>`;
-}
-function renderT2brandrank(){
-  const bm={};
-  elandCols().forEach(c=>{ bm[c.brand]=(bm[c.brand]||0)+c.monthly; });
-  const arr=Object.entries(bm).map(([k,v])=>({name:k,val:v,req:REQ_BRANDS.includes(k)}))
-            .sort((a,b)=>b.val-a.val);
-  const tot=arr.reduce((a,x)=>a+x.val,0)||1;
-  document.getElementById('t2brandrank').innerHTML=
-    `<thead><tr><th class="l">순위</th><th class="l">브랜드</th><th>월누계</th><th>비중</th></tr></thead><tbody>`+
-    arr.map((r,i)=>`<tr><td class="l"><span class="rk ${i<3?'t'+(i+1):''}">${i+1}</span></td>
-      <td class="l">${r.name} ${r.name==='위라이크패션'?'<span class="chip we">기준</span>':(r.req?'<span class="chip req">요청</span>':'')}</td>
-      <td class="num">${won(r.val)}</td>
-      <td class="num" style="color:var(--muted)">${(r.val/tot*100).toFixed(1)}%</td></tr>`).join('')+`</tbody>`;
-}
-document.getElementById('t2date').onchange=renderT2daily;
-document.getElementById('t2alertdate').onchange=renderT2alerts;
-document.getElementById('t2obdate').onchange=renderT2otherbrand;
-
-/* ============ TAB 3 (DB) ============ */
-function buildT3filters(){
-  const chs=[...new Set(COLS.map(c=>chOf(c.store)))].sort();
-  const brs=[...new Set(COLS.map(c=>c.brand))].sort();
-  document.getElementById('t3ch').innerHTML='<option value="">전체 채널</option>'+chs.map(c=>`<option>${c}</option>`).join('');
-  document.getElementById('t3br').innerHTML='<option value="">전체 브랜드</option>'+brs.map(b=>`<option>${b}</option>`).join('');
-}
-function renderT3(){
-  const q=document.getElementById('t3search').value.trim();
-  const fch=document.getElementById('t3ch').value, fbr=document.getElementById('t3br').value;
-  const we=document.getElementById('t3we').checked;
-  let rows=COLS.filter(c=>{
-    if(we && !c.isWelike) return false;
-    if(fch && chOf(c.store)!==fch) return false;
-    if(fbr && c.brand!==fbr) return false;
-    if(q && !(c.store+c.brand+c.brandRaw).includes(q)) return false;
-    return true;
-  }).sort((a,b)=>b.monthly-a.monthly);
-  document.getElementById('t3count').textContent=`${rows.length} / ${COLS.length} 행`;
-  const dHead=DATES.map(d=>`<th>${fmtDate(d)}</th>`).join('');
-  const body=rows.map(c=>`<tr>
-    <td class="l">${chOf(c.store)}</td>
-    <td class="l">${c.store}</td>
-    <td class="l">${c.brandRaw}${c.isWelike?' <span class="chip we">위라이크</span>':''}</td>
-    ${c.daily.map(v=>`<td class="num" ${v<0?'style="color:var(--red)"':''}>${v?v.toLocaleString():'·'}</td>`).join('')}
-    <td class="num" style="font-weight:800">${c.monthly.toLocaleString()}</td></tr>`).join('');
-  document.getElementById('t3tbl').innerHTML=
-    `<thead><tr><th class="l">채널</th><th class="l">점포</th><th class="l">브랜드</th>${dHead}<th>월누계</th></tr></thead><tbody>${body}</tbody>`;
-}
-['t3search','t3ch','t3br','t3we'].forEach(id=>{
-  const el=document.getElementById(id); el.addEventListener(el.type==='checkbox'?'change':'input',renderT3);
-});
-
-/* ============ TAB 4 (매핑) ============ */
-function buildT4(){
-  const stores=[...new Set(COLS.map(c=>c.store))];
-  const wrap=document.getElementById('t4map');
-  wrap.innerHTML=stores.map(s=>`<div class="map-row"><span class="st">${s}</span>
-    <select data-store="${s}">${CH_OPTIONS.map(ch=>`<option ${CHMAP[s]===ch?'selected':''}>${ch}</option>`).join('')}</select></div>`).join('');
-  wrap.querySelectorAll('select').forEach(sel=>sel.onchange=e=>{
-    CHMAP[e.target.dataset.store]=e.target.value; renderAll();
-  });
-}
-
-/* ---------- master render ---------- */
-function renderAll(){
-  renderT1kpi(); renderT1bars(); renderT1ranks();
-  renderT2kpi(); renderT2daily(); renderT2alerts(); renderT2otherbrand(); renderT2brandrank();
-  buildT3filters(); renderT3();
-}
-buildT4(); renderAll();
-</script>
+<!-- 하단 고정 CTA -->
+<div class="dock">
+  <a class="d-tel" href="tel:0000000000" data-tel>📞 전화</a>
+  <a class="d-kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" data-kakao>💛 카카오로 1분 상담</a>
+</div>
 </body>
 </html>
