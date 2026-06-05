@@ -128,7 +128,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .pass-box .ph{display:flex;align-items:center;gap:8px;font-size:16.5px;font-weight:800;margin-bottom:6px}
 .pass-box>p{font-size:14.5px;color:var(--ink2)}
 
-/* 슬라이드 (PASS 발급방법 · 데이터 이전 방법 공용) */
+/* 슬라이드 (데이터 이전 방법 등) */
 .pass-slider{position:relative;margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .pass-slider .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .pass-slider .slides::-webkit-scrollbar{display:none}
@@ -244,7 +244,7 @@ footer b{color:var(--ink2)}
   ③ 개통 조회 서류 다운로드(합본 PDF 1개): 저장소 루트에 kt-application-forms.pdf 업로드.
   ④ 작성 샘플 이미지: 저장소 루트에 kt-sample-1.jpg / kt-sample-2.jpg / kt-sample-3.jpg 업로드.
   ⑤ STEP2 인증 동영상: 저장소 루트에 pass.mp4(1차) / sign.mp4(2차) 업로드.
-  ⑥ PASS 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_11.jpg (11장) 업로드.
+  ⑥ PASS 발급방법: 단계별 안내 페이지 pass2606.html 로 연결(step8/9/11/12.jpg 삽입).
   ⑦ STEP3 데이터 이전 방법 슬라이드: 저장소 루트에 transfer-1.jpg ~ transfer-6.jpg (6장) 업로드.
   ⑧ Lineup 단말기: 각 카드 이미지(모델명.jpg) + 클릭 시 모델명 상세 페이지(모델명.html)로 이동.
      매핑 → iphone17promax / iphone17pro / iphone17 / iphone17air
@@ -396,18 +396,14 @@ footer b{color:var(--ink2)}
     <h2 class="step-h"><span class="step-no">STEP 2.</span> 개통 진행 (본인인증)</h2>
     <p class="sub">개통 진행 시 <b>본인인증 후 개통이 완료</b>됩니다. 조회 후 인증 요청은 필수이며, 아래 인증 방법(영상)을 참고해 주세요.</p>
 
-    <!-- PASS 인증서 필수 (상단) + 발급방법 슬라이드 -->
+    <!-- PASS 인증서 필수 (상단) + 발급방법 안내 페이지 -->
     <div class="pass-box" style="margin-top:24px">
       <div class="ph">🔐 PASS 인증서 필수</div>
       <p>원활한 개통을 위해 <b>PASS 앱 설치 및 인증서 발급</b>이 먼저 필요합니다.</p>
-      <div class="s1-label" style="margin-top:20px;margin-bottom:10px">PASS 인증서 발급방법 <span style="font-weight:600;color:var(--muted);font-size:13px">· 옆으로 넘겨보세요</span></div>
-      <!-- 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_11.jpg 업로드 시 표시 -->
-      <div class="pass-slider" data-prefix="pass_" data-total="11" data-ext="jpg">
-        <div class="slides"></div>
-        <button class="sl-nav prev" type="button" aria-label="이전 슬라이드">&#8249;</button>
-        <button class="sl-nav next" type="button" aria-label="다음 슬라이드">&#8250;</button>
-        <div class="sl-count"><span class="sl-idx">1</span> / <span class="sl-tot">11</span></div>
-      </div>
+      <div class="s1-label" style="margin-top:20px;margin-bottom:10px">PASS 인증서 발급방법</div>
+      <!-- 발급방법: 단계별 안내 페이지(pass2606.html)로 연결 -->
+      <a class="dl-btn" href="pass2606" target="_blank" rel="noopener" style="background:#004ea2">🔐 PASS 인증서 발급방법 자세히 보기 →</a>
+      <p class="dl-note">버튼을 누르면 그림과 함께 따라하기 쉬운 단계별 안내가 열립니다.</p>
     </div>
 
     <!-- 1차 / 2차 인증 + 동영상 -->
@@ -515,7 +511,7 @@ footer b{color:var(--ink2)}
 /* 슬라이더(.pass-slider): data-prefix / data-total / data-ext 로 이미지 자동 생성.
    - 모바일: 손가락 스와이프(scroll-snap) / PC: 좌우 화살표
    - 이미지 없으면 '이미지 준비 중' 폴백
-   여러 개의 슬라이더(PASS 발급방법, 데이터 이전 방법)를 동시에 지원합니다. */
+   데이터 이전 방법 등 슬라이더를 지원합니다. */
 (function(){
   document.querySelectorAll('.pass-slider').forEach(function(sl){
     var box=sl.querySelector('.slides'); if(!box) return;
