@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASS 인증서 발급하기</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .guide-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 20px 16px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* 메인 상단 배너 스타일 */
+        .main-header {
+            background-color: #004ea2; /* 신뢰감을 주는 패스 블루 */
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 20px 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .main-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .main-header p {
+            font-size: 14px;
+            color: #93c5fd;
+            margin-top: 6px;
+        }
+
+        /* 사전 확인 경고창 */
+        .alert-box {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-left: 4px solid #ef4444;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 24px;
+        }
+
+        .alert-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #991b1b;
+            margin-bottom: 6px;
+        }
+
+        .alert-text {
+            font-size: 13.5px;
+            color: #7f1d1d;
+            line-height: 1.5;
+        }
+
+        /* 대분류 섹션 타이틀 */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 28px 0 14px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #004ea2;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background-color: #004ea2;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+
+        /* 단계별 카드 스타일 */
+        .step-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: #004ea2;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .step-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.45;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 6px;
+            line-height: 1.5;
+            padding-left: 2px;
+        }
+
+        /* 통신사 선택 강조 표 */
+        .agency-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .agency-table td {
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .agency-sk { color: #e11d48; font-weight: 700; background-color: #fff1f2; }
+        .agency-kt { color: #2563eb; font-weight: 700; background-color: #eff6ff; }
+        .agency-lg { color: #db2777; font-weight: 700; background-color: #fdf2f8; }
+
+        /* 하이라이트 효과 */
+        .highlight-blue { color: #004ea2; font-weight: 700; }
+        .highlight-red { color: #dc2626; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div class="guide-container">
+
+    <!-- 상단 헤더 -->
+    <div class="main-header">
+        <h1>PASS 인증서 발급 가이드</h1>
+        <p>테라스타와 함께하는 안전하고 간편한 인증서 만들기</p>
+    </div>
+
+    <!-- [준비 필수] 사전 확인 사항 -->
+    <div class="alert-box">
+        <div class="alert-title">⚠️ 발급 전 필수 확인 및 준비 사항</div>
+        <div class="alert-text">
+            <p>• 인증서 발급 과정 중 본인 확인을 위한 <strong>계좌 입·출금 내역(1원) 확인</strong>이 필요합니다. 문자 또는 은행 앱 알림 확인이 가능해야 합니다[cite: 1].</p>
+            <p style="margin-top: 4px;">• 만약 알림 확인이 불가능하다면, 먼저 은행에 방문하여 입·출금 확인이 가능한 서비스를 신청하셔야 진행할 수 있습니다[cite: 1].</p>
+        </div>
+    </div>
+
+    <!-- 1단계 섹션 -->
+    <div class="section-title">1단계. PASS 앱 설치하기</div>
+    
+    <div class="step-card">
+        <div class="step-number">STEP 1</div>
+        <div class="step-text">구글 플레이스토어 또는 앱스토어에서 패스앱 다운로드[cite: 2]</div>
+        <div class="step-desc">
+            스마트폰 종류에 맞는 스토어를 열고 <span class="highlight-blue">"패스"</span> 또는 <span class="highlight-blue">"PASS"</span>를 검색해 다운로드합니다[cite: 2].
+            <table class="agency-table">
+                <tr>
+                    <td class="agency-sk">SK 사용자</td>
+                    <td>PASS by SKT 설치[cite: 2]</td>
+                </tr>
+                <tr>
+                    <td class="agency-kt">KT 사용자</td>
+                    <td>PASS by KT 설치[cite: 2]</td>
+                </tr>
+                <tr>
+                    <td class="agency-lg">LG 사용자</td>
+                    <td>PASS by U+ 설치[cite: 2]</td>
+                </tr>
+            </table>
+            <span class="highlight-red" style="display:block; margin-top:6px; font-size:13px;">※ 반드시 현재 사용 중인 본인의 통신사를 확인하고 알맞은 앱을 받으셔야 합니다[cite: 2].</span>
+        </div>
+    </div>
+
+    <!-- 2단계 섹션 -->
+    <div class="section-title">2단계. PASS 회원가입 진행</div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 2</div>
+        <div class="step-text">앱 접속 및 앱 접근 권한 허용[cite: 3]</div>
+        <div class="step-desc">다운로드한 PASS 앱을 처음 열고, 원활한 작동을 위해 화면에 나오는 <span class="highlight-blue">"앱 접근 권한 허용"</span>을 모두 승인해 줍니다[cite: 3].</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 3</div>
+        <div class="step-text">간편 본인확인 정보 입력[cite: 3]</div>
+        <div class="step-desc">회원가입을 위해 본인의 <span class="highlight-blue">이름, 주민등록번호 앞자리+뒷첫글자, 휴대폰 번호</span>를 정확히 입력한 후 다음을 누릅니다[cite: 3].</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 4</div>
+        <div class="step-text">필수 약관 동의하기</div>
+        <div class="step-desc">회원가입 절차 진행을 위한 약관 동의 화면에서 필수 항목에 전체 동의를 체크합니다.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 5</div>
+        <div class="step-text">문자 인증번호 확인 및 입력</div>
+        <div class="step-desc">문자로 전송된 인증번호 숫자를 확인하여 입력 창에 그대로 기입하고 확인을 누릅니다.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 6</div>
+        <div class="step-text">PASS 비밀번호 6자리 설정</div>
+        <div class="step-desc">
+            앞으로 앱을 열거나 인증할 때 매번 사용할 <span class="highlight-red">6자리 비밀번호</span>를 직접 정해 줍니다.
+            <span style="display:block; margin-top:4px; font-size:13px; color:#64748b;">- 확인을 위해 똑같은 번호를 연속으로 2번 입력하게 됩니다. 잘 기억해 두세요!</span>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 7</div>
+        <div class="step-text">생체 인식 설정 (얼굴 / 지문)</div>
+        <div class="step-desc">비밀번호 입력 완료 후 더 간편한 로그인을 원하시면 생체인증(Face ID 또는 지문)을 등록해 줍니다. 나중에 설정하고 싶다면 하단의 <span class="highlight-blue">"다음에 할게요"</span>를 누르시면 됩니다.</div>
+    </div>
+
+    <!-- 3단계 섹션 -->
+    <div class="section-title">3단계. 인증서 발급하기</div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 8</div>
+        <div class="step-text">메인 화면에서 "인증서 발급받기" 클릭</div>
+        <div class="step-desc">회원가입 완료 후 메인 홈 화면의 내지갑 영역에서 <span class="highlight-blue">"인증서 발급받기"</span> 버튼을 찾아 눌러줍니다.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 9</div>
+        <div class="step-text">본인인증 정보 입력</div>
+        <div class="step-desc">인증서 발급을 위해 화면 안내에 따라 가입자 본인의 이름과 휴대폰 번호를 다시 한번 기입하고 다음을 누릅니다.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 10</div>
+        <div class="step-text">서비스 사용 전체동의 및 비밀번호 확인</div>
+        <div class="step-desc">인증서 서비스 사용 동의서에 전체 체크를 하고, 조금 전 가입할 때 만들었던 <span class="highlight-blue">6자리 비밀번호</span>를 키패드에 입력합니다.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 11</div>
+        <div class="step-text">2차 계좌인증 진행 (은행 및 계좌번호 입력)</div>
+        <div class="step-desc">
+            더 안전한 본인인증을 위해 <span class="highlight-red">본인 명의의 은행</span>을 선택하고 <span class="highlight-red">계좌번호</span>를 입력한 후 다음을 누릅니다.
+            <span style="display:block; margin-top:4px; font-size:13px; color:#64748b;">※ 평생계좌번호, 가상계좌, 휴대폰 계좌번호 등은 인증이 불가능할 수 있습니다.</span>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">STEP 12</div>
+        <div class="step-text">입금자명 또는 숫자 확인 후 기입</div>
+        <div class="step-desc">입력한 은행 계좌로 통장에 '1원'이 입금됩니다. 거래 내역의 입금자명으로 표시된 <span class="highlight-blue">3자리 숫자 또는 4글자의 단어</span>를 확인하여 인증 창에 넣고 확인을 누릅니다.</div>
+    </div>
+
+    <div class="step-card" style="border: 2px solid #22c55e; background-color: #f0fdf4;">
+        <div class="step-number" style="background-color: #22c55e;">FINISH</div>
+        <div class="step-text" style="color: #166534;">🎉 PASS 인증서 발급 최종 완료!</div>
+        <div class="step-desc" style="color: #166534;">인증서 발급 완료 화면이 나타났다면 모든 절차가 끝났습니다. 이제 자유롭게 간편 인증 서비스를 사용해 보세요.</div>
+    </div>
+
+</div>
+
+</body>
+</html>
