@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KT 번호이동 2차 서명하기 가이드</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .guide-container {
+            width: 100%;
+            max-width: 460px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 20px 16px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* 상단 타이틀 메인 배너 */
+        .main-header {
+            background-color: #0284c7; /* 차별화된 세련된 스카이블루/블루 */
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 22px 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .main-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #fef08a; /* 골드 포인트 */
+        }
+        
+        .main-header p {
+            font-size: 14px;
+            color: #e0f2fe;
+            margin-top: 6px;
+        }
+
+        /* 사전 예방 경고 상자 */
+        .alert-box {
+            background-color: #fffbec;
+            border: 1px solid #fef08a;
+            border-left: 4px solid #ca8a04;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 24px;
+        }
+
+        .alert-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #854d0e;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-size: 13.5px;
+            color: #713f12;
+            line-height: 1.5;
+        }
+
+        /* 대분류 섹션 구분선 타이틀 */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 32px 0 16px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #0284c7;
+        }
+
+        /* 스마트 가이드 카드 디자인 */
+        .step-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: #0284c7;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .step-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        /* 요청 이미지 삽입 컨테이너 구조 */
+        .img-container {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 12px 0;
+            border: 1px solid #cbd5e1;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .step-desc {
+            font-size: 14.5px;
+            color: #334155;
+            margin-top: 4px;
+            line-height: 1.55;
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* 필수항목 리스트 가독성 강화 */
+        .item-list {
+            margin: 8px 0;
+            padding-left: 18px;
+            font-size: 14px;
+        }
+
+        .item-list li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        .highlight-blue { color: #0284c7; font-weight: 700; }
+        .highlight-red { color: #dc2626; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div class="guide-container">
+
+    <!-- 메인 타이틀 배너 [KakaoTalk_20260526_110614969_14.jpg 대응] -->
+    <div class="main-header">
+        <h1>(주)테라스타 KT 번호이동 개통방법</h1>
+        <p>쉽고 스마트한 2차 서명하기 절차 안내</p>
+    </div>
+
+    <!-- 진행 전 안심 알림 상자 -->
+    <div class="alert-box">
+        <div class="alert-title">💡 2차 서명 전 안내사항</div>
+        <div class="alert-text">
+            • 본 가이드는 1차 접수 완료 후 문자 수신에 따라 모바일 웹에서 계약서 내용을 최종 확인하고 정자로 자필 서명을 남기는 마지막 단계입니다.
+        </div>
+    </div>
+
+
+    <div class="section-title">1단계. 서명 요청 페이지 접속</div>
+    
+    <!-- [KakaoTalk_20260526_110614969_15.jpg 대응] -->
+    <div class="step-card">
+        <div class="step-number">STEP 1</div>
+        <div class="step-text">고객서명요청 안내 문자 수신 및 링크 접속</div>
+        
+        <!-- 지정해주신 스텝1 하단에 이미지 컴포넌트 삽입 위치 -->
+        <div class="img-container">
+            <img src="./images/after02.jpg" alt="고객서명요청 문자 링크 안내서">
+        </div>
+        
+        <div class="step-desc">
+            • KT에서 발송한 <span class="highlight-blue">[KT안내] 고객서명 요청</span> 장문 문자를 열어봅니다.<br>
+            • 문자 메시지 하단에 링크되어 있는 <span class="highlight-red">인터넷 주소(URL) 링크</span>를 터치하여 2차 계약서 서명 시스템 웹페이지에 접속합니다.<br>
+            <span style="display:block; margin-top:6px; font-size:13px; color:#64748b;">※ 브라우저 진행 중 끊김 현상을 방지하기 위해 인터넷 창(탭)이 과도하게 많이 열려있다면 정리 후 시작하시길 권장합니다.</span>
+        </div>
+    </div>
+
+
+    <div class="section-title">2단계. 필수 계약 항목 확인 및 식별 번호 입력</div>
+
+    <!-- [KakaoTalk_20260526_110614969_16.jpg, 17.jpg 대응] -->
+    <div class="step-card">
+        <div class="step-number">STEP 2</div>
+        <div class="step-text">첫 번째 필수확인 버튼 터치 및 식별 정보 입력</div>
+        <div class="step-desc">
+            • 페이지 진입 시 화면에 나타나는 <strong>필수확인 5개 항목</strong> 중에서 가장 첫 번째에 있는 <span class="highlight-blue">[① 무선신청서] 필수확인</span> 단추를 터치합니다.<br>
+            • 본인 고객 식별을 위한 암호화 팝업창이 열리면, 개통하시는 분의 <span class="highlight-red">생년월일 6자리(주민등록번호 앞자리)</span>를 정확히 타이핑하고 [확인] 버튼을 터치합니다.
+        </div>
+    </div>
+
+    <!-- [KakaoTalk_20260526_110614969_18.jpg, 19.jpg, 20.jpg 대응] -->
+    <div class="step-card">
+        <div class="step-number">STEP 3</div>
+        <div class="step-text">계약 상세 서류 조회 및 확인 승인</div>
+        <div class="step-desc">
+            • 계약정보 상세 서류 화면이 표시되면, 모바일 창을 위로 부드럽게 스크롤하며 계약 내역(단말기 정보, 요금제 등)을 끝까지 꼼꼼하게 읽어 내려갑니다.<br>
+            • 모든 내용을 다 읽고 확인하셨다면 문서 하단의 파란색 <span class="highlight-blue">[확인]</span> 버튼을 터치하여 승인 처리를 완료합니다.<br>
+            • 첫 번째 항목 확인이 완벽히 끝나면 기존 목록으로 돌아오게 되며, 해당 칸의 표시가 <span class="highlight-blue">'보기'</span> 상태로 변경됩니다.
+        </div>
+    </div>
+
+    <!-- [KakaoTalk_20260526_110614969_21.jpg 대응] -->
+    <div class="step-card">
+        <div class="step-number">STEP 4</div>
+        <div class="step-text">나머지 4개 필수 서류 동일 방식으로 모두 조회</div>
+        <div class="step-desc">
+            • 목록에 있는 나머지 필수확인 서류들도 위의 순서와 완전히 동일한 방법으로 하나씩 터치하여 조회를 이어나갑니다.
+            <ul class="item-list">
+                <li><span class="highlight-blue">② 서비스신청서</span> ➡️ 화면 아래로 내려서 내용 확인 후 [확인] 클릭</li>
+                <li><span class="highlight-blue">③ 개인정보활용동의서</span> ➡️ 화면 아래로 내려서 내용 확인 후 [확인] 클릭</li>
+                <li><span class="highlight-blue">④ 표준안내서</span> ➡️ 내용 확인 후 [확인] 클릭</li>
+                <li><span class="highlight-blue">⑤ 무선지원금</span> ➡️ 내용 확인 후 [확인] 클릭</li>
+            </ul>
+            • <span class="highlight-red">중요:</span> 확인이 완벽히 끝난 서류는 <strong>'보기'</strong> 단추로 바뀌며, 아직 확인하지 못한 서류는 <strong>'필수확인'</strong>으로 남아있으니 5개 항목 모두가 '보기'로 바뀔 때까지 전부 조회하셔야 완료됩니다.
+        </div>
+    </div>
+
+
+    <div class="section-title">3단계. 친필 사인 및 최종 저장</div>
+
+    <!-- [KakaoTalk_20260526_110614969_22.jpg 대응] -->
+    <div class="step-card">
+        <div class="step-number">STEP 5</div>
+        <div class="step-text">가입자 서명하기 실행</div>
+        <div class="step-desc">
+            • 필수확인 항목 5가지가 전부 '보기'로 깔끔하게 변했다면, 화면 아래쪽 서명 구역에 새롭게 활성화된 <span class="highlight-red">[가입자서명]</span> 상자를 터치합니다.
+        </div>
+    </div>
+
+    <!-- [KakaoTalk_20260526_110614969_23.jpg 대응] -->
+    <div class="step-card" style="border: 2px solid #22c55e; background-color: #f0fdf4;">
+        <div class="step-number" style="background-color: #22c55e;">FINISH</div>
+        <div class="step-text" style="color: #166534;">성명 정자 기입 및 필기 서명 완료</div>
+        <div class="step-desc" style="color: #166534; background-color: #ffffff;">
+            • <strong>⑧ 성명 기입란:</strong> 사각형 흰 패널 공간을 터치한 뒤, 본인의 본명을 손가락을 사용해 정자체로 바르게 받아적습니다. (틀렸을 시 하단의 '성명삭제' 터치 후 재기입)<br>
+            • <strong>⑨ 서명 기입란:</strong> 아래 사각형 서명 패널 공간을 터치하고 본인의 친필 사인을 멋지게 입력합니다. (대리 서명은 법적 효력이 없으므로 반드시 가입자 본인이 직접 작성해야 합니다.)<br>
+            • 서명이 모두 완료되었다면 하단에 활성화되는 민트색 <span class="highlight-blue">[확인]</span> 버튼을 최종 터치합니다. 시스템상에 저장이 정상 완료되면 모든 개통 서류 절차가 종료됩니다!
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
