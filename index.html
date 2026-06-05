@@ -181,8 +181,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .dev:hover{border-color:var(--ink);box-shadow:var(--shadow);transform:translateY(-2px)}
 .dev:hover .nm{color:var(--kt)}
 .dev .ph{aspect-ratio:1/1;width:100%;border-radius:8px;overflow:hidden;background:var(--bg2);
-  display:flex;align-items:center;justify-content:center;font-size:30px}
-.dev .ph img{width:100%;height:100%;object-fit:cover;object-position:left center;display:block}
+  display:flex;align-items:center;justify-content:center;font-size:30px;padding:10px}
+.dev .ph img{width:100%;height:100%;object-fit:contain;display:block}
 .dev .nm{font-weight:700;font-size:15px;margin-top:11px;letter-spacing:-.02em;transition:.16s}
 .dev .tg{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:700;color:var(--muted);
   border:1px solid var(--line2);padding:2px 9px;border-radius:999px}
@@ -246,11 +246,10 @@ footer b{color:var(--ink2)}
   ⑤ STEP2 인증 동영상: 저장소 루트에 pass.mp4(1차) / sign.mp4(2차) 업로드.
   ⑥ PASS 발급방법 슬라이드: 저장소 루트에 pass_1.jpg ~ pass_11.jpg (11장) 업로드.
   ⑦ STEP3 데이터 이전 방법 슬라이드: 저장소 루트에 transfer-1.jpg ~ transfer-6.jpg (6장) 업로드.
-  ⑧ 단말기 혜택표 이미지: Lineup의 각 단말기 클릭 시 p2~p13.jpg 를 새 탭으로 엽니다.
-     매핑 → p2 점프4 / p3 S26 / p4 S26+ / p5 S26울트라 / p6 S25엣지 / p7 Z폴드7
-            p8 아이폰17프로 / p9 프로맥스(요금할인)·p10 프로맥스(단말할인)
-            p11 에어(단말할인)·p12 에어(요금할인) / p13 아이폰17
-     ※ 다른 이미지로 바꾸려면 해당 <a class="dev" href="..."> 의 파일명을 수정.
+  ⑧ Lineup 단말기: 각 카드 이미지(모델명.jpg) + 클릭 시 모델명 상세 페이지(모델명.html)로 이동.
+     매핑 → iphone17promax / iphone17pro / iphone17 / iphone17air
+            s26ultra / s26+ / s26 / s25edge / galaxy z fold7 / jump4
+     ※ vercel.json cleanUrls=true 이므로 href 는 확장자 없이 연결. 공백/+ 는 %20/%2B 인코딩.
   ⑨ STEP3 무선서비스 계약 표준안내서: 저장소 루트에 result1.jpg 업로드 시 클릭 다운로드.
   ⑩ 신규가입 상담(히어로 버튼): 구글폼 https://forms.gle/VeDyu4aEtwqodzSa8 로 연결.
 ======================================================= -->
@@ -322,17 +321,17 @@ footer b{color:var(--ink2)}
     <h2 class="t">최신 인기 단말, 바로 개통</h2>
     <p class="sub">재고·색상·용량은 실시간으로 다르니 상담 시 확인해 드립니다. <b>아래 원하시는 단말기를 클릭하시면 지원금 내역을 실시간 확인 가능합니다.</b></p>
     <div class="dev-grid">
-      <!-- 각 단말기 클릭 → 모델별 혜택표 이미지(p2~p13). ※프로맥스·Air는 요금할인/단말할인 2종 중 1개 연결 -->
-      <a class="dev" href="p9.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p9.jpg" alt="아이폰 17 프로맥스" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 프로맥스</div><div class="tg">프리미엄</div></a>
-      <a class="dev" href="p8.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p8.jpg" alt="아이폰 17 프로" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 프로</div><div class="tg">프리미엄</div></a>
-      <a class="dev" href="p13.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p13.jpg" alt="아이폰 17" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17</div><div class="tg">인기</div></a>
-      <a class="dev" href="p12.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p12.jpg" alt="아이폰 17 에어" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 에어</div><div class="tg">신상</div></a>
-      <a class="dev" href="p5.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p5.jpg" alt="갤럭시 S26 울트라" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26 울트라</div><div class="tg">프리미엄</div></a>
-      <a class="dev" href="p4.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p4.jpg" alt="갤럭시 S26+" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26+</div><div class="tg">인기</div></a>
-      <a class="dev" href="p3.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p3.jpg" alt="갤럭시 S26" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26</div><div class="tg">인기</div></a>
-      <a class="dev" href="p6.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p6.jpg" alt="갤럭시 S25 엣지" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S25 엣지</div><div class="tg">실속</div></a>
-      <a class="dev" href="p7.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p7.jpg" alt="갤럭시 Z 폴드7" loading="lazy" onerror="this.replaceWith(document.createTextNode('📲'))"></div><div class="nm">갤럭시 Z 폴드7</div><div class="tg">폴더블</div></a>
-      <a class="dev" href="p2.jpg" target="_blank" rel="noopener"><div class="ph"><img src="p2.jpg" alt="갤럭시 점프4" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 점프4</div><div class="tg">출고가 0원</div></a>
+      <!-- 각 단말기 클릭 → 모델별 상세 페이지(.html). 이미지·링크는 저장소의 모델명 파일과 연동 -->
+      <a class="dev" href="iphone17promax"><div class="ph"><img src="iphone17promax.jpg" alt="아이폰 17 프로맥스" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 프로맥스</div><div class="tg">프리미엄</div></a>
+      <a class="dev" href="iphone17pro"><div class="ph"><img src="iphone17pro.jpg" alt="아이폰 17 프로" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 프로</div><div class="tg">프리미엄</div></a>
+      <a class="dev" href="iphone17"><div class="ph"><img src="iphone17.jpg" alt="아이폰 17" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17</div><div class="tg">인기</div></a>
+      <a class="dev" href="iphone17air"><div class="ph"><img src="iphone17air.jpg" alt="아이폰 17 에어" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">아이폰 17 에어</div><div class="tg">신상</div></a>
+      <a class="dev" href="s26ultra"><div class="ph"><img src="s26ultra.jpg" alt="갤럭시 S26 울트라" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26 울트라</div><div class="tg">프리미엄</div></a>
+      <a class="dev" href="s26%2B"><div class="ph"><img src="s26%2B.jpg" alt="갤럭시 S26+" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26+</div><div class="tg">인기</div></a>
+      <a class="dev" href="s26"><div class="ph"><img src="s26.jpg" alt="갤럭시 S26" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26</div><div class="tg">인기</div></a>
+      <a class="dev" href="s25edge"><div class="ph"><img src="s25edge.jpg" alt="갤럭시 S25 엣지" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S25 엣지</div><div class="tg">실속</div></a>
+      <a class="dev" href="galaxy%20z%20fold7"><div class="ph"><img src="galaxy%20z%20fold7.jpg" alt="갤럭시 Z 폴드7" loading="lazy" onerror="this.replaceWith(document.createTextNode('📲'))"></div><div class="nm">갤럭시 Z 폴드7</div><div class="tg">폴더블</div></a>
+      <a class="dev" href="jump4"><div class="ph"><img src="jump4.jpg" alt="갤럭시 점프4" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 점프4</div><div class="tg">출고가 0원</div></a>
     </div>
 
     <div class="notice">
