@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>추천인 전용 · KT 테라스타 통신</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#0f1115;--muted:#8b9099;--line:#e2e3e6;--kt:#e2231a;--bg:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Pretendard,-apple-system,system-ui,"Apple SD Gothic Neo",sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{width:100%;max-width:460px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 25px -5px rgba(0,0,0,.08);overflow:hidden}
+
+/* 비밀번호 게이트 */
+.gate{padding:44px 24px;text-align:center}
+.gate .lock{font-size:42px}
+.gate h1{font-size:20px;font-weight:800;margin:14px 0 6px;letter-spacing:-.02em}
+.gate p{font-size:14px;color:var(--muted);margin-bottom:22px}
+.gate input{width:100%;font-size:22px;text-align:center;letter-spacing:.35em;padding:14px;border:1px solid var(--line);border-radius:10px;outline:none}
+.gate input:focus{border-color:var(--kt)}
+.gate button{width:100%;margin-top:12px;background:var(--ink);color:#fff;border:0;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;transition:.15s}
+.gate button:hover{background:#000}
+.gate .err{color:var(--kt);font-size:13px;font-weight:600;margin-top:10px;min-height:18px}
+
+/* 슬라이드 (인증 후 표시) */
+.viewer{display:none}
+.viewer-head{padding:18px 20px;background:var(--ink);color:#fff;text-align:center}
+.viewer-head h2{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.viewer-head p{font-size:13px;color:#aeb3bb;margin-top:4px}
+.slider{position:relative;background:#fff}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:14px;min-height:300px;background:#fff}
+.slide img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:8px;display:block}
+.slide .ph{color:var(--muted);font-size:13px;font-weight:600;padding:80px 10px;text-align:center}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(15,17,21,.55);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;padding-bottom:3px}
+.nav:hover{background:rgba(15,17,21,.8)}
+.nav.prev{left:10px}
+.nav.next{right:10px}
+.count{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(15,17,21,.62);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;z-index:2}
+@media(max-width:600px){.nav{width:36px;height:36px;font-size:20px}}
+</style>
+</head>
+<body>
+<div class="card">
+  <!-- 비밀번호 게이트 (비밀번호: 9147) -->
+  <div class="gate" id="gate">
+    <div class="lock">🔒</div>
+    <h1>추천인 전용 페이지</h1>
+    <p>비밀번호를 입력해 주세요.</p>
+    <input id="pw" type="password" inputmode="numeric" placeholder="••••" maxlength="8" autocomplete="off">
+    <button id="enter" type="button">확인</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <!-- 슬라이드 (인증 성공 후 표시) -->
+  <div class="viewer" id="viewer">
+    <div class="viewer-head">
+      <h2>추천인 안내</h2>
+      <p>옆으로 넘겨보세요</p>
+    </div>
+    <div class="slider">
+      <div class="slides" id="slides"></div>
+      <button class="nav prev" type="button" aria-label="이전 슬라이드">&#8249;</button>
+      <button class="nav next" type="button" aria-label="다음 슬라이드">&#8250;</button>
+      <div class="count"><span id="idx">1</span> / <span id="tot">4</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PASS="9147", TOTAL=4, PREFIX="hand0", EXT="jpg";
+  var gate=document.getElementById('gate'), viewer=document.getElementById('viewer');
+  var pw=document.getElementById('pw'), err=document.getElementById('err');
+
+  function unlock(){
+    if(pw.value.trim()===PASS){
+      gate.style.display='none';
+      viewer.style.display='block';
+      build();
+    }else{
+      err.textContent='비밀번호가 올바르지 않습니다.';
+      pw.value=''; pw.focus();
+    }
+  }
+  document.getElementById('enter').addEventListener('click', unlock);
+  pw.addEventListener('keydown', function(e){ if(e.key==='Enter') unlock(); });
+  pw.focus();
+
+  function build(){
+    var box=document.getElementById('slides');
+    document.getElementById('tot').textContent=TOTAL;
+    for(var i=1;i<=TOTAL;i++){
+      var s=document.createElement('div'); s.className='slide';
+      var img=document.createElement('img');
+      img.src=PREFIX+i+'.'+EXT; img.alt='추천인 안내 '+i; img.loading='lazy';
+      img.onerror=function(){ var p=document.createElement('div'); p.className='ph'; p.textContent='이미지 준비 중'; this.replaceWith(p); };
+      s.appendChild(img); box.appendChild(s);
+    }
+    var idx=document.getElementById('idx');
+    function cur(){ return box.clientWidth ? Math.round(box.scrollLeft/box.clientWidth) : 0; }
+    box.addEventListener('scroll', function(){ idx.textContent=cur()+1; });
+    document.querySelector('.nav.prev').addEventListener('click', function(){ box.scrollTo({left:Math.max(0,cur()-1)*box.clientWidth, behavior:'smooth'}); });
+    document.querySelector('.nav.next').addEventListener('click', function(){ box.scrollTo({left:Math.min(TOTAL-1,cur()+1)*box.clientWidth, behavior:'smooth'}); });
+  }
+})();
+</script>
+</body>
+</html>
