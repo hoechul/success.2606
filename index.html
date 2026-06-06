@@ -66,6 +66,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .nav-right{display:flex;align-items:center;gap:14px}
 .nav-tel{font-weight:700;font-size:15px}
 @media(max-width:920px){.nav-mid,.nav-tel{display:none}}
+@media(max-width:560px){.brand .store{display:none}}
 
 /* hero */
 .hero{padding:90px 0 80px;border-bottom:1px solid var(--line);position:relative}
@@ -253,7 +254,7 @@ footer b{color:var(--ink2)}
      ※ vercel.json cleanUrls=true 이므로 href 는 확장자 없이 연결. 공백/+ 는 %20/%2B 인코딩.
   ⑨ STEP3 무선서비스 계약 표준안내서: 저장소 루트에 result1.jpg 업로드 시 클릭 다운로드.
   ⑩ 신규가입 상담(히어로 버튼): 구글폼 https://forms.gle/VeDyu4aEtwqodzSa8 로 연결.
-  ⑪ 추천인(히어로 버튼): recommend.html 로 연결(비밀번호 9147 입력 후 hand01~hand04 슬라이드).
+  ⑪ 추천인 페이지(recommend.html): 비밀번호 9147 후 hand01~hand04 슬라이드. ※광고 규정상 히어로 버튼은 제거됨(직접 URL 접속용으로만 유지).
 ======================================================= -->
 
 <header>
@@ -261,6 +262,7 @@ footer b{color:var(--ink2)}
     <div class="brand">
       <span class="kt-logo"><span class="k">k</span><span class="t">t</span></span> 테라스타 통신 <span class="sep">·</span>
       <span class="store">(주)Terrastar</span>
+      <span class="store" style="font-size:11.5px">· 통신판매업신고 제2025-서울구로-1053호</span>
     </div>
     <nav class="nav-mid">
       <a href="#device">단말기</a>
@@ -278,25 +280,24 @@ footer b{color:var(--ink2)}
     <div>
       <p class="eyebrow">KT 테라스타 통신 · (주)TERRASTAR</p>
       <h1>오직 KT 최신폰으로,<br><em>가장 유리하게</em>.</h1>
-      <p class="lead"><b style="color:var(--kt)">타사(SKT, LGU)에서 KT 통신사 신규 · 번호이동에만</b>, 갤럭시 S26·Z폴드7부터 아이폰17까지
+      <p class="lead"><b style="color:var(--kt)">타 통신사 이용 고객 대상 번호이동 혜택</b>으로, 갤럭시 S26·Z폴드7부터 아이폰17까지
         혜택을 1:1로 비교해 가장 합리적인 조합을 설계해 드립니다.</p>
       <div class="cta">
         <a class="btn btn-dark btn-lg" href="#device">단말기 보기</a>
         <a class="btn btn-red btn-lg" href="https://forms.gle/VeDyu4aEtwqodzSa8" target="_blank" rel="noopener">신규가입 상담</a>
-        <a class="btn btn-line btn-lg" href="recommend" target="_blank" rel="noopener">추천인</a>
       </div>
       <p class="fine">상담은 무료이며, 신청만으로 가입되지 않습니다. 견적을 보고 결정하세요.</p>
     </div>
 
     <aside class="spec">
       <div class="k">오늘의 가입 혜택</div>
-      <div class="big">최대 <span>70만원</span><span style="font-size:20px;color:var(--ink2)"> 상당</span></div>
-      <div class="note">공시지원금 + 요금제 할인 합산 기준 · 단말·요금제별 상이</div>
+      <div class="big">최대 <span>70만원</span><span style="font-size:20px;color:var(--ink2)"> 혜택 가능</span></div>
+      <div class="note">단말·요금제에 따라 상이 · 상담 시 확인</div>
       <hr>
       <ul>
         <li><span class="dash">—</span><span><b>공시지원금</b> 최대 적용 + 추가지원금(15% 이내)</span></li>
         <li><span class="dash">—</span><span><b>요금제 할인</b>까지 함께 설계</span></li>
-        <li><span class="dash">—</span><span><b>갤럭시 점프4</b> 지원금 적용 시 출고가 0원</span></li>
+        <li><span class="dash">—</span><span><b>갤럭시 점프4</b> 지원금 적용 조건 충족 시 출고가 0원 (9만원 요금제 6개월 유지)</span></li>
         <li><span class="dash">—</span><span><b>신규 단말기</b> 택배비 지원</span></li>
       </ul>
     </aside>
@@ -334,12 +335,12 @@ footer b{color:var(--ink2)}
       <a class="dev" href="s26"><div class="ph"><img src="s26.jpg" alt="갤럭시 S26" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S26</div><div class="tg">인기</div></a>
       <a class="dev" href="s25edge"><div class="ph"><img src="s25edge.jpg" alt="갤럭시 S25 엣지" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 S25 엣지</div><div class="tg">실속</div></a>
       <a class="dev" href="galaxy%20z%20fold7"><div class="ph"><img src="galaxy%20z%20fold7.jpg" alt="갤럭시 Z 폴드7" loading="lazy" onerror="this.replaceWith(document.createTextNode('📲'))"></div><div class="nm">갤럭시 Z 폴드7</div><div class="tg">폴더블</div></a>
-      <a class="dev" href="jump4"><div class="ph"><img src="jump4.jpg" alt="갤럭시 점프4" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 점프4</div><div class="tg">출고가 0원</div></a>
+      <a class="dev" href="jump4"><div class="ph"><img src="jump4.jpg" alt="갤럭시 점프4" loading="lazy" onerror="this.replaceWith(document.createTextNode('📱'))"></div><div class="nm">갤럭시 점프4</div><div class="tg">조건 시 0원</div></a>
     </div>
 
     <div class="notice">
       <div class="ni"><b>요금제 안내</b> — 개통 후 <b>6개월간 9만원 요금제 유지</b>, 이후 <b>5만원 이상 요금제</b>로 변경 가능합니다. (모든 단말기 동일)</div>
-      <div class="ni"><b>갤럭시 점프4</b> — 지원금 적용 시 <b>출고가 0원</b>. 단, <b>128GB 모델</b>이므로 현재 사용 중인 단말기의 저장공간을 꼭 확인해 주세요.</div>
+      <div class="ni"><b>갤럭시 점프4</b> — <b>지원금 적용 조건 충족 시 출고가 0원</b> (9만원 요금제 6개월 유지 조건). 단, <b>128GB 모델</b>이므로 현재 사용 중인 단말기의 저장공간을 꼭 확인해 주세요.</div>
     </div>
   </div>
 </section>
